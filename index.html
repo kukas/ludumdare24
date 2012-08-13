@@ -1,0 +1,48 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Ludum Dare 24 Jam</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="assets/styles/style.css">
+
+	<!-- libs -->
+		<!-- jQuery -->
+		<script src="assets/libs/jquery-1.8.0.min.js"></script>
+		<!-- mrdoob's stats - https://github.com/mrdoob/stats.js -->
+		<script src="assets/libs/Stats.js"></script>
+		<!-- RequireJS - http://requirejs.org/ -->
+		<script src="assets/libs/require.js"></script>
+		<!-- requestAnimationFrame polyfill - https://gist.github.com/1579671 -->
+		<script src="assets/libs/requestAnimationFrame.js"></script>
+
+	<!-- Core -->
+	<script src="assets/js/game.js"></script>
+	<script src="assets/js/eventhandler.js"></script>
+
+	<!-- init -->
+	<script>
+		var game, stats;
+		$(document).ready(function(){
+			stats = new Stats();
+			stats.setMode(1); // 0: fps, 1: ms
+
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.left = '0px';
+			stats.domElement.style.top = '0px';
+			stats.domElement.style.zIndex = '100';
+
+			$("body").append( stats.domElement );
+
+			game = new Game();
+
+			game.init();
+		});
+	</script>
+</head>
+<body>
+	<footer>&copy; Qaterknan</footer>
+</body>
+</html>
