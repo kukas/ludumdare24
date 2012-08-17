@@ -1,4 +1,5 @@
 function Game(){
+	var _this = this;
 	this.canvas = document.createElement("canvas");
 	this.canvas.innerHTML = "Your browser does not support Canvas. <br>Please download a modern browser to see the content."
 	this.ctx = this.canvas.getContext("2d");
@@ -10,7 +11,17 @@ function Game(){
 	this.startTime = new Date().getTime();
 	this.time = 0;
 
-	this.eventhandler = new Eventhandler();
+	this.eventhandler = new Eventhandler( this.canvas );
+	this.gui = new GUI();
+
+	this.eventhandler.addMouseControl(1, function(x,y){
+		_this.gui.mousehandler(x,y,"onMouseDown");
+	}, function(x,y){
+		_this.gui.mousehandler(x,y,"onMouseUp");
+	});
+	this.eventhandler.addMouseControl(0, function(x,y){
+		_this.gui.mousehandler(x,y,"onMouseMove");
+	});
 
 	this.objects = {};
 	this.camera = {
@@ -40,12 +51,17 @@ Game.prototype.render = function() {
 
 	this.ctx.fillText(this.time, 2, 10);
 
+	this.gui.render(this.ctx);
+
 	this.ctx.restore();
 
 	stats.end();
 };
 Game.prototype.tick = function() {
 	this.time = new Date().getTime() - this.startTime;
+
+	this.eventhandler.loop();
+	this.gui.tick();
 };
 
 Game.prototype.centerCanvas = function() {
@@ -54,6 +70,10 @@ Game.prototype.centerCanvas = function() {
 
 	this.canvas.style.left = (window.innerWidth - this.width * this.scale)/2;
 	this.canvas.style.top = (window.innerHeight - this.height * this.scale)/3;
+
+	this.eventhandler.offset = $(this.canvas).offset();
+	this.gui.width = this.width * this.scale;
+	this.gui.height = this.height * this.scale;
 };
 
 // Vypne interpolaci ctx.scale(); = dodá retro atmosféru
@@ -70,6 +90,9 @@ Game.prototype.init = function() {
 	$(window).resize(function() {
 	  _this.centerCanvas();
 	});
+
+	// loading sekvence
+	this.gui.switchGUI("main_menu");
 
 	this.disableInterpolation();
 	this.render();
