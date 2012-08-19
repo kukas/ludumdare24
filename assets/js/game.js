@@ -1,5 +1,6 @@
 function Game(){
 	var _this = this;
+	this.levelpath = "assets/levels/";
 	this.canvas = document.createElement("canvas");
 	this.canvas.innerHTML = "Your browser does not support Canvas. <br>Please download a modern browser to see the content."
 	this.ctx = this.canvas.getContext("2d");
@@ -13,6 +14,7 @@ function Game(){
 
 	this.eventhandler = new Eventhandler( this.canvas );
 	this.gui = new GUI();
+	this.textures = new Textures();
 
 	this.eventhandler.addMouseControl(1, function(x,y){
 		_this.gui.mousehandler(x,y,"onMouseDown");
@@ -48,8 +50,6 @@ Game.prototype.render = function() {
 	this.ctx.scale(this.scale, this.scale);
 
 	this.ctx.clearRect(0, 0, this.width, this.height);
-
-	this.ctx.fillText(this.time, 2, 10);
 
 	this.gui.render(this.ctx);
 
@@ -91,9 +91,33 @@ Game.prototype.init = function() {
 	  _this.centerCanvas();
 	});
 
-	// loading sekvence
-	this.gui.switchGUI("main_menu");
+	this.loadLevel("menu")
 
 	this.disableInterpolation();
 	this.render();
+};
+
+Game.prototype.loadLevel = function(name) {
+	var _this = this;
+	if(this.level_loading){
+		console.log("Already loading level!");
+		return;
+	}
+	this.gui.switchGUI("loading_screen");
+	this.level_loading = true;
+	// díky jQuery! :)
+	$.getScript(this.levelpath + name + ".js", function(){
+		_this.level = level;
+
+		// informovat uživatele
+		_this.gui.guis.loading_screen.setPercentage(20);
+
+		_this.textures.loadTextures( _this.level.textures_src, function(){
+
+			_this.gui.guis.loading_screen.setPercentage(40);
+
+			_this.level.afterLoad();
+			_this.level_loading = false;
+		} );
+	});
 };

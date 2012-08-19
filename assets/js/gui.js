@@ -1,4 +1,6 @@
 function GUIObject(){
+	this.creationTime = new Date().getTime();
+
 	this.x = 0;
 	this.y = 0;
 	this.width = 0;
@@ -6,11 +8,20 @@ function GUIObject(){
 
 	this.parent = false;
 	this.children = [];
+	this.links = {};
 }
-GUIObject.prototype.add = function( obj ) {
+GUIObject.prototype.add = function( obj, name ) {
 	obj.parent = this;
 	this.children.push( obj );
+
+	if(name){
+		this.links[name] = obj;
+	}
 };
+GUIObject.prototype.get = function( name ) {
+	return this.links[name];
+};
+
 GUIObject.prototype.tickChildren = function (){
 	for (var i in this.children){
 		this.children[i].tick();
@@ -49,15 +60,20 @@ GUIObject.prototype.mousehandler = function(x,y,type) {
 			this.onMouseOut();
 		}
 	}
-	for (var i in this.children){
+	for (var i = 0; i < this.children.length; i++){
 		this.children[i].mousehandler(x+this.x,y+this.y,type);
 	}
 };
 
 function GUI(){
+	GUIObject.call(this);
 	var _this = this;
 
+	this.activeGUI = false;
+
 	function Button(x, y, options){
+		GUIObject.call(this);
+
 		this.x = x === undefined ? 0 : x;
 		this.y = y === undefined ? 0 : y;
 		this.width = options.width === undefined ? 60 : options.width;
@@ -82,6 +98,11 @@ function GUI(){
 	};
 
 	function Text(options){
+		GUIObject.call(this);
+
+		this.x = options.x === undefined ? 0 : options.x;
+		this.y = options.y === undefined ? 0 : options.y;
+
 		this.value = options.value;
 		this.text = [];
 		this.color = options.color === undefined ? "#FFF" : options.color;
@@ -167,75 +188,138 @@ function GUI(){
 			spacing = this.lineSpacing;
 		}
 	};
-	function Texture(options){
+	function Texture(image, options){
+		GUIObject.call(this);
+
 		this.x = options.x === undefined ? 0 : options.x;
 		this.y = options.y === undefined ? 0 : options.y;
 		this.width = options.width === undefined ? 0 : options.width;
 		this.height = options.height === undefined ? 0 : options.height;
 
-		this.image = options.image === undefined ? new Image() : options.image;
-		this.clip = options.clip === undefined ? false : options.clip;
+		this.image = image;
 		this.repeat = options.repeat === undefined ? false : options.repeat;
 
 		this.scale = options.scale === undefined ? 1 : options.scale;
+		this.opacity = options.opacity === undefined ? 1 : options.opacity;
 	}
 	Texture.prototype = new GUIObject();
 	Texture.prototype.render = function(ctx){
-		// if(this.clip)
-		// 	ctx.drawImage(this.image, this.x, this.y, this.width, this.height, this.clip.x, this.clip.y, this.clip.width, this.clip.height);
-		// else
-		// 	ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-
+		ctx.globalAlpha = this.opacity;
 		if(this.repeat){
 			if(this.scale !== 1){
 				ctx.save();
 				ctx.scale(this.scale, this.scale);
 			}
-			ctx.fillStyle = ctx.createPattern(this.image, "repeat");
+			ctx.fillStyle = ctx.createPattern(this.image.image, "repeat");
 			ctx.fillRect(this.x, this.y, this.width, this.height);
 			if(this.scale !== 1){
 				ctx.restore();
 			}
 		}
 		else {
-			ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+			this.image.draw(ctx, this.x, this.y, this.width, this.height);
 		}
+		ctx.globalAlpha = 1;
 	}
 
 	this.guis = {
+		loading_screen: {
+			objects: function(){
+				// var objects = [];
+				// pozadí
+				// var pozadi = new Button(0, 0, {width: game.width, height: game.height, color: "#000" });
+				// _this.add( pozadi );
+
+				// loading text
+				_this.add( new Text({y:-40,width: game.width, height: game.height, size: 32, value: "loading...", align:"center", valign:"center", color: "#000" }) );
+
+
+				// loading bar (maximum: 100px)
+				_this.add( new Button(game.width/2-50, game.height/2-5, {width: 0, height: 10, color: "#16C739" }), "loading_bar" );
+
+				// return objects;
+			},
+			setPercentage: function(_perc){
+				perc = _perc > 100 ? 100 : _perc;
+				// 2. prvek je loading bar (ja vim, hardcode, ale co... :P) (=možné zlepšení je ukládat gui prvky do objektu, ale nenene)
+				_this.get("loading_bar").width = perc;
+			}
+		},
+		logo: {
+			objects: function(){
+				logo = new Texture(game.textures.get("logo"), {width: game.width, height: game.height, opacity: 0});
+				logo.tick = function(){
+					this.tickChildren();
+
+					var time = new Date().getTime() - this.creationTime;
+
+					if(this.opacity < 1 && time < 2000){
+						this.opacity += 0.02;
+					}
+					else if(time > 2000){
+						this.opacity -= 0.02;
+					}
+
+					if(this.opacity < 0){
+						this.opacity = 0;
+						_this.switchGUI("main_menu");
+					}
+				}
+				_this.add( logo );
+			},
+			controls: function(){
+				// přeskočí úvodní animaci
+				game.eventhandler.addKeyboardControl(27, undefined, function(){
+					game.gui.children[0].opacity = -1;
+				});
+			},
+			preload: function(){
+				// game.jukebox.play("znelka");
+				return
+			}
+		},
 		main_menu: {
 			objects: function(){
-				var objects = [];
-
-				var img2 = new Image();
-				img2.src = "assets/textures/background.png";
 				// pozadí
-				objects.push( new Texture({width: game.width, height: game.height, image: img2, repeat: true, scale: 4}) )
-
-				var img = new Image();
-				img.src = "assets/textures/button.png";
-				// tlačítko
-				var button = new Button(game.width/2-50,70, { width: 100, height: 50, visible: false,
-					   onMouseDown: function(){
-						this.children[0].image.src = "assets/textures/button2.png";
-					}, onMouseUp: function(){
-					   	console.log("starting the game...")
-						this.children[0].image.src = "assets/textures/button.png";
+				_this.add( new Texture(
+					game.textures.get("funky_background"),
+					{width: game.width, height: game.height, repeat: true, scale: 4})
+				);
+				// start game tlačítko
+				var start_game = new Button(game.width/2-50,70, { width: 100, height: 50, visible: false, 
+					   onMouseUp: function(){
+						_this.switchGUI("in_game");
+					   	game.loadLevel("test");
 					}, onMouseIn: function(){
-						document.body.style.cursor = "pointer"
+						this.get("pozadi").image.clip.y = 16;
 					}, onMouseOut: function(){
-						this.children[0].image.src = "assets/textures/button.png";
-						document.body.style.cursor = "default"
+						this.get("pozadi").image.clip.y = 0;
 					} });
-				button.add( new Texture({width:100, height:50, image: img}) )
-				button.add( new Text({ value:"Start Game", color: "#000", weight: 700, size: 13, width: 100, height: 50, align: "center", valign: "center",
+				// pozadí pro start game tlačítko
+				start_game.add( new Texture(game.textures.get("funky_button", {clip: {x:0, y:0, width:32, height:16}}), { width:100, height:50 }), "pozadi" );
+				// text pro start game tlačítko
+				start_game.add( new Text({ value:"Start Game", color: "#000", weight: 700, size: 13, width: 100, height: 50, align: "center", valign: "center",
 				shadow: { color: "#666", blur: 1 } }) );
 				
-				objects.push(button);
+				_this.add(start_game);
 
-				return objects;
+				// options tlačítko
+				var options = new Button(game.width/2-50,140, { width: 100, height: 50, visible: false,
+					   onMouseDown: function(){
+					}, onMouseUp: function(){
+					   	_this.switchGUI("options");
+					}, onMouseIn: function(){
+						this.get("pozadi").image.clip.y = 16;
+					}, onMouseOut: function(){
+						this.get("pozadi").image.clip.y = 0;
+					} });
+				options.add( new Texture(game.textures.get("funky_button", {clip: {x:0, y:0, width:32, height:16}}), { width:100, height:50 }), "pozadi" )
+				options.add( new Text({ value:"Options", color: "#000", weight: 700, size: 13, width: 100, height: 50, align: "center", valign: "center",
+				shadow: { color: "#666", blur: 1 } }) );
+
+				_this.add(options);
 			}
-		}
+		},
 	}
 	
 }
@@ -248,14 +332,13 @@ GUI.prototype.switchGUI = function(gui) {
 		return
 	}
 
+	this.activeGUI = gui;
+
 	if(this.guis[gui].preload)
 		this.guis[gui].preload();
 
-	var objects = this.guis[gui].objects();
-
-	for(var i in objects){
-		this.add( objects[i] );
-	}
+	if(this.guis[gui].objects)
+		this.guis[gui].objects();
 
 	if(this.guis[gui].controls)
 		this.guis[gui].controls();
