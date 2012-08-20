@@ -273,9 +273,8 @@ function GUI(){
 					game.gui.children[0].opacity = -1;
 				});
 			},
-			preload: function(){
-				// game.jukebox.play("znelka");
-				return
+			afterload: function(){
+				game.jukebox.play("logo");
 			}
 		},
 		main_menu: {
@@ -288,7 +287,6 @@ function GUI(){
 				// start game tlačítko
 				var start_game = new Button(game.width/2-50,70, { width: 100, height: 50, visible: false, 
 					   onMouseUp: function(){
-						_this.switchGUI("in_game");
 					   	game.loadLevel("test");
 					}, onMouseIn: function(){
 						this.get("pozadi").image.clip.y = 16;
@@ -307,7 +305,7 @@ function GUI(){
 				var options = new Button(game.width/2-50,140, { width: 100, height: 50, visible: false,
 					   onMouseDown: function(){
 					}, onMouseUp: function(){
-					   	_this.switchGUI("options");
+					   	game.jukebox.togglePlay("logo");
 					}, onMouseIn: function(){
 						this.get("pozadi").image.clip.y = 16;
 					}, onMouseOut: function(){
@@ -320,6 +318,9 @@ function GUI(){
 				_this.add(options);
 			}
 		},
+		in_game: {
+
+		}
 	}
 	
 }

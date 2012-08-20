@@ -59,6 +59,11 @@ Textures.prototype.loadTextures = function(src_object, callback) {
 
 	this.texturesToLoad = Object.keys(this.textures_src).length;
 
+	if(this.texturesToLoad <= 0){
+		callback();
+		return;
+	}
+
 	for(var name in this.textures_src){
 		(function(name, callback){
 			var image = new Image();
@@ -71,5 +76,5 @@ Textures.prototype.loadTextures = function(src_object, callback) {
 
 			image.src = _this.textures_src[name] + "?_="+Math.random();
 		}(name, callback))
-	}
+	};
 };

@@ -8,9 +8,9 @@ function Level(){
 		logo: this.texturepath + "logo.png",
 	};
 
-	// this.sounds_src = {
-	// 	solarFields: this.musicpath+"Circles_Of_Motion.mp3",
-	// };
+	this.sounds_src = {
+		logo: this.soundpath+"logo.wav",
+	};
 }
 Level.prototype = new Levels();
 

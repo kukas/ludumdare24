@@ -15,6 +15,7 @@ function Game(){
 	this.eventhandler = new Eventhandler( this.canvas );
 	this.gui = new GUI();
 	this.textures = new Textures();
+	this.jukebox = new Jukebox();
 
 	this.eventhandler.addMouseControl(1, function(x,y){
 		_this.gui.mousehandler(x,y,"onMouseDown");
@@ -116,8 +117,12 @@ Game.prototype.loadLevel = function(name) {
 
 			_this.gui.guis.loading_screen.setPercentage(40);
 
-			_this.level.afterLoad();
-			_this.level_loading = false;
+			_this.jukebox.loadSounds( _this.level.sounds_src, function(){
+				_this.gui.guis.loading_screen.setPercentage(60);
+
+				_this.level.afterLoad();
+				_this.level_loading = false;
+			} )
 		} );
 	});
 };
