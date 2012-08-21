@@ -349,4 +349,5 @@ GUI.prototype.switchGUI = function(gui) {
 };
 GUI.prototype.resetGUI = function() {
 	this.children = [];
+	this.links = {};
 };
