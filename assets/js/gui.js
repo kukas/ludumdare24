@@ -41,11 +41,9 @@ GUIObject.prototype.renderChildren = function (ctx){
 	ctx.restore();
 };
 GUIObject.prototype.tick = function (){
-	this.tickChildren();
 };
 
 GUIObject.prototype.render = function (ctx){
-	this.renderChildren(ctx);
 };
 GUIObject.prototype.mousehandler = function(x,y,type) {
 	if(this[type] || (type == "onMouseMove" && (this.onMouseIn || this.onMouseOut)) ){
@@ -94,7 +92,6 @@ function GUI(){
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x, this.y, this.width, this.height);
 		}
-		this.renderChildren(ctx);
 	};
 
 	function Text(options){
@@ -241,16 +238,13 @@ function GUI(){
 			},
 			setPercentage: function(_perc){
 				perc = _perc > 100 ? 100 : _perc;
-				// 2. prvek je loading bar (ja vim, hardcode, ale co... :P) (=možné zlepšení je ukládat gui prvky do objektu, ale nenene)
 				_this.get("loading_bar").width = perc;
 			}
 		},
 		logo: {
 			objects: function(){
-				logo = new Texture(game.textures.get("logo"), {width: game.width, height: game.height, opacity: 0});
+				logo = new Texture(game.textures.get("logo"), {x: (game.width-354)/2, y: (game.height-270)/2, width: 354, height: 270, opacity: 0});
 				logo.tick = function(){
-					this.tickChildren();
-
 					var time = new Date().getTime() - this.creationTime;
 
 					if(this.opacity < 1 && time < 2000){
@@ -350,4 +344,11 @@ GUI.prototype.switchGUI = function(gui) {
 GUI.prototype.resetGUI = function() {
 	this.children = [];
 	this.links = {};
+};
+GUI.prototype.tick = function (){
+	this.tickChildren();
+};
+
+GUI.prototype.render = function (ctx){
+	this.renderChildren(ctx);
 };

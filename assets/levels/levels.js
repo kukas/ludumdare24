@@ -1,7 +1,7 @@
 function Levels(){
-	this.texturepath = "assets/textures/";
-	this.soundpath = "assets/sounds/";
-	this.musicpath = "assets/music/";
+	this.texturepath = "./assets/textures/";
+	this.soundpath = "./assets/sounds/";
+	this.musicpath = "./assets/music/";
 
 	this.textures_src = {};
 	this.sounds_src = {};

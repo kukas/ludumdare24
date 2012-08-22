@@ -15,7 +15,7 @@ Jukebox.prototype.loadSounds = function(sounds_src, callback) {
 	for(var name in this.sounds_src){
 		(function(name, callback){
 			var audio = new Audio();
-			$(audio).on("canplaythrough", function(){
+			$(audio).on("loadeddata", function(){
 				if( --_this.soundsToLoad <= 0 )
 					callback();
 			});

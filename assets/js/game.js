@@ -69,8 +69,8 @@ Game.prototype.centerCanvas = function() {
 	this.canvas.width = this.width * this.scale;
 	this.canvas.height = this.height * this.scale;
 
-	this.canvas.style.left = (window.innerWidth - this.width * this.scale)/2;
-	this.canvas.style.top = (window.innerHeight - this.height * this.scale)/3;
+	this.canvas.style.left = (window.innerWidth - this.width * this.scale)/2 + "px";
+	this.canvas.style.top = (window.innerHeight - this.height * this.scale)/3 + "px";
 
 	this.eventhandler.offset = $(this.canvas).offset();
 	this.gui.width = this.width * this.scale;
