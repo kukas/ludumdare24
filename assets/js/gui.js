@@ -266,6 +266,9 @@ function GUI(){
 				game.eventhandler.addKeyboardControl(27, undefined, function(){
 					game.gui.children[0].opacity = -1;
 				});
+				game.eventhandler.addMouseControl(1, undefined, function(){
+					game.gui.children[0].opacity = -1;
+				});
 			},
 			afterload: function(){
 				game.jukebox.play("logo");
@@ -277,6 +280,11 @@ function GUI(){
 				_this.add( new Texture(
 					game.textures.get("funky_background"),
 					{width: game.width, height: game.height, repeat: true, scale: 4})
+				);
+
+				_this.add( new Texture(
+					game.textures.get("nadpis", {animation:{frames:2, speed: 5}}),
+					{x:(game.width-458)/2, width: 458, height: 146})
 				);
 				// start game tlačítko
 				var start_game = new Button(game.width/2-50,70, { width: 100, height: 50, visible: false, 
@@ -310,10 +318,15 @@ function GUI(){
 				shadow: { color: "#666", blur: 1 } }) );
 
 				_this.add(options);
+			},
+			controls: function(){
+				_this.addControls();
 			}
 		},
 		in_game: {
-
+			controls: function(){
+				return;
+			}
 		}
 	}
 	
@@ -335,8 +348,10 @@ GUI.prototype.switchGUI = function(gui) {
 	if(this.guis[gui].objects)
 		this.guis[gui].objects();
 
-	if(this.guis[gui].controls)
+	if(this.guis[gui].controls){
+		game.eventhandler.resetControls();
 		this.guis[gui].controls();
+	}
 
 	if(this.guis[gui].afterload)
 		this.guis[gui].afterload();
@@ -351,4 +366,16 @@ GUI.prototype.tick = function (){
 
 GUI.prototype.render = function (ctx){
 	this.renderChildren(ctx);
+};
+
+GUI.prototype.addControls = function() {
+	var _this = this;
+	game.eventhandler.addMouseControl(1, function(x,y){
+		_this.mousehandler(x,y,"onMouseDown");
+	}, function(x,y){
+		_this.mousehandler(x,y,"onMouseUp");
+	});
+	game.eventhandler.addMouseControl(0, function(x,y){
+		_this.mousehandler(x,y,"onMouseMove");
+	});
 };

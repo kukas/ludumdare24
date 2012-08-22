@@ -5,6 +5,9 @@ function Levels(){
 
 	this.textures_src = {};
 	this.sounds_src = {};
+
+	this.objects = [];
+	this.links = {};
 }
 
 Levels.prototype.afterLoad = function (){
@@ -12,14 +15,9 @@ Levels.prototype.afterLoad = function (){
 };
 
 Levels.prototype.add = function(obj, name) {
-	if(name === undefined){
-		var last = Object.keys(this.objects).length;
-		while( this.objects[last] !== undefined ){
-			last++;
-		}
-		this.objects[ last ] = obj;
-	}
-	else{
-		this.objects[ name ] = obj;
+	this.objects.push(obj);
+	obj.parent = game;
+	if(name){
+		this.links[name] = obj;
 	}
 };

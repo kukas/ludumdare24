@@ -7,6 +7,7 @@ function Level(){
 		funky_background: this.texturepath + "background.png",
 		funky_button: this.texturepath + "button.png",
 		logo: this.texturepath + "logo.png",
+		nadpis: this.texturepath + "nadpis.png",
 	};
 
 	this.sounds_src = {

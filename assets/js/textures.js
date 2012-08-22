@@ -26,10 +26,10 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 	height = height === undefined ? this.height : height;
 	if(this.animated){
 		ctx.drawImage(this.image, 
-			Math.floor(this.frame)*this.width,0,
-			this.width,this.height,
+			Math.floor(this.frame)*this.frameWidth,0,
+			this.width/this.frames,this.height,
 			x,y,
-			this.width,this.height
+			width,height
 			);
 		if(this.frame + 1/this.speed < this.frames){
 			this.frame += 1/this.speed;
@@ -40,10 +40,7 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 
 	}
 	else {
-		// if(this.clip)
 		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, x, y, width, height);
-		// else
-		// 	ctx.drawImage(this.image, x, y, width, height);
 	}
 };
 

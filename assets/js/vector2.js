@@ -14,7 +14,7 @@ Vector2 = function ( x, y ) {
 
 Vector2.prototype = {
 
-	constructor: THREE.Vector2,
+	constructor: Vector2,
 
 	set: function ( x, y ) {
 
@@ -168,7 +168,7 @@ Vector2.prototype = {
 
 	clone: function () {
 
-		return new THREE.Vector2( this.x, this.y );
+		return new Vector2( this.x, this.y );
 
 	}
 

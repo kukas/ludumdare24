@@ -17,16 +17,7 @@ function Game(){
 	this.textures = new Textures();
 	this.jukebox = new Jukebox();
 
-	this.eventhandler.addMouseControl(1, function(x,y){
-		_this.gui.mousehandler(x,y,"onMouseDown");
-	}, function(x,y){
-		_this.gui.mousehandler(x,y,"onMouseUp");
-	});
-	this.eventhandler.addMouseControl(0, function(x,y){
-		_this.gui.mousehandler(x,y,"onMouseMove");
-	});
-
-	this.objects = {};
+	this.children = {};
 	this.camera = {
 		x: 0,
 		y: 0,
@@ -54,6 +45,12 @@ Game.prototype.render = function() {
 
 	this.gui.render(this.ctx);
 
+	for (var i = 0, len = this.children.length; i < len; i++){
+		this.children[i].render(this.ctx);
+		if(this.children[i].renderChildren)
+			this.children[i].renderChildren(this.ctx);
+	};
+
 	this.ctx.restore();
 
 	stats.end();
@@ -63,6 +60,12 @@ Game.prototype.tick = function() {
 
 	this.eventhandler.loop();
 	this.gui.tick();
+
+	for (var i = 0, len = this.children.length; i < len; i++){
+		this.children[i].tick();
+		if(this.children[i].tickChildren)
+			this.children[i].tickChildren();
+	};
 };
 
 Game.prototype.centerCanvas = function() {
@@ -122,7 +125,21 @@ Game.prototype.loadLevel = function(name) {
 
 				_this.level.afterLoad();
 				_this.level_loading = false;
+
+				_this.children = _this.level.objects;
+				_this.links = _this.level.links;
 			} )
 		} );
 	});
 };
+
+Game.prototype.findCollisions = function(obj){
+	var collisions = [];
+	for (var i = 0, len = this.children.length; i < len; i++){
+		if(this.children[i] != obj){
+			if( obj.checkCollision( this.children[i] ) )
+				collisions.push( this.children[i] )
+		}
+	};
+	return collisions;
+}
