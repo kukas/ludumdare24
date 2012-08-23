@@ -1,7 +1,11 @@
 function Object2D( options ){
+	var _this = this;
+
 	options = options === undefined ? {} : options;
 
-	this.position = new Vector2( options.x, options.y );
+	this.creationTime = new Date().getTime();
+
+	this.position = options.position === undefined ? new Vector2() : options.position;
 	this.zIndex = options.zIndex === undefined ? 0 : options.zIndex;
 	this.rotation = options.rotation === undefined ? 0 : options.rotation;
 	
@@ -15,10 +19,13 @@ function Object2D( options ){
 	this.texture = options.texture === undefined ? false : options.texture;
 
 	this.collidable = options.collidable === undefined ? true : options.collidable;
-	this.collisionType = "circle"; // "rectangle", "rotated-rectangle"
+	this.collisionType = "hitbox"; // "hitbox", "rotated-hitbox"
 	this.boundingRadius = options.boundingRadius === undefined ? this.computeBoundingRadius() : options.boundingRadius;
+	this.hitbox = options.hitbox === undefined ? {x: 0, y: 0, width: _this.width, height: _this.height} : options.hitbox;
 
-	this.vector = new Vector2();
+	this.opaque = true;
+
+	this.velocity = new Vector2();
 };
 
 Object2D.prototype.lookAt = function(vec) {
@@ -42,12 +49,12 @@ Object2D.prototype.checkCollision = function(obj) {
 		}
 		return false;
 	}
-	else if(this.collisionType == "rectangle"){
+	else if(this.collisionType == "hitbox"){
 		// http://gamedev.stackexchange.com/questions/586/what-is-the-fastest-way-to-work-out-2d-bounding-box-intersection
 		return (Math.abs(this.position.x - obj.position.x) * 2 < (this.width + obj.width)) && 
 			(Math.abs(this.position.y - obj.position.y) * 2 < (this.height + obj.height));
 	}
-	else if(this.collisionType == "rotated-rectangle"){
+	else if(this.collisionType == "rotated-hitbox"){
 		return false;
 	}
 };
@@ -77,12 +84,12 @@ Object2D.prototype.inObject = function(vec) {
 		var minDistance = this.boundingRadius;
 		return dx*dx + dy*dy < minDistance*minDistance;
 	}
-	else if(this.collisionType == "rectangle"){
+	else if(this.collisionType == "hitbox"){
 		// http://gamedev.stackexchange.com/questions/586/what-is-the-fastest-way-to-work-out-2d-bounding-box-intersection
 		return (Math.abs(this.position.x - vec.x) * 2 < this.width) && 
 			(Math.abs(this.position.y - vec.y) * 2 < this.height);
 	}
-	else if(this.collisionType == "rotated-rectangle"){
+	else if(this.collisionType == "rotated-hitbox"){
 		return false;
 	}
 };
@@ -101,17 +108,17 @@ Object2D.prototype.render = function(ctx) {
 		ctx.restore();
 	ctx.restore();
 	
-	ctx.lineWidth = 1;
-	ctx.strokeStyle = "#FF00FF";
-	if(this.collisionType == "circle"){
-		ctx.beginPath();
-			ctx.arc(this.position.x, this.position.y, this.boundingRadius, 0, Math.PI*2, false );
-			ctx.stroke();
-		ctx.closePath();
-	}
-	else if(this.collisionType == "rectangle"){
-		ctx.strokeRect( this.position.x - this.width/2, this.position.y - this.height/2, this.width, this.height );
-	}
+	// ctx.lineWidth = 1;
+	// ctx.strokeStyle = "#FF00FF";
+	// if(this.collisionType == "circle"){
+	// 	ctx.beginPath();
+	// 		ctx.arc(this.position.x, this.position.y, this.boundingRadius, 0, Math.PI*2, false );
+	// 		ctx.stroke();
+	// 	ctx.closePath();
+	// }
+	// else if(this.collisionType == "hitbox"){
+	// 	ctx.strokeRect( this.position.x - this.width/2, this.position.y - this.height/2, this.width, this.height );
+	// }
 };
 
 Object2D.prototype.tickChildren = function() {

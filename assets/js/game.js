@@ -8,26 +8,26 @@ function Game(){
 	this.width = 480;
 	this.height = 300;
 	this.scale = 1;
-	// místo ticků je čas od startu tick smyčky.
-	this.startTime = new Date().getTime();
-	this.time = 0;
+
+	this.ticks = 0;
+
+	this.clearColor = "#888";
 
 	this.eventhandler = new Eventhandler( this.canvas );
 	this.gui = new GUI();
 	this.textures = new Textures();
 	this.jukebox = new Jukebox();
 
+	this.lights = false;
+
 	this.children = {};
-	this.camera = {
-		x: 0,
-		y: 0,
-		tX: function(x){
+	this.camera = new Vector2();
+	this.camera.tX = function(x){
 			return x + this.x;
-		},
-		tY: function(y){
+		};
+	this.camera.tY = function(y){
 			return y + this.y;
-		}
-	};
+		};
 };
 
 Game.prototype.render = function() {
@@ -38,10 +38,18 @@ Game.prototype.render = function() {
 	stats.begin();
 	this.tick();
 
+	this.ctx.fillStyle = this.clearColor;
+	this.ctx.fillRect(0, 0, this.width, this.height);
+	// this.ctx.clearRect(0, 0, this.width, this.height);
+
+	if(this.lights)
+		this.lights.render(this.ctx);
+
 	this.ctx.save();
 	this.ctx.scale(this.scale, this.scale);
 
-	this.ctx.clearRect(0, 0, this.width, this.height);
+	this.ctx.translate(-this.camera.x, -this.camera.y)
+
 
 	this.gui.render(this.ctx);
 
@@ -51,12 +59,15 @@ Game.prototype.render = function() {
 			this.children[i].renderChildren(this.ctx);
 	};
 
+	if(this.lights)
+		this.lights.renderMask(this.ctx);
+
 	this.ctx.restore();
 
 	stats.end();
 };
-Game.prototype.tick = function() {
-	this.time = new Date().getTime() - this.startTime;
+Game.prototype.tickChildren = function() {
+	this.ticks++;
 
 	this.eventhandler.loop();
 	this.gui.tick();
@@ -66,6 +77,10 @@ Game.prototype.tick = function() {
 		if(this.children[i].tickChildren)
 			this.children[i].tickChildren();
 	};
+};
+
+Game.prototype.tick = function() {
+	this.tickChildren();
 };
 
 Game.prototype.centerCanvas = function() {
@@ -78,6 +93,8 @@ Game.prototype.centerCanvas = function() {
 	this.eventhandler.offset = $(this.canvas).offset();
 	this.gui.width = this.width * this.scale;
 	this.gui.height = this.height * this.scale;
+
+	this.disableInterpolation();
 };
 
 // Vypne interpolaci ctx.scale(); = dodá retro atmosféru
@@ -95,7 +112,7 @@ Game.prototype.init = function() {
 	  _this.centerCanvas();
 	});
 
-	this.loadLevel("menu")
+	this.loadLevel("test")
 
 	this.disableInterpolation();
 	this.render();
@@ -126,6 +143,7 @@ Game.prototype.loadLevel = function(name) {
 				_this.level.afterLoad();
 				_this.level_loading = false;
 
+				_this.lights = _this.level.lights;
 				_this.children = _this.level.objects;
 				_this.links = _this.level.links;
 			} )
@@ -143,3 +161,11 @@ Game.prototype.findCollisions = function(obj){
 	};
 	return collisions;
 }
+
+Game.prototype.add = function(obj, name) {
+	this.children.push(obj);
+	obj.parent = this;
+
+	if(name)
+		this.links[name] = obj;
+};

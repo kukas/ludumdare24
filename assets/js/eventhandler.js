@@ -7,13 +7,8 @@ function Eventhandler( dom ) {
 	this.keyboardControls = {};
 	this.mouseControls = {};
 
-	this.mouse = { 
-		x: 0, 
-		y: 0,
-		projected: {
-			x: 0,
-			y: 0
-		}};
+	this.mouse = new Vector2();
+	this.mouse.projected = new Vector2();
 
 	document.body.addEventListener( "keydown", function(ev){ _this.keyboardhandler(ev); }, true );
 	document.body.addEventListener( "keyup", function(ev){ _this.keyboardhandler(ev); }, true );
