@@ -1,14 +1,40 @@
 function Unit(options){
 	Object2D.call(this, options);
+	var _this = this;
 	
 	this.owner = options.owner !== undefined ? options.owner : false;
 	
-	this.speed = options.speed !== undefined ? options.speed : 1; 
+	this.speed = options.speed !== undefined ? options.speed : 0.5;
+	this.currentSpeed = this.speed;
+
+	this.actions = [
+		{
+			name: "Stop!",
+			description: "Stop the selected unit.",
+			exec: function(){
+				_this.currentSpeed = 0;
+			}
+		},
+		{
+			name: "Forward!",
+			description: "Order the selected unit to MOVE!",
+			exec: function(){
+				_this.currentSpeed = this.speed;
+			}
+		},
+		{
+			name: "Backward!",
+			description: "Order the selected unit to MOVE!",
+			exec: function(){
+				_this.currentSpeed = -this.speed;
+			}
+		},
+	];
 }
 Unit.prototype = new Object2D();
 
 Unit.prototype.move = function() {
-	this.position.x += this.speed;
+	this.position.x += this.currentSpeed;
 	this.position.y = game.links.terrain.getHeight(this.position.x) - this.width/2;
 };
 

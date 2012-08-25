@@ -324,7 +324,18 @@ function GUI(){
 			}
 		},
 		in_game: {
+			objects: function(){
+				var button = new Button(10, 10, {
+					width: 100,
+					height: 100,
+					onMouseUp: function(){
+						console.log("adsf")
+					}
+				});
+				_this.add(button);
+			},
 			controls: function(){
+				_this.addControls()
 				game.eventhandler.addMouseControl(3,function () {
 					for(var i in game.children){
 						if(game.children[i].actions !== undefined && game.children[i].inObject(game.eventhandler.mouse)) console.log(game.children[i].actions);

@@ -97,5 +97,5 @@ Terrain.prototype.setBorder = function(x, team) {
 };
 
 Terrain.prototype.getHeight = function(x) {
-	return this.height - this.heightMap[x];
+	return this.height - this.heightMap[Math.floor(x)];
 };
