@@ -294,10 +294,10 @@ function GUI(){
 				// layout.add( new Text({value:"ASDF"}) );
 				_this.add(layout, "layout");
 
-				var unitControl = new Button(300, 10, {
-					width: 120,
-					height: 150,
-					visible: true,
+				var unitControl = new Button(10, 10, {
+					width: 1,
+					height: 1,
+					visible: false,
 				});
 				layout.add( unitControl, "unitControl" );
 
@@ -307,7 +307,7 @@ function GUI(){
 				game.gui.links.layout.links.unitControl.children = [];
 
 				for(var i in actions){
-					var button = new Button(0, i * 50, {
+					var button = new Button(i * 130, 0, {
 						width: 120,
 						height: 40,
 						visible: false,

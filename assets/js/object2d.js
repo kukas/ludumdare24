@@ -52,6 +52,8 @@ Object2D.prototype.computeBoundingRadius = function() {
 };
 
 Object2D.prototype.checkCollision = function(obj) {
+	if(!obj.collidable)
+		return false;
 	if(this.collisionType == "circle"){
 		var dx = obj.position.x - this.position.x;
 		var dy = obj.position.y - this.position.y;
@@ -72,8 +74,8 @@ Object2D.prototype.checkCollision = function(obj) {
 };
 
 Object2D.prototype.rangeCollision = function (obj){
-	if(obj instanceof Unit && obj != this){
-		if(Math.abs(this.position.x - obj.position.x) <= this.range + obj.range){
+	if(obj != this){
+		if(Math.abs(this.position.x - obj.position.x) <= this.range){
 			return true;
 		}
 		else{

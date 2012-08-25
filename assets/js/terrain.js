@@ -10,6 +10,8 @@ function Terrain(options){
 		enemy: 50,
 	};
 
+	this.collidable = false;
+
 	this.grassLevel = 20;
 	this.middleHeight = options.middleHeight === undefined ? this.height/2 : options.middleHeight;
 	this.elevation = options.elevation === undefined ? 20 : options.elevation;

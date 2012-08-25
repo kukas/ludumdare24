@@ -58,6 +58,15 @@ Level.prototype.afterLoad = function (){
 
 	this.add( gay );
 
+	var gay = new Gay({
+		position: new Vector2(game.width-400,0),
+		owner: "enemy",
+		// speed: -1,
+	})
+
+	this.add( gay );
+
+
 
 	var ps = new ParticleSystem();
 	// ps.tick = function(){
