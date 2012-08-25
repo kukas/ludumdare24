@@ -39,6 +39,9 @@ Unit.prototype.move = function() {
 
 Unit.prototype.tick = function() {
 	this.move();
+	for(var i in game.children){
+		if(this.rangeCollision(game.children[i]) !== undefined) console.log(this.rangeCollision(game.children[i]));
+	};
 };
 
 Unit.prototype.getDistance = function (){

@@ -69,6 +69,17 @@ Object2D.prototype.checkCollision = function(obj) {
 	}
 };
 
+Object2D.prototype.rangeCollision = function (obj){
+	if(obj instanceof Unit){
+		if(Math.abs(this.position.x - obj.position.x) <= this.range + obj.range){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+};
+
 Object2D.prototype.inObject = function(vec) {
 	if(this.collisionType == "circle"){
 		var dx = vec.x - this.position.x;

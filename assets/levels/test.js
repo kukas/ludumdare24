@@ -35,25 +35,12 @@ Level.prototype.afterLoad = function (){
 	});
 	this.add(building);
 	
-	var unit = new Unit({
-		position: new Vector2(0,0),
-		width:180,
-		height:180,
-		speed:2,
-		texture: game.textures.get("skull"),
-		owner: "player",
+	var crus1 = new Crusader({
+		position: new Vector2(300,0),
+		owner:"player",
 	});
-	this.add( unit );
-	
-	var unit2 = new Unit({
-		position: new Vector2(game.width,0),
-		width:46,
-		height:64,
-		texture: game.textures.get("crusader", {animation:{frames:6, speed:7}, flip: "x"}),
-		owner: "enemy",
-		speed: -1,
-	})
-	this.add( unit2 );
+	this.add(crus1);
+
 };
 
 var level = new Level();
