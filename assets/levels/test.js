@@ -39,8 +39,19 @@ Level.prototype.afterLoad = function (){
 		height:18,
 		texture: game.textures.get("skull"),
 		owner: "player",
-	})
+	});
 	this.add( unit );
+	
+	var unit2 = new Unit({
+		position: new Vector2(game.width,0),
+		width:18,
+		height:18,
+		texture: game.textures.get("skull"),
+		owner: "enemy",
+		speed: -1,
+	})
+	this.add( unit2 );
+	
 };
 
 var level = new Level();

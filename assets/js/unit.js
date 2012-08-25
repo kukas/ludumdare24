@@ -1,8 +1,9 @@
 function Unit(options){
 	Object2D.call(this, options);
-	this.speed = 1;
 	
 	this.owner = options.owner !== undefined ? options.owner : false;
+	
+	this.speed = options.speed !== undefined ? options.speed : 1; 
 }
 Unit.prototype = new Object2D();
 
