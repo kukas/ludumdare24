@@ -82,10 +82,9 @@ Unit.prototype.dealDamage = function ( obj ){
 	}
 };
 
-
 Unit.prototype.renderLife = function ( ctx ){
 	ctx.fillStyle = "#000";
-	ctx.fillRect(this.x, this.y, this.width, 4);
+	ctx.fillRect(0, 0, this.width, 4);
 	ctx.fillStyle = "#0F0";
-	ctx.fillRect(this.x, this.y, this.width * (this.health/this.maxHealth), 4);
+	ctx.fillRect(0, 0, this.width * (this.health/this.maxHealth), 4);
 };

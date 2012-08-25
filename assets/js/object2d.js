@@ -187,7 +187,7 @@ Object2D.prototype.render = function(ctx) {
 					ctx.stroke();
 					ctx.closePath();
 					if(this.health)
-						this.renderLife();
+						this.renderLife(ctx);
 				}
 			ctx.restore();
 		ctx.restore();

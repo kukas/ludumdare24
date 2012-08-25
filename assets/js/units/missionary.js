@@ -13,8 +13,8 @@ function Missionary( options ){
 	this.range = 23;
 	
 	this.damage = 1;
-	this.health = 3;
 	this.maxHealth = 3;
+	this.health = this.maxHealth;
 	this.cadency = 30;
 	
 	if(options.owner == "player"){
