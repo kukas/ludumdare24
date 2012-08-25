@@ -7,6 +7,7 @@ function Level(){
 		skull: this.texturepath + "skull.png",
 		kaple: this.texturepath + "rotunda.png",
 		crusader: this.texturepath + "crusader.png",
+		troll: this.texturepath + "troll.png",
 	};
 }
 Level.prototype = new Levels();
@@ -53,7 +54,6 @@ Level.prototype.afterLoad = function (){
 		speed: -1,
 	})
 	this.add( unit2 );
-	
 };
 
 var level = new Level();

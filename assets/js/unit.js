@@ -2,9 +2,8 @@ function Unit(options){
 	Object2D.call(this, options);
 	var _this = this;
 	
-	this.owner = options.owner !== undefined ? options.owner : false;
+	options = options !== undefined ? options : {};
 	
-	this.speed = options.speed !== undefined ? options.speed : 0.5;
 	this.currentSpeed = this.speed;
 
 	this.actions = [
