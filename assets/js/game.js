@@ -5,13 +5,13 @@ function Game(){
 	this.canvas.innerHTML = "Your browser does not support Canvas. <br>Please download a modern browser to see the content."
 	this.ctx = this.canvas.getContext("2d");
 
-	this.width = 480;
-	this.height = 300;
+	this.width = 960;
+	this.height = 400;
 	this.scale = 1;
 
 	this.ticks = 0;
 
-	this.clearColor = "#888";
+	this.clearColor = "#BDFFFF";
 
 	this.eventhandler = new Eventhandler( this.canvas );
 	this.gui = new GUI();
