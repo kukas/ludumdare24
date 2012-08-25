@@ -7,7 +7,8 @@ function Chapel( options ){
 	
 	this.owner = options.owner !== undefined ? options.owner : false;
 	
-	this.health = 100;
+	this.maxHealth = 100;
+	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
 	this.range = 64;
