@@ -17,6 +17,8 @@ function Professor( options ){
 	this.maxHealth = 15;
 	this.cadency = 50;
 	
+	this.spawnSound = game.jukebox.sounds["professor"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("professor", {
 			totalFrames: 3,

@@ -16,6 +16,15 @@ function Level(){
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
 	};
+	
+	this.sounds_src = {
+		gorilla : this.soundpath+"zvuky/opice.wav",
+		missionary : this.soundpath + "zvuky/misionar.wav",
+		professor : this.soundpath + "zvuky/profesor.wav",
+		prophet : this.soundpath + "zvuky/prorok.wav",
+		gay : this.soundpath + "zvuky/homosexual.wav",
+		crusader : this.soundpath + "zvuky/krizak.wav",
+	};
 }
 Level.prototype = new Levels();
 
@@ -43,6 +52,7 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(300,0),
 		owner:"player",
 	});
+	crus1.spawnSound.play();
 	this.add(crus1);
 	
 	var gay = new Gay({
@@ -50,7 +60,7 @@ Level.prototype.afterLoad = function (){
 		owner: "enemy",
 		// speed: -1,
 	})
-
+	gay.spawnSound.play();
 	this.add( gay );
 
 

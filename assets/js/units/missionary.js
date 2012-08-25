@@ -17,6 +17,8 @@ function Missionary( options ){
 	this.health = this.maxHealth;
 	this.cadency = 30;
 	
+	this.spawnSound = game.jukebox.sounds["missionary"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("missionary", {
 			totalFrames: 4,

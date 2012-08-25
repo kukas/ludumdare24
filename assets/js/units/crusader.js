@@ -17,6 +17,8 @@ function Crusader( options ){
 	this.health = this.maxHealth;
 	this.cadency = 50;
 	
+	this.spawnSound = game.jukebox.sounds["crusader"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("crusader", {
 			totalFrames: 7,

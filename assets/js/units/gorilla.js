@@ -17,6 +17,8 @@ function Gorilla( options ){
 	this.maxHealth = 3;
 	this.cadency = 30;
 	
+	this.spawnSound = game.jukebox.sounds["gorilla"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("gorilla", {
 			totalFrames: 5,

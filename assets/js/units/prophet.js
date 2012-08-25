@@ -17,6 +17,8 @@ function Prophet( options ){
 	this.maxHealth = 30;
 	this.cadency = 20;
 	
+	this.spawnSound = game.jukebox.sounds["prophet"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("prophet", {
 			totalFrames: 4,
