@@ -13,13 +13,32 @@ function Level(){
 		prophet: this.texturepath + "prophet.png",
 		professor: this.texturepath + "professor.png",
 		missionary: this.texturepath + "missionary.png",
+		nun: this.texturepath + "nun.png",
+		priest: this.texturepath + "priest.png",
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
 	};
-
 	this.sounds_src = {
-		logo: this.soundpath+"logo.wav",
-		gorilla: this.soundpath+"zvuky/opice.wav",
+		gorilla : this.soundpath+"zvuky/opice.wav",
+		missionary : this.soundpath + "zvuky/misionar.wav",
+		professor : this.soundpath + "zvuky/profesor.wav",
+		prophet : this.soundpath + "zvuky/prorok.wav",
+		gay : this.soundpath + "zvuky/homosexual.wav",
+		crusader : this.soundpath + "zvuky/krizak.wav",
+		nun : this.soundpath + "zvuky/jeptiska.wav",
+		priest : this.soundpath + "zvuky/knez.wav",
+		librarian : this.soundpath + "zvuky/knihovnice.wav",
+		angel : this.soundpath + "zvuky/andel.wav",
+		barocoangel : this.soundpath + "zvuky/andelicek.wav",
+		biolog : this.soundpath + "zvuky/biolog.wav",
+		bishop : this.soundpath + "zvuky/biskup.wav",
+		devil : this.soundpath + "zvuky/dabel.wav",
+		heretic : this.soundpath + "zvuky/heretic.wav",
+		jesus : this.soundpath + "zvuky/jezis.wav",
+		trex : this.soundpath + "zvuky/trex.wav",
+		teacher : this.soundpath + "zvuky/ucitel.wav",
+		matherTerese : this.soundpath + "zvuky/matka_tereza.wav",
+		wallace : this.soundpath + "zvuky/wallace.wav",
 	};
 }
 Level.prototype = new Levels();
@@ -48,6 +67,7 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(300,0),
 		owner:"player",
 	});
+	crus1.spawnSound.play();
 	this.add(crus1);
 	
 	var gay = new Gay({
@@ -63,15 +83,10 @@ Level.prototype.afterLoad = function (){
 		owner: "enemy",
 		// speed: -1,
 	})
-
+	gay.spawnSound.play();
 	this.add( gay );
 
-
-
 	var ps = new ParticleSystem();
-	// ps.tick = function(){
-		
-	// }
 	this.add(ps, "particlesystem")
 
 };

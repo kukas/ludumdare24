@@ -17,6 +17,8 @@ function Gay(options){
 	this.health = this.maxHealth;
 	this.cadency = 20;
 	
+	this.spawnSound = game.jukebox.sounds["gay"];
+	
 	if(options.owner == "player"){
 		this.texture = game.textures.get("gay", {
 			totalFrames: 5,

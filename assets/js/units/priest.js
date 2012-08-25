@@ -1,26 +1,26 @@
-function Prophet( options ){
+function Priest( options ){
 	if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 0.8;
+		this.speed = options.speed !== undefined ? options.speed : 0.3;
 	}
 	else{
-		this.speed = options.speed !== undefined ? options.speed : -0.8;
+		this.speed = options.speed !== undefined ? options.speed : -0.3;
 	}
 
 	Unit.call(this, options);
 	
-	this.width = 74;
+	this.width = 46;
 	this.height = 64;
-	this.range = 37;
+	this.range = 46;
 	
-	this.damage = 5;
-	this.health = 30;
-	this.maxHealth = 30;
+	this.damage = 1;
+	this.maxHealth = 5;
+	this.health = this.maxHealth;
 	this.cadency = 20;
 	
-	this.spawnSound = game.jukebox.sounds["prophet"];
+	this.spawnSound = game.jukebox.sounds["priest"];
 	
 	if(options.owner == "player"){
-		this.texture = game.textures.get("prophet", {
+		this.texture = game.textures.get("priest", {
 			totalFrames: 4,
 			currentAnimation: "walking",
 			animations:{
@@ -39,7 +39,7 @@ function Prophet( options ){
 		});
 	}
 	else{
-		this.texture = game.textures.get("prophet", {
+		this.texture = game.textures.get("priest", {
 			flip: "x",
 			totalFrames: 4,
 			currentAnimation: "walking",
@@ -59,5 +59,6 @@ function Prophet( options ){
 		});
 	}
 	this.owner = options.owner !== undefined ? options.owner : false;
+	
 };
-Prophet.prototype = new Unit();
+Priest.prototype = new Unit();

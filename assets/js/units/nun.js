@@ -1,26 +1,26 @@
-function Prophet( options ){
+function Nun( options ){
 	if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 0.8;
+		this.speed = options.speed !== undefined ? options.speed : 0.2;
 	}
 	else{
-		this.speed = options.speed !== undefined ? options.speed : -0.8;
+		this.speed = options.speed !== undefined ? options.speed : -0.2;
 	}
 
 	Unit.call(this, options);
 	
-	this.width = 74;
+	this.width = 35;
 	this.height = 64;
-	this.range = 37;
+	this.range = 64;
 	
-	this.damage = 5;
-	this.health = 30;
-	this.maxHealth = 30;
-	this.cadency = 20;
+	this.damage = 3;
+	this.maxHealth = 6;
+	this.health = this.maxHealth;
+	this.cadency = 50;
 	
-	this.spawnSound = game.jukebox.sounds["prophet"];
+	this.spawnSound = game.jukebox.sounds["nun"];
 	
 	if(options.owner == "player"){
-		this.texture = game.textures.get("prophet", {
+		this.texture = game.textures.get("nun", {
 			totalFrames: 4,
 			currentAnimation: "walking",
 			animations:{
@@ -39,7 +39,7 @@ function Prophet( options ){
 		});
 	}
 	else{
-		this.texture = game.textures.get("prophet", {
+		this.texture = game.textures.get("nun", {
 			flip: "x",
 			totalFrames: 4,
 			currentAnimation: "walking",
@@ -59,5 +59,6 @@ function Prophet( options ){
 		});
 	}
 	this.owner = options.owner !== undefined ? options.owner : false;
+	
 };
-Prophet.prototype = new Unit();
+Nun.prototype = new Unit();
