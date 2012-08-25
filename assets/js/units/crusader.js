@@ -8,7 +8,7 @@ function Crusader( options ){
 
 	Unit.call(this, options);
 	
-	this.width = 64;
+	this.width = 46;
 	this.height = 64;
 	this.range = 36;
 	

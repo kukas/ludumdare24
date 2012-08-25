@@ -70,7 +70,7 @@ Object2D.prototype.checkCollision = function(obj) {
 };
 
 Object2D.prototype.rangeCollision = function (obj){
-	if(obj instanceof Unit){
+	if(obj instanceof Unit && obj != this){
 		if(Math.abs(this.position.x - obj.position.x) <= this.range + obj.range){
 			return true;
 		}
