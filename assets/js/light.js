@@ -1,12 +1,4 @@
 // celé jsem to vykradl odsud: https://github.com/gre/illuminated.js
-function createCanvas(w, h){
-	var canvas = document.createElement("canvas");
-	canvas.width = w;
-	canvas.height = h;
-	var ctx = canvas.getContext("2d");
-	return {canvas: canvas, ctx: ctx, width: w, height: h};
-}
-
 function Lamp(options){
 	this.position = options.position === undefined ? new Vector2() : options.position;
 	this.distance = options.distance === undefined ? 100 : options.distance;
