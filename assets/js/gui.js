@@ -325,7 +325,11 @@ function GUI(){
 		},
 		in_game: {
 			controls: function(){
-				return;
+				game.eventhandler.addMouseControl(1,undefined,function () {
+					for(var i in game.children){
+						if(!(game.children[i] instanceof Terrain)) console.log(game.children[i].inObject(new Vector2().copy(game.eventhandler.mouse)));
+					};
+				})
 			}
 		}
 	}
