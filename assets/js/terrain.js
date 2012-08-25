@@ -29,7 +29,8 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 		cache.ctx.lineTo(i, this.height - height);
 	}
 	cache.ctx.lineTo(this.width, this.height);
-	cache.ctx.fillStyle = "#806438";	
+	var pattern = cache.ctx.createPattern(this.texture.image, "repeat");
+	cache.ctx.fillStyle = pattern;
 	cache.ctx.fill();
 	cache.ctx.closePath();
 
@@ -50,10 +51,12 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 Terrain.prototype.render = function(ctx) {
 	if(this.heightMapImage)
 		ctx.drawImage(this.heightMapImage, this.position.x, this.position.y);
-
-	
 };
 
 Terrain.prototype.setBorder = function(x, team) {
 	this.borders[team] = x;
+};
+
+Terrain.prototype.getHeight = function(x) {
+	return this.height - this.heightMap[x];
 };
