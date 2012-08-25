@@ -29,6 +29,7 @@ Level.prototype.afterLoad = function (){
 		width:game.textures.get("kaple").width,
 		height:game.textures.get("kaple").height,
 		actions:"hello, world!",
+		owner: "player",
 	});
 	this.add(building);
 	
@@ -36,7 +37,8 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(0,0),
 		width:18,
 		height:18,
-		texture: game.textures.get("skull")
+		texture: game.textures.get("skull"),
+		owner: "player",
 	})
 	this.add( unit );
 };

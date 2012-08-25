@@ -71,7 +71,25 @@ Terrain.prototype.render = function(ctx) {
 };
 
 Terrain.prototype.tick = function (){
-	for(){};
+	for(var i in game.children){
+		if(game.children[i] instanceof Unit){
+			if(game.children[i].owner == "player"){
+				if(game.children[i].getDistance() > this.borders["player"])
+					this.borders["player"]  = game.children[i].getDistance();
+			}
+			else{
+				if(game.children[i].getDistance() > this.borders["enemy"])
+					this.borders["enemy"]  = game.children[i].getDistance();
+			}
+			var soucet = this.borders["player"]+this.borders["enemy"];
+			if(this.width < soucet){
+				if(this.borders["player"] > this.borders["enemy"])
+					this.borders["enemy"]-=soucet - this.width;
+				else
+					this.borders["player"]-=soucet - this.width;
+			}
+		}
+	};
 };
 
 Terrain.prototype.setBorder = function(x, team) {
