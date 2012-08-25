@@ -192,22 +192,12 @@ Game.prototype.setPlayer = function (id){
 Game.prototype.fightControl = function (){
 	for(var i in this.children){var colided = false;
 		for(var j in this.children){
-			if(this.children[i].rangeCollision(this.children[j])){
-				if(this.children[i].owner != this.children[j].owner){
-					this.children[i].dealDamage(this.children[j]);
-					var colided = true;
-				}
-				if(this.children[i].owner == this.children[j].owner){
-					if(this.children[i].position.x > this.children[j].position.x){
-						this.children[j].waitQueue = true;
-					}
-					else{
-						this.children[i].waitQueue = true;
-						var colided = true;
-					}
-				}
+			var obja = this.children[i];
+			var objb = this.children[j];
+			if(obja.rangeCollision(objb)){
+				obja.waiting = true;
+				objb.waiting = true;
 			}
 		};
-		if(!colided) this.children[i].waitQueue = false;
 	};	
 };

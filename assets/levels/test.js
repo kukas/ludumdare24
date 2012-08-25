@@ -13,6 +13,7 @@ function Level(){
 		prophet: this.texturepath + "prophet.png",
 		professor: this.texturepath + "professor.png",
 		missionary: this.texturepath + "missionary.png",
+		nun: this.texturepath + "nun.png",
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
 	};
@@ -24,6 +25,7 @@ function Level(){
 		prophet : this.soundpath + "zvuky/prorok.wav",
 		gay : this.soundpath + "zvuky/homosexual.wav",
 		crusader : this.soundpath + "zvuky/krizak.wav",
+		nun : this.soundpath + "zvuky/jeptiska.wav",
 	};
 }
 Level.prototype = new Levels();

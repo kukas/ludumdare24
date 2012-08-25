@@ -39,7 +39,7 @@ Unit.prototype.move = function() {
 };
 
 Unit.prototype.tick = function() {
-	if(!this.waitQueue)
+	if(!this.waiting)
 		this.move();
 };
 
@@ -58,7 +58,7 @@ Unit.prototype.getDistance = function (){
 };
 
 Unit.prototype.dealDamage = function ( obj ){
-	this.waitQueue = true;
+	this.waiting = true;
 	if(this.lastdeal !== undefined){
 		if(this.lastdeal >= this.cadency){
 			obj.health-=this.damage;
@@ -83,4 +83,4 @@ Unit.prototype.dealDamage = function ( obj ){
 		this.lastdeal = 0;
 	}
 };
-Unit.prototype.waitQueue = false;
+Unit.prototype.waiting = false;

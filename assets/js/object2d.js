@@ -72,8 +72,19 @@ Object2D.prototype.checkCollision = function(obj) {
 };
 
 Object2D.prototype.rangeCollision = function (obj){
-	if(obj instanceof Unit && obj != this){
-		if(Math.abs(this.position.x - obj.position.x) <= this.range + obj.range){
+	if(( obj instanceof Unit || obj instanceof Building )&& obj != this){
+		if(Math.abs(this.position.x - obj.position.x) <= this.width/2 + obj.width/2){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+};
+
+Object2D.prototype.attackable = function (obj){
+	if(( obj instanceof Unit || obj instanceof Building )&& obj != this){
+		if(Math.abs(this.position.x - obj.position.x) <= this.range){
 			return true;
 		}
 		else{
