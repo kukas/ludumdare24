@@ -11,6 +11,8 @@ function Texture(image, options){
 
 	this.clip = options.clip === undefined ? {x: 0, y: 0, width: _this.width, height: _this.height} : options.clip;
 	
+	this.scale = options.scale === undefined ? new Vector2(1,1) : options.scale;
+	
 	this.animated = !!options.animation;
 	if(this.animated){
 		this.frame = 0;
@@ -24,6 +26,8 @@ function Texture(image, options){
 Texture.prototype.draw = function(ctx, x, y, width, height) {
 	width = width === undefined ? this.width : width;
 	height = height === undefined ? this.height : height;
+	ctx.save();
+	ctx.scale(this.scale.x,this.scale.y);
 	if(this.animated){
 		ctx.drawImage(this.image, 
 			Math.floor(this.frame)*this.frameWidth,0,
@@ -42,6 +46,7 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 	else {
 		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, x, y, width, height);
 	}
+	ctx.restore();
 };
 
 function Textures(){
