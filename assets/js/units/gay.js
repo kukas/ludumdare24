@@ -13,8 +13,8 @@ function Gay(options){
 	this.range = 34;
 		
 	this.damage = 5;
-	this.health = 30;
 	this.maxHealth = 30;
+	this.health = this.maxHealth;
 	this.cadency = 20;
 	
 	if(options.owner == "player"){

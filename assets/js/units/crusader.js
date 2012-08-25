@@ -13,8 +13,8 @@ function Crusader( options ){
 	this.range = 23;
 	
 	this.damage = 6;
-	this.health = 15;
 	this.maxHealth = 15;
+	this.health = this.maxHealth;
 	this.cadency = 50;
 	
 	if(options.owner == "player"){
