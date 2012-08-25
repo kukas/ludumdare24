@@ -46,6 +46,7 @@ GUIObject.prototype.tick = function (){
 GUIObject.prototype.render = function (ctx){
 };
 GUIObject.prototype.mousehandler = function(x,y,type) {
+
 	if(this[type] || (type == "onMouseMove" && (this.onMouseIn || this.onMouseOut)) ){
 		if( x > this.x && x < this.x+this.width &&
 			y > this.y && y < this.y+this.height){
@@ -59,7 +60,7 @@ GUIObject.prototype.mousehandler = function(x,y,type) {
 		}
 	}
 	for (var i = 0; i < this.children.length; i++){
-		this.children[i].mousehandler(x+this.x,y+this.y,type);
+		this.children[i].mousehandler(x-this.x,y-this.y,type);
 	}
 };
 
@@ -276,48 +277,6 @@ function GUI(){
 		},
 		main_menu: {
 			objects: function(){
-				// pozadí
-				_this.add( new Texture(
-					game.textures.get("funky_background"),
-					{width: game.width, height: game.height, repeat: true, scale: 4})
-				);
-
-				_this.add( new Texture(
-					game.textures.get("nadpis", {animation:{frames:2, speed: 5}}),
-					{x:(game.width-458)/2, width: 458, height: 146})
-				);
-				// start game tlačítko
-				var start_game = new Button(game.width/2-50,70, { width: 100, height: 50, visible: false, 
-					   onMouseUp: function(){
-					   	game.loadLevel("test");
-					}, onMouseIn: function(){
-						this.get("pozadi").image.clip.y = 16;
-					}, onMouseOut: function(){
-						this.get("pozadi").image.clip.y = 0;
-					} });
-				// pozadí pro start game tlačítko
-				start_game.add( new Texture(game.textures.get("funky_button", {clip: {x:0, y:0, width:32, height:16}}), { width:100, height:50 }), "pozadi" );
-				// text pro start game tlačítko
-				start_game.add( new Text({ value:"Start Game", color: "#000", weight: 700, size: 13, width: 100, height: 50, align: "center", valign: "center",
-				shadow: { color: "#666", blur: 1 } }) );
-				
-				_this.add(start_game);
-
-				// options tlačítko
-				var options = new Button(game.width/2-50,140, { width: 100, height: 50, visible: false,
-					   onMouseDown: function(){
-					}, onMouseUp: function(){
-					   	game.jukebox.togglePlay("logo");
-					}, onMouseIn: function(){
-						this.get("pozadi").image.clip.y = 16;
-					}, onMouseOut: function(){
-						this.get("pozadi").image.clip.y = 0;
-					} });
-				options.add( new Texture(game.textures.get("funky_button", {clip: {x:0, y:0, width:32, height:16}}), { width:100, height:50 }), "pozadi" )
-				options.add( new Text({ value:"Options", color: "#000", weight: 700, size: 13, width: 100, height: 50, align: "center", valign: "center",
-				shadow: { color: "#666", blur: 1 } }) );
-
-				_this.add(options);
 			},
 			controls: function(){
 				_this.addControls();
@@ -325,14 +284,45 @@ function GUI(){
 		},
 		in_game: {
 			objects: function(){
-				var button = new Button(10, 10, {
-					width: 100,
-					height: 100,
-					onMouseUp: function(){
-						console.log("adsf")
-					}
+				var layout = new Button(game.width/2 - 250, game.height - 150, {
+					width: 500,
+					height: 150,
+					visible: false
 				});
-				_this.add(button);
+				// layout.add( new Text({value:"ASDF"}) );
+				_this.add(layout);
+
+				var unitControl = new Button(300, 10, {
+					width: 90,
+					height: 130,
+					visible: false,
+				});
+				layout.add( unitControl );
+
+				unitControl.add( new Button(0, 0, {
+					width: 90,
+					height: 30,
+					color: "#FF0000",
+					onMouseUp: function(){
+						console.log("adsf");
+					}
+				}) );
+				unitControl.add( new Button(0, 40, {
+					width: 90,
+					height: 30,
+					color: "#FF0000",
+					onMouseUp: function(){
+						console.log("adsf");
+					}
+				}) );
+				unitControl.add( new Button(0, 80, {
+					width: 90,
+					height: 30,
+					color: "#FF0000",
+					onMouseUp: function(){
+						console.log("adsf");
+					}
+				}) );
 			},
 			controls: function(){
 				_this.addControls()

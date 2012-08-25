@@ -9,6 +9,8 @@ function Texture(image, options){
 	this.width = this.image.width;
 	this.height = this.image.height;
 
+	this.flip = options.flip === undefined ? false : options.flip;
+
 	this.clip = options.clip === undefined ? {x: 0, y: 0, width: _this.width, height: _this.height} : options.clip;
 	
 	this.scale = options.scale === undefined ? new Vector2(1,1) : options.scale;
@@ -27,12 +29,25 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 	width = width === undefined ? this.width : width;
 	height = height === undefined ? this.height : height;
 	ctx.save();
-	ctx.scale(this.scale.x,this.scale.y);
+	var addX = addY = 0;
+	if(this.flip){
+		if(this.flip == "x"){
+			ctx.scale(-1,1);
+			var addX = -this.frameWidth/2;
+			ctx.translate(addX, 0);
+		}
+		else if(this.flip == "y"){
+			ctx.scale(1,-1);
+			var addY = -this.height/2;
+			ctx.translate(0, addY);
+		}
+	}
+	
 	if(this.animated){
 		ctx.drawImage(this.image, 
 			Math.floor(this.frame)*this.frameWidth,0,
 			this.width/this.frames,this.height,
-			x,y,
+			x + addX,y + addY,
 			width,height
 			);
 		if(this.frame + 1/this.speed < this.frames){
@@ -44,7 +59,7 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 
 	}
 	else {
-		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, x, y, width, height);
+		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, 0, 0, width, height);
 	}
 	ctx.restore();
 };

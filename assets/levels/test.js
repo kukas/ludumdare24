@@ -36,8 +36,9 @@ Level.prototype.afterLoad = function (){
 	
 	var unit = new Unit({
 		position: new Vector2(0,0),
-		width:18,
-		height:18,
+		width:180,
+		height:180,
+		speed:2,
 		texture: game.textures.get("skull"),
 		owner: "player",
 	});
@@ -45,9 +46,9 @@ Level.prototype.afterLoad = function (){
 	
 	var unit2 = new Unit({
 		position: new Vector2(game.width,0),
-		width:64,
+		width:46,
 		height:64,
-		texture: game.textures.get("crusader", {scale:new Vector2(-1,1)}),
+		texture: game.textures.get("crusader", {animation:{frames:6, speed:7}, flip: "x"}),
 		owner: "enemy",
 		speed: -1,
 	})
