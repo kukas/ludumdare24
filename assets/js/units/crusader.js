@@ -13,7 +13,7 @@ function Crusader( options ){
 	this.range = 23;
 	
 	this.damage = 6;
-	this.maxHealth = 1500;
+	this.maxHealth = 15;
 	this.health = this.maxHealth;
 	this.cadency = 50;
 	
