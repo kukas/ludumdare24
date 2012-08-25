@@ -10,7 +10,8 @@ function Level(){
 		troll: this.texturepath + "troll.png",
 		gay: this.texturepath + "gay.png",
 		missionary: this.texturepath + "missionary.png",
-		button: this.texturepath + "button.png",
+		button: this.texturepath + "button.jpg",
+		button2: this.texturepath + "button2.jpg",
 	};
 }
 Level.prototype = new Levels();

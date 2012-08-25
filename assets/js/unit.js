@@ -6,6 +6,7 @@ function Unit(options){
 	
 	this.currentSpeed = this.speed;
 
+
 	this.actions = [
 		{
 			name: "Stop!",
@@ -18,14 +19,14 @@ function Unit(options){
 			name: "Forward!",
 			description: "Order the selected unit to MOVE!",
 			exec: function(){
-				_this.currentSpeed = this.speed;
+				_this.currentSpeed = _this.speed;
 			}
 		},
 		{
 			name: "Backward!",
 			description: "Order the selected unit to MOVE!",
 			exec: function(){
-				_this.currentSpeed = -this.speed;
+				_this.currentSpeed = -_this.speed;
 			}
 		},
 	];

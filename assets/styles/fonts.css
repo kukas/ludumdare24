@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'PlainBlackNormal';
+    src: url('../fonts/Plain_Black-webfont.eot');
+    src: url('../fonts/Plain_Black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Plain_Black-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: '1942report';
+    src: url('../fonts/1942-webfont.eot');
+    src: url('../fonts/1942-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/1942-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}

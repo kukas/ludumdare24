@@ -286,49 +286,68 @@ function GUI(){
 		},
 		in_game: {
 			objects: function(){
-				var layout = new Button(game.width/2 - 250, game.height - 150, {
+				var layout = new Button(game.width/2 - 250, game.height - 200, {
 					width: 500,
-					height: 150,
+					height: 200,
 					visible: false
 				});
 				// layout.add( new Text({value:"ASDF"}) );
-				_this.add(layout);
+				_this.add(layout, "layout");
 
 				var unitControl = new Button(300, 10, {
-					width: 90,
-					height: 130,
-					visible: false,
+					width: 120,
+					height: 150,
+					visible: true,
 				});
-				layout.add( unitControl );
+				layout.add( unitControl, "unitControl" );
 
-				var button = new Button(0, 0, {
-					width: 90,
-					height: 30,
-					visible: false,
-					color: "#FF0000",
-					onMouseUp: function(){
-						
-					}
-				});
-				var texture = new Texture(game.textures.get("button", {clip:{x:0, y:0, width:15, height:5}}));
-				texture.width = 90;
-				texture.height = 30;
+				
+			},
+			updateUnitControl: function(t, actions){
+				game.gui.links.layout.links.unitControl.children = [];
 
-				button.add( texture );
-				console.log(texture)
-				unitControl.add( button );
+				for(var i in actions){
+					var button = new Button(0, i * 50, {
+						width: 120,
+						height: 40,
+						visible: false,
+						onMouseUp: actions[i].exec
+					});
+					// obrázek
+					var texture = new Texture(game.textures.get("button"));
+					texture.width = 120;
+					texture.height = 40;
+
+					button.add( texture );
+					// text
+					var text = new Text({
+						y: 4,
+						color: "#000",
+						font: "PlainBlackNormal",
+						size: 26,
+						value: actions[i].name,
+						align: "center",
+					});
+					text.width = 120;
+					text.height = 40;
+
+					button.add( text );
+
+					_this.links.layout.links.unitControl.add( button );
+				}
 			},
 			controls: function(){
 				_this.addControls()
 				game.eventhandler.addMouseControl(1,function () {
+					for(var j in game.selected){
+						game.selected[j].selected = false;
+					};
 					for(var i in game.children){
 						if( game.children[i].inObject(game.eventhandler.mouse) ){
-							for(var j in game.selected){
-								game.selected[j].selected = false;
-							}
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
-						}
+							_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
+						};
 					};
 				})
 			}
