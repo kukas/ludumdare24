@@ -6,8 +6,8 @@ function Terrain(options){
 	this.heightMap = [];
 
 	this.borders = {
-		atheists: 0,
-		creationists: 0
+		player: 200,
+		enemy: 50,
 	};
 
 	this.grassLevel = 20;
@@ -51,6 +51,27 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 Terrain.prototype.render = function(ctx) {
 	if(this.heightMapImage)
 		ctx.drawImage(this.heightMapImage, this.position.x, this.position.y);
+	//player
+	ctx.beginPath();
+	ctx.fillStyle = game.player.color;
+	for(var i = 0; i <= this.borders["player"];i++){
+		ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
+	};
+	ctx.fill();
+	ctx.closePath();
+	
+	//enemy
+	ctx.beginPath();
+	ctx.fillStyle = game.enemy.color;
+	for(var i = this.width; this.width - i <= this.borders["enemy"];i--){
+		ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
+	};
+	ctx.fill();
+	ctx.closePath();
+};
+
+Terrain.prototype.tick = function (){
+	for(){};
 };
 
 Terrain.prototype.setBorder = function(x, team) {

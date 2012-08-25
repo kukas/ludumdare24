@@ -29,6 +29,9 @@ function Game(){
 	this.camera.tY = function(y){
 			return y + this.y;
 		};
+		
+	this.player = {side:"creationist",color:"#93C6CC"};
+	this.enemy = {side:"atheist",color:"#F0271D"};
 };
 
 Game.prototype = new Object2D();
@@ -165,4 +168,15 @@ Game.prototype.add = function(obj, name) {
 
 	if(name)
 		this.links[name] = obj;
+};
+
+Game.prototype.setPlayer = function (id){
+	if(id == "creationist"){
+		this.player = {side:"creationist",color:"#93C6CC"};
+		this.enemy = {side:"atheist",color:"#F0271D"};
+	}
+	else{
+		this.player = {side:"atheist",color:"#F0271D"};
+		this.enemy = {side:"creationist",color:"#93C6CC"};
+	}
 };
