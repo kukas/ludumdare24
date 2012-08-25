@@ -13,12 +13,6 @@ Level.prototype = new Levels();
 Level.prototype.afterLoad = function (){
 	var _this = this;
 
-	game.gui.guis.in_game.controls = function(){
-		game.eventhandler.addMouseControl(3, function(){
-			console.log("ahoj")
-		})
-	}
-
 	game.gui.switchGUI("in_game");
 
 	var terrain = new Terrain({
@@ -34,6 +28,7 @@ Level.prototype.afterLoad = function (){
 		texture: game.textures.get("kaple"),
 		width:game.textures.get("kaple").width,
 		height:game.textures.get("kaple").height,
+		actions:"hello, world!",
 	});
 	this.add(building);
 	
