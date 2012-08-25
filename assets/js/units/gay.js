@@ -18,10 +18,43 @@ function Gay(options){
 	this.cadency = 20;
 	
 	if(options.owner == "player"){
-		this.texture = game.textures.get("gay", {animation:{frames:5,speed:7}});
+		this.texture = game.textures.get("gay", {
+			totalFrames: 5,
+			currentAnimation: "walking",
+			animations:{
+				walking: {
+					start: 0,
+					end: 4,
+					speed: 7
+				},
+				attack: {
+					start: 4,
+					end: 5,
+					speed: 10,
+					cycle: true
+				}
+			}
+		});
 	}
 	else{
-		this.texture = game.textures.get("gay", {animation:{frames:5,speed:7},flip:"x"});
+		this.texture = game.textures.get("gay", {
+			flip:"x",
+			totalFrames: 5,
+			currentAnimation: "walking",
+			animations:{
+				walking: {
+					start: 0,
+					end: 4,
+					speed: 7
+				},
+				attack: {
+					start: 4,
+					end: 5,
+					speed: 10,
+					cycle: true
+				}
+			}
+		});
 	}
 	this.owner = options.owner !== undefined ? options.owner : false;
 	

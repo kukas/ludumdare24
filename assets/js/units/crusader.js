@@ -39,7 +39,6 @@ function Crusader( options ){
 	else{
 		this.texture = game.textures.get("crusader", {
 			flip: "x",
-
 			totalFrames: 7,
 			currentAnimation: "walking",
 			animations:{

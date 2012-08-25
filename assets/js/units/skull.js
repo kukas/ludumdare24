@@ -9,7 +9,12 @@ function Skull(options){
 	
 	this.range = 20;
 	
-	this.texture = game.textures.get("skull", {scale:new Vector2(1,1)});
+	if(options.owner == "player"){
+		this.texture = game.textures.get("skull");
+	}
+	else{
+		this.texture = game.textures.get("skull", {flip:"x"});
+	}
 	
 	this.owner = options.owner !== undefined ? options.owner : false;
 	

@@ -18,10 +18,42 @@ function Missionary( options ){
 	this.cadency = 30;
 	
 	if(options.owner == "player"){
-		this.texture = game.textures.get("missionary", {animation:{frames:4,speed:7}});
+		this.texture = game.textures.get("missionary", {
+			totalFrames: 4,
+			currentAnimation: "walking",
+			animations:{
+				walking: {
+					start: 0,
+					end: 3,
+					speed: 7
+				},
+				attack: {
+					start: 3,
+					end: 4,
+					speed: 10,
+					cycle: true
+				}
+			}
+		});
 	}
 	else{
-		this.texture = game.textures.get("misssionary", {animation:{frames:4,speed:7},flip:"x"});
+		this.texture = game.textures.get("misssionary", {
+			totalFrames: 5,
+			currentAnimation: "walking",
+			animations:{
+				walking: {
+					start: 0,
+					end: 4,
+					speed: 7
+				},
+				attack: {
+					start: 4,
+					end: 5,
+					speed: 10,
+					cycle: true
+				}
+			}
+		,flip:"x"});
 	}
 	this.owner = options.owner !== undefined ? options.owner : false;
 	
