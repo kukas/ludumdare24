@@ -23,7 +23,7 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 	var cache = createCanvas(this.width, this.height);
 	cache.ctx.beginPath();
 	cache.ctx.moveTo(0, this.height);
-	for(var i = 0; i < this.width; i++){
+	for(var i = 0; i <= this.width; i++){
 		var height = middleHeight + this.simplex.noise( i / zoom , 0 ) * elevation;
 		this.heightMap.push(height);
 		cache.ctx.lineTo(i, this.height - height);
@@ -35,10 +35,10 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 	cache.ctx.closePath();
 
 	cache.ctx.beginPath();
-	for(var i = 0; i < this.width; i++){
+	for(var i = 0; i <= this.width; i++){
 		cache.ctx.lineTo(i, this.height - this.heightMap[i]);
 	}
-	for(var i = this.width-1; i >= 0; i--){
+	for(var i = this.width; i >= 0; i--){
 		cache.ctx.lineTo(i, this.height - this.heightMap[i] + this.grassLevel);
 	}
 	cache.ctx.fillStyle = "#1F8C23";	

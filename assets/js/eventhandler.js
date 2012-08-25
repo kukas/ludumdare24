@@ -52,7 +52,6 @@ Mouse.prototype.add = function(func, type){
 Mouse.prototype.exec = function(type, x, y){
 	if (this[type].length === 0)
 		return
-
 	for(var i in this[type]){
 		this[type][i](x, y);
 	}
@@ -100,7 +99,12 @@ Eventhandler.prototype.keyboardhandler = function(e) {
 Eventhandler.prototype.mousehandler = function(e) {
 	var which = e.which,
 		type = e.type;
-	
+
+	e.preventDefault();
+
+	if(type == "contextmenu")
+		return;
+
 	var x = e.clientX - this.offset.left,
 		y = e.clientY - this.offset.top;
 
@@ -113,8 +117,9 @@ Eventhandler.prototype.mousehandler = function(e) {
 		else {
 			this.mouseControls[ which ].down = false;
 		}
-		if(type != "mousemove")
+		if(type != "mousemove"){
 			this.mouseControls[ which ].exec(type, x, y)
+		}
 
 		if( (which == 0 && this.mouseControls[ which ]) || (this.mouseControls[ which ].down == false && type == "mousemove") ){
 			this.mouseControls[ 0 ].exec("mousedown", x, y);
@@ -123,7 +128,6 @@ Eventhandler.prototype.mousehandler = function(e) {
 	// else{
 	// 	console.log([which,type])
 	// }
-	e.preventDefault();
 };
 Eventhandler.prototype.updateMouseXY = function(x,y) {
 	this.mouse.x = x;

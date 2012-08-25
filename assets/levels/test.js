@@ -12,6 +12,11 @@ Level.prototype = new Levels();
 Level.prototype.afterLoad = function (){
 	var _this = this;
 
+	game.gui.guis.in_game.controls = function(){
+		game.eventhandler.addMouseControl(3, function(){
+			console.log("ahoj")
+		})
+	}
 	game.gui.switchGUI("in_game");
 
 	var terrain = new Terrain({
