@@ -1,5 +1,7 @@
 function Building(options){
 	Object2D.call(this, options);
+	this.producing = false;
+	this.produceTime = 0;
 }
 Building.prototype = new Object2D();
 
@@ -31,6 +33,24 @@ Building.prototype.die = function( murderer ) {
 	// console.log(murderer)
 	murderer.unfreeze();
 	if(this.health <= 0){
+		this.onDie !== undefined ? this.onDie() : false;
 		game.remove(this);
+	}
+};
+
+Building.prototype.produce = function (obj,cena){
+	var _this = this;
+	if(!this.producing){
+		this.producing = obj;
+		game.gui.add(new ProgressBar(game.textures.get("button2"),100,{x:_this.position.x,y:_this.position.y+10,height:10,width:100}));
+	}
+	else{
+		if(this.produceTime >= 120){
+			Spawn(obj, new Vector2(this.position.x+this.width/2+32,this.position.y+this.height/2+32),this.owner);
+			this.producing = false;
+		}
+		else{
+			this.produceTime++;
+		}
 	}
 };

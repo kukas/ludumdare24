@@ -39,7 +39,7 @@ function Missionary( options ){
 		});
 	}
 	else{
-		this.texture = game.textures.get("misssionary", {
+		this.texture = game.textures.get("missionary", {
 			totalFrames: 5,
 			currentAnimation: "walking",
 			animations:{

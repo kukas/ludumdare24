@@ -5,7 +5,10 @@ function Level(){
 	this.textures_src = {
 		soil: this.texturepath + "soil.png",
 		skull: this.texturepath + "skull.png",
-		kaple: this.texturepath + "rotunda.png",
+		chapel0: this.texturepath + "rotunda.png",
+		chapel1: this.texturepath + "church.png",
+		chapel2: this.texturepath + "monastery.png",
+		chapel3: this.texturepath + "cathedral.png",
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
 		gay: this.texturepath + "gay.png",
@@ -57,8 +60,7 @@ Level.prototype.afterLoad = function (){
 	this.add( terrain, "terrain" );
 	
 	var building = new Chapel({
-		position: new Vector2(100,terrain.getHeight(100)-game.textures.get("kaple").height/2),
-		actions:"hello, world!",
+		position: new Vector2(100,terrain.getHeight(100)-game.textures.get("chapel0").height/2),
 		owner: "player",
 	});
 	this.add(building);
@@ -67,7 +69,6 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(300,0),
 		owner:"player",
 	});
-	crus1.spawnSound.play();
 	this.add(crus1);
 	
 	var gay = new Gay({
@@ -83,7 +84,6 @@ Level.prototype.afterLoad = function (){
 		owner: "enemy",
 		// speed: -1,
 	})
-	gay.spawnSound.play();
 	this.add( gay );
 
 	var ps = new ParticleSystem();
