@@ -63,6 +63,13 @@ Game.prototype.render = function() {
 
 	this.gui.render(this.ctx);
 
+	// var grd=this.ctx.createRadialGradient(this.height/2, this.height/2, 0, this.height/2, this.height/2, this.height);
+	// grd.addColorStop(0.5, "rgba(0,0,0,0)");
+	// grd.addColorStop(1, "rgba(0,0,0,1)");
+
+	// this.ctx.fillStyle = grd;
+	// this.ctx.fillRect(0, 0, this.height/2, this.height);
+
 	this.ctx.restore();
 
 	stats.end();

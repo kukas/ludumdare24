@@ -86,6 +86,7 @@ function GUI(){
 		this.onMouseOut = options.onMouseOut;
 		this.mouseIn = false;
 
+		return this;
 	};
 	Button.prototype = new GUIObject();
 	Button.prototype.render = function(ctx) {
@@ -188,6 +189,7 @@ function GUI(){
 	};
 	function Texture(image, options){
 		GUIObject.call(this);
+		options = options === undefined ? {} : options;
 
 		this.x = options.x === undefined ? 0 : options.x;
 		this.y = options.y === undefined ? 0 : options.y;
@@ -299,30 +301,22 @@ function GUI(){
 				});
 				layout.add( unitControl );
 
-				unitControl.add( new Button(0, 0, {
+				var button = new Button(0, 0, {
 					width: 90,
 					height: 30,
+					visible: false,
 					color: "#FF0000",
 					onMouseUp: function(){
-						console.log("adsf");
+						
 					}
-				}) );
-				unitControl.add( new Button(0, 40, {
-					width: 90,
-					height: 30,
-					color: "#FF0000",
-					onMouseUp: function(){
-						console.log("adsf");
-					}
-				}) );
-				unitControl.add( new Button(0, 80, {
-					width: 90,
-					height: 30,
-					color: "#FF0000",
-					onMouseUp: function(){
-						console.log("adsf");
-					}
-				}) );
+				});
+				var texture = new Texture(game.textures.get("button", {clip:{x:0, y:0, width:15, height:5}}));
+				texture.width = 90;
+				texture.height = 30;
+
+				button.add( texture );
+				console.log(texture)
+				unitControl.add( button );
 			},
 			controls: function(){
 				_this.addControls()

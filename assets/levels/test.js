@@ -8,6 +8,7 @@ function Level(){
 		kaple: this.texturepath + "rotunda.png",
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
+		button: this.texturepath + "button.png",
 	};
 }
 Level.prototype = new Levels();
@@ -43,6 +44,7 @@ Level.prototype.afterLoad = function (){
 		texture: game.textures.get("skull"),
 		owner: "player",
 	});
+	unit.select = true;
 	this.add( unit );
 	
 	var unit2 = new Unit({

@@ -16,6 +16,8 @@ function Object2D( options ){
 	this.children = [];
 	this.links = {};
 
+	this.selected = false;
+
 	this.texture = options.texture === undefined ? false : options.texture;
 
 	this.collidable = options.collidable === undefined ? true : options.collidable;
@@ -164,6 +166,15 @@ Object2D.prototype.render = function(ctx) {
 				ctx.translate(-this.width/2, -this.height/2);
 				if(this.texture){
 					this.texture.draw(ctx, 0, 0 , this.width, this.height)
+				}
+				if(this.selected){
+					ctx.beginPath();
+					ctx.fillStyle = "rgba(219, 26, 26, 0.3)"
+					ctx.strokeStyle = "rgba(219, 26, 26, 0.7)"
+					ctx.rect(0,0,this.width, this.height)
+					ctx.fill();
+					ctx.stroke();
+					ctx.closePath();
 				}
 			ctx.restore();
 		ctx.restore();
