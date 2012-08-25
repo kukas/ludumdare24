@@ -160,10 +160,12 @@ Object2D.prototype.render = function(ctx) {
 		ctx.translate(this.position.x, this.position.y);
 		ctx.save();
 			ctx.rotate(this.rotation)
-			ctx.translate(-this.width/2, -this.height/2);
-			if(this.texture){
-				this.texture.draw(ctx, 0, 0 , this.width, this.height)
-			}
+			ctx.save();
+				ctx.translate(-this.width/2, -this.height/2);
+				if(this.texture){
+					this.texture.draw(ctx, 0, 0 , this.width, this.height)
+				}
+			ctx.restore();
 		ctx.restore();
 	ctx.restore();
 	

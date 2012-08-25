@@ -6,6 +6,7 @@ function Level(){
 		soil: this.texturepath + "soil.png",
 		skull: this.texturepath + "skull.png",
 		kaple: this.texturepath + "rotunda.png",
+		crusader: this.texturepath + "crusader.png",
 	};
 }
 Level.prototype = new Levels();
@@ -44,9 +45,9 @@ Level.prototype.afterLoad = function (){
 	
 	var unit2 = new Unit({
 		position: new Vector2(game.width,0),
-		width:18,
-		height:18,
-		texture: game.textures.get("skull"),
+		width:64,
+		height:64,
+		texture: game.textures.get("crusader", {scale:new Vector2(-1,1)}),
 		owner: "enemy",
 		speed: -1,
 	})
