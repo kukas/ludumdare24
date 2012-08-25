@@ -13,7 +13,7 @@ function Gay(options){
 	this.range = 34;
 		
 	this.damage = 5;
-	this.maxHealth = 30;
+	this.maxHealth = 3000;
 	this.health = this.maxHealth;
 	this.cadency = 20;
 	
@@ -31,7 +31,7 @@ function Gay(options){
 					start: 4,
 					end: 5,
 					speed: 10,
-					cycle: true
+					cycle: false
 				}
 			}
 		});
@@ -48,10 +48,10 @@ function Gay(options){
 					speed: 7
 				},
 				attack: {
-					start: 4,
+					start: 3,
 					end: 5,
 					speed: 10,
-					cycle: true
+					cycle: false
 				}
 			}
 		});

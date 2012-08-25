@@ -16,6 +16,11 @@ function Level(){
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
 	};
+
+	this.sounds_src = {
+		logo: this.soundpath+"logo.wav",
+		gorilla: this.soundpath+"zvuky/opice.wav",
+	};
 }
 Level.prototype = new Levels();
 
@@ -46,7 +51,7 @@ Level.prototype.afterLoad = function (){
 	this.add(crus1);
 	
 	var gay = new Gay({
-		position: new Vector2(game.width,0),
+		position: new Vector2(game.width-500,0),
 		owner: "enemy",
 		// speed: -1,
 	})
@@ -55,17 +60,10 @@ Level.prototype.afterLoad = function (){
 
 
 	var ps = new ParticleSystem();
-	ps.tick = function(){
-		ps.emit(Particle, 2, {
-			position: new Vector2(90,120)
-		}, {
-			velocity: {
-				x: {min: -1, max: 1},
-				y: {min: -1, max: 1}
-			}
-		})
-	}
-	this.add(ps)
+	// ps.tick = function(){
+		
+	// }
+	this.add(ps, "particlesystem")
 
 };
 

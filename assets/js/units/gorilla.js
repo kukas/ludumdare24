@@ -31,7 +31,7 @@ function Gorilla( options ){
 					start: 4,
 					end: 5,
 					speed: 10,
-					cycle: true
+					cycle: false
 				}
 			}
 		});
