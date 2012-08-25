@@ -89,6 +89,7 @@ Game.prototype.tickChildren = function() {
 
 Game.prototype.tick = function() {
 	this.tickChildren();
+	this.fightControl();
 };
 
 Game.prototype.centerCanvas = function() {
@@ -186,4 +187,12 @@ Game.prototype.setPlayer = function (id){
 		this.player = {side:"atheist",color:"#F0271D"};
 		this.enemy = {side:"creationist",color:"#93C6CC"};
 	}
+};
+
+Game.prototype.fightControl = function (){
+	for(var i in this.children){
+		for(var j in this.children){
+			if(this.children[i].rangeCollision(this.children[j])) this.children[i].dealDamage(this.children[j]);
+		};
+	};	
 };
