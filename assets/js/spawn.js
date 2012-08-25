@@ -1,8 +1,5 @@
-function Spawn(id,vec2,side){
-	if(id == "crusader" || id == "Crusader"){
-		game.add(new Crusader({owner:side,position:vec2}));
-	}
-	if(id == "skull" || id == "Skull"){
-		game.add(new Skull({owner:side,position:vec2}));
+function Spawn(con,vec2,side){
+	if(con !== undefined){
+		game.add(new con({position:vec2,owner:side}));
 	}
 };

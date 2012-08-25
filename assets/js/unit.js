@@ -57,5 +57,27 @@ Unit.prototype.getDistance = function (){
 
 Unit.prototype.dealDamage = function ( obj ){
 	this.actions[0].exec();
-	console.log("dealing damage");
+	if(this.lastdeal !== undefined){
+		if(this.lastdeal >= this.cadency){
+			obj.health-=this.damage;
+			console.log("dealing damage");
+			if(obj.health <= 0){console.log("died");
+				this.currentSpeed = this.speed;
+				game.remove(obj);
+			}
+			this.lastdeal = 0;
+		}
+		else{
+			this.lastdeal++;
+		}
+	}
+	else{
+		obj.health-=this.damage;
+		console.log("dealing damage");
+		if(obj.health <= 0){console.log("died");
+			this.currentSpeed = this.speed;
+			game.remove(obj);
+		}
+		this.lastdeal = 0;
+	}
 };

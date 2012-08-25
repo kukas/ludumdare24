@@ -192,7 +192,7 @@ Game.prototype.setPlayer = function (id){
 Game.prototype.fightControl = function (){
 	for(var i in this.children){
 		for(var j in this.children){
-			if(this.children[i].rangeCollision(this.children[j])) this.children[i].dealDamage(this.children[j]);
+			if(this.children[i].rangeCollision(this.children[j]) && this.children[i].owner != this.children[j].owner) this.children[i].dealDamage(this.children[j]);
 		};
 	};	
 };

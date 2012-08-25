@@ -8,6 +8,8 @@ function Level(){
 		kaple: this.texturepath + "rotunda.png",
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
+		gay: this.texturepath + "gay.png",
+		missionary: this.texturepath + "missionary.png",
 		button: this.texturepath + "button.png",
 	};
 }
@@ -44,12 +46,12 @@ Level.prototype.afterLoad = function (){
 	crus1.selected = true;
 	
 	
-	var crus2 = new Crusader({
+	var gay = new Gay({
 		position: new Vector2(game.width,0),
 		owner: "enemy",
 		speed: -1,
 	})
-	this.add( crus2 );
+	this.add( gay );
 };
 
 var level = new Level();
