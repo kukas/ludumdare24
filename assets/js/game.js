@@ -6,7 +6,7 @@ function Game(){
 	this.ctx = this.canvas.getContext("2d");
 
 	this.width = 960;
-	this.height = 400;
+	this.height = 500;
 	this.scale = 1;
 
 	this.ticks = 0;

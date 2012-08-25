@@ -71,6 +71,17 @@ Object2D.prototype.checkCollision = function(obj) {
 	}
 };
 
+Object2D.prototype.rangeCollision = function (obj){
+	if(obj instanceof Unit){
+		if(Math.abs(this.position.x - obj.position.x) <= this.range + obj.range){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+};
+
 Object2D.prototype.inObject = function(vec) {
 	if(this.collisionType == "circle"){
 		var dx = vec.x - this.position.x;
@@ -169,8 +180,8 @@ Object2D.prototype.render = function(ctx) {
 				}
 				if(this.selected){
 					ctx.beginPath();
-					ctx.fillStyle = "rgba(219, 26, 26, 0.3)"
-					ctx.strokeStyle = "rgba(219, 26, 26, 0.7)"
+					ctx.fillStyle = "rgba(255, 0, 0, 0.3)"
+					ctx.strokeStyle = "rgba(255, 0, 0, 0.7)"
 					ctx.rect(0,0,this.width, this.height)
 					ctx.fill();
 					ctx.stroke();

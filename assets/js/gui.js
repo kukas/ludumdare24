@@ -320,9 +320,15 @@ function GUI(){
 			},
 			controls: function(){
 				_this.addControls()
-				game.eventhandler.addMouseControl(3,function () {
+				game.eventhandler.addMouseControl(1,function () {
 					for(var i in game.children){
-						if(game.children[i].actions !== undefined && game.children[i].inObject(game.eventhandler.mouse)) console.log(game.children[i].actions);
+						if( game.children[i].inObject(game.eventhandler.mouse) ){
+							for(var j in game.selected){
+								game.selected[j].selected = false;
+							}
+							game.children[i].selected = true;
+							game.selected = [ game.children[i] ];
+						}
 					};
 				})
 			}
