@@ -18,9 +18,10 @@ function Game(){
 	this.textures = new Textures();
 	this.jukebox = new Jukebox();
 
-	this.lights = false;
+	this.lights = undefined;
+	this.renderLights = true;
 
-	this.children = {};
+	this.children = [];
 	this.camera = new Vector2();
 	this.camera.tX = function(x){
 			return x + this.x;
@@ -29,6 +30,8 @@ function Game(){
 			return y + this.y;
 		};
 };
+
+Game.prototype = new Object2D();
 
 Game.prototype.render = function() {
 	var _this = this;
@@ -40,27 +43,22 @@ Game.prototype.render = function() {
 
 	this.ctx.fillStyle = this.clearColor;
 	this.ctx.fillRect(0, 0, this.width, this.height);
-	// this.ctx.clearRect(0, 0, this.width, this.height);
-
-	if(this.lights)
-		this.lights.render(this.ctx);
 
 	this.ctx.save();
 	this.ctx.scale(this.scale, this.scale);
 
 	this.ctx.translate(-this.camera.x, -this.camera.y)
 
+	this.renderChildren(this.ctx);
+	
+	if(this.lights && this.renderLights)
+		this.lights.render(this.ctx);
+
+	if(this.lights && this.renderLights)
+		this.lights.renderMask(this.ctx);
+	
 
 	this.gui.render(this.ctx);
-
-	for (var i = 0, len = this.children.length; i < len; i++){
-		this.children[i].render(this.ctx);
-		if(this.children[i].renderChildren)
-			this.children[i].renderChildren(this.ctx);
-	};
-
-	if(this.lights)
-		this.lights.renderMask(this.ctx);
 
 	this.ctx.restore();
 
@@ -114,7 +112,6 @@ Game.prototype.init = function() {
 
 	this.loadLevel("test")
 
-	this.disableInterpolation();
 	this.render();
 };
 

@@ -23,11 +23,13 @@ function Object2D( options ){
 	this.boundingRadius = options.boundingRadius === undefined ? this.computeBoundingRadius() : options.boundingRadius;
 	this.hitbox = options.hitbox === undefined ? {x: 0, y: 0, width: _this.width, height: _this.height} : options.hitbox;
 
-	this.opaque = true;
+	// světlo
+	this.opaque = options.opaque === undefined ? true : options.opaque;
+	this.diffuse =  options.diffuse === undefined ? 0.4 : options.diffuse; // jak moc se od jeho povrchu odráží světlo
 
 	this.velocity = new Vector2();
 };
-
+// pohybové funkce
 Object2D.prototype.lookAt = function(vec) {
 	tVec = new Vector2().sub(this.position, vec);
 	this.rotation = Math.atan(tVec.y/tVec.x);
@@ -35,6 +37,14 @@ Object2D.prototype.lookAt = function(vec) {
 		this.rotation += Math.PI;
 };
 
+Object2D.prototype.move = function(vec) {
+	this.position.addSelf(vec);
+	var colls = game.findCollisions(this);
+	if(colls.length)
+		this.position.subSelf(vec);
+};
+
+// kolizní funkce
 Object2D.prototype.computeBoundingRadius = function() {
 	return this.boundingRadius = Math.sqrt(this.width*this.width + this.height*this.height)/2;
 };
@@ -59,24 +69,6 @@ Object2D.prototype.checkCollision = function(obj) {
 	}
 };
 
-Object2D.prototype.add = function(obj, name) {
-	this.children.push(obj);
-	obj.parent = this;
-
-	if(name)
-		this.links[name] = obj;
-};
-
-Object2D.prototype.remove = function(obj){
-};
-
-Object2D.prototype.move = function(vec) {
-	this.position.addSelf(vec);
-	var colls = game.findCollisions(this);
-	if(colls.length)
-		this.position.subSelf(vec);
-};
-
 Object2D.prototype.inObject = function(vec) {
 	if(this.collisionType == "circle"){
 		var dx = vec.x - this.position.x;
@@ -94,8 +86,75 @@ Object2D.prototype.inObject = function(vec) {
 	}
 };
 
+// funkce práce s dětmi
+Object2D.prototype.add = function(obj, name) {
+	this.children.push(obj);
+	obj.parent = this;
+
+	if(name)
+		this.links[name] = obj;
+};
+
+Object2D.prototype.remove = function(obj){
+	var search = this.children.indexOf(obj);
+	if(search > -1){
+		this.children.splice(search, 1);
+	}
+
+	for (var i = 0; i < this.links.length; i++) {
+		if(this.links[i] == obj)
+			delete this.links[i];
+	};
+};
+
+Object2D.prototype.getSortedChildrenHash = function(){
+	var hash = [];
+	for (var i = 0, len = this.children.length; i < len; i++){
+		hash.push(this.children[i].zIndex)
+	};
+	return hash.join("");
+}
+
+Object2D.prototype.sortChildren = function() {
+	if( this.sortedChildrenHash !== this.getSortedChildrenHash() ){
+		this.children.sort(function(a,b){
+			return a.zIndex - b.zIndex;
+		})
+		this.sortedChildrenHash = this.getSortedChildrenHash();
+		return this.children;
+	}
+	else {
+		return this.children;
+	}
+};
+Object2D.prototype.tickChildren = function() {
+	for (var i = 0, len = this.children.length; i < len; i++){
+		this.children[i].tick();
+		if(this.children[i].tickChildren)
+			this.children[i].tickChildren();
+	};
+};
+
+Object2D.prototype.renderChildren = function(ctx) {
+	if(this.children.length < 1)
+		return;
+
+	this.sortChildren();
+
+	ctx.save();
+	ctx.translate(this.position.x, this.position.y);
+	for (var i = 0, len = this.children.length; i < len; i++){
+		this.children[i].render(ctx);
+		if(this.children[i].renderChildren)
+			this.children[i].renderChildren(ctx);
+	};
+	ctx.restore();
+};
+
+
 Object2D.prototype.tick = function() {
 };
+
 Object2D.prototype.render = function(ctx) {
 	ctx.save();
 		ctx.translate(this.position.x, this.position.y);
@@ -121,20 +180,3 @@ Object2D.prototype.render = function(ctx) {
 	// }
 };
 
-Object2D.prototype.tickChildren = function() {
-	for (var i = 0, len = this.children.length; i < len; i++){
-		this.children[i].tick();
-		if(this.children[i].tickChildren)
-			this.children[i].tickChildren();
-	};
-};
-Object2D.prototype.renderChildren = function(ctx) {
-	ctx.save();
-	ctx.translate(this.position.x, this.position.y);
-	for (var i = 0, len = this.children.length; i < len; i++){
-		this.children[i].render(ctx);
-		if(this.children[i].renderChildren)
-			this.children[i].renderChildren(ctx);
-	};
-	ctx.restore();
-};
