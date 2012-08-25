@@ -7,6 +7,7 @@ function Level(){
 		skull: this.texturepath + "skull.png",
 		kaple: this.texturepath + "rotunda.png",
 		crusader: this.texturepath + "crusader.png",
+		troll: this.texturepath + "troll.png",
 	};
 }
 Level.prototype = new Levels();
@@ -34,24 +35,11 @@ Level.prototype.afterLoad = function (){
 	});
 	this.add(building);
 	
-	var unit = new Unit({
-		position: new Vector2(0,0),
-		width:18,
-		height:18,
-		texture: game.textures.get("skull"),
+	var unit = new Troll({
+		position:new Vector2(0,terrain.getHeight(0)),
 		owner: "player",
 	});
 	this.add( unit );
-	
-	var unit2 = new Unit({
-		position: new Vector2(game.width,0),
-		width:64,
-		height:64,
-		texture: game.textures.get("crusader", {scale:new Vector2(-1,1)}),
-		owner: "enemy",
-		speed: -1,
-	})
-	this.add( unit2 );
 	
 };
 
