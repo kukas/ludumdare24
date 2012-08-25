@@ -38,7 +38,8 @@ Unit.prototype.move = function() {
 };
 
 Unit.prototype.tick = function() {
-	this.move();
+	if(!this.waitQueue)
+		this.move();
 };
 
 Unit.prototype.getDistance = function (){
@@ -56,7 +57,7 @@ Unit.prototype.getDistance = function (){
 };
 
 Unit.prototype.dealDamage = function ( obj ){
-	this.actions[0].exec();
+	this.waitQueue = true;
 	if(this.lastdeal !== undefined){
 		if(this.lastdeal >= this.cadency){
 			obj.health-=this.damage;
@@ -88,3 +89,5 @@ Unit.prototype.renderLife = function ( ctx ){
 	ctx.fillStyle = "#0F0";
 	ctx.fillRect(0, 0, this.width * (this.health/this.maxHealth), 4);
 };
+
+Unit.prototype.waitQueue = false;
