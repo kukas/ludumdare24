@@ -28,6 +28,18 @@ function Level(){
 		crusader : this.soundpath + "zvuky/krizak.wav",
 		nun : this.soundpath + "zvuky/jeptiska.wav",
 		priest : this.soundpath + "zvuky/knez.wav",
+		librarian : this.soundpath + "zvuky/knihovnice.wav",
+		angel : this.soundpath + "zvuky/andel.wav",
+		barocoangel : this.soundpath + "zvuky/andelicek.wav",
+		biolog : this.soundpath + "zvuky/biolog.wav",
+		bishop : this.soundpath + "zvuky/biskup.wav",
+		devil : this.soundpath + "zvuky/dabel.wav",
+		heretic : this.soundpath + "zvuky/heretic.wav",
+		jesus : this.soundpath + "zvuky/jezis.wav",
+		trex : this.soundpath + "zvuky/trex.wav",
+		teacher : this.soundpath + "zvuky/teacher.wav",
+		matherTerese : this.soundpath + "zvuky/matka_tereza.wav",
+		wallace : this.soundpath + "zvuky/walace.wav",
 	};
 }
 Level.prototype = new Levels();
