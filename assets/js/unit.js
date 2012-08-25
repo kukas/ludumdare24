@@ -34,7 +34,7 @@ Unit.prototype = new Object2D();
 
 Unit.prototype.move = function() {
 	this.position.x += this.currentSpeed;
-	this.position.y = game.links.terrain.getHeight(this.position.x) - this.width/2;
+	this.position.y = game.links.terrain.getHeight(this.position.x) - this.height/2;
 };
 
 Unit.prototype.tick = function() {
@@ -57,5 +57,13 @@ Unit.prototype.getDistance = function (){
 
 Unit.prototype.dealDamage = function ( obj ){
 	this.actions[0].exec();
-	console.log("dealing damage");
+	// console.log("dealing damage");
+};
+
+
+Unit.prototype.renderLife = function ( ctx ){
+	ctx.fillStyle = "#000";
+	ctx.fillRect(this.x, this.y, this.width, 4);
+	ctx.fillStyle = "#0F0";
+	ctx.fillRect(this.x, this.y, this.width * (this.health/this.maxHealth), 4);
 };

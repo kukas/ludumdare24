@@ -41,15 +41,26 @@ Level.prototype.afterLoad = function (){
 		owner:"player",
 	});
 	this.add(crus1);
-	crus1.selected = true;
-	
 	
 	var crus2 = new Crusader({
 		position: new Vector2(game.width,0),
 		owner: "enemy",
-		speed: -1,
+		// speed: -1,
 	})
 	this.add( crus2 );
+
+	var ps = new ParticleSystem();
+	ps.tick = function(){
+		ps.emit(Particle, 2, {
+			position: new Vector2(90,120)
+		}, {
+			velocity: {
+				x: {min: -1, max: 1},
+				y: {min: -1, max: 1}
+			}
+		})
+	}
+	this.add(ps)
 };
 
 var level = new Level();
