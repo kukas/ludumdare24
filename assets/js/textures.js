@@ -7,6 +7,7 @@ function Texture(image, options){
 	this.creationTime = new Date().getTime();
 
 	this.width = this.image.width;
+	this.frameWidth = this.width;
 	this.height = this.image.height;
 
 	this.flip = options.flip === undefined ? false : options.flip;
@@ -15,18 +16,29 @@ function Texture(image, options){
 	
 	this.scale = options.scale === undefined ? new Vector2(1,1) : options.scale;
 	
-	this.animated = !!options.animation;
+	this.animated = !!options.animations;
 	if(this.animated){
-		this.frame = 0;
-		this.frames = options.animation.frames;
-		this.frameWidth = this.width/this.frames;
-
-		this.speed = options.animation.speed;
-		this.cycle = options.animation.cycle === undefined ? true : options.animation.cycle;
+		this.animations = options.animations;
+		this.frameWidth = this.width/options.totalFrames;
+		this.switchAnimation(options.currentAnimation);
 	}
 }
+
+Texture.prototype.switchAnimation = function(name) {
+	if(this.animations[name]){
+		this.currentAnimation = this.animations[name];
+		this.frame = this.currentAnimation.start;
+		this.frames = this.currentAnimation.end - this.currentAnimation.start;
+
+		this.speed = this.currentAnimation.speed;
+		this.currentAnimation.cycle = this.currentAnimation.cycle === undefined ? true : this.currentAnimation.cycle;
+	}
+	else
+		console.log("no such animation " + name);
+};
+
 Texture.prototype.draw = function(ctx, x, y, width, height) {
-	width = width === undefined ? this.width : width;
+	width = width === undefined ? this.frameWidth : width;
 	height = height === undefined ? this.height : height;
 	ctx.save();
 	var addX = addY = 0;
@@ -44,19 +56,24 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 	}
 	
 	if(this.animated){
-		ctx.drawImage(this.image, 
-			Math.floor(this.frame)*this.frameWidth,0,
-			this.width/this.frames,this.height,
-			x + addX,y + addY,
-			width,height
+		// ctx.drawImage(this.image, 
+		// 	Math.floor(this.frame)*this.frameWidth,0,
+		// 	this.width/this.currentAnimation.end,this.height,
+		// 	x + addX,y + addY,
+		// 	width,height
+		// 	);
+		ctx.drawImage(this.image,
+			Math.floor(this.frame)*this.frameWidth, 0,
+			this.frameWidth, this.height,
+			x + addX, y + addY,
+			width, height
 			);
-		if(this.frame + 1/this.speed < this.frames){
-			this.frame += 1/this.speed;
+		if(this.frame + 1/this.currentAnimation.speed <= this.currentAnimation.end){
+			this.frame += 1/this.currentAnimation.speed;
 		}
-		else if(this.cycle){
-			this.frame = 0;
+		else if(this.currentAnimation.cycle){
+			this.frame = this.currentAnimation.start;
 		}
-
 	}
 	else {
 		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, 0, 0, width, height);

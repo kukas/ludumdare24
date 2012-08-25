@@ -53,20 +53,23 @@ Terrain.prototype.render = function(ctx) {
 		ctx.drawImage(this.heightMapImage, this.position.x, this.position.y);
 	//player
 	ctx.beginPath();
-	ctx.fillStyle = game.player.color;
+	ctx.strokeStyle = game.player.color;
+	ctx.lineWidth = 5;
 	for(var i = 0; i <= this.borders["player"];i++){
-		ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
+		// ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
+		ctx.lineTo(i,this.height-this.heightMap[i]-1)
 	};
-	ctx.fill();
+	ctx.stroke();
 	ctx.closePath();
 	
 	//enemy
 	ctx.beginPath();
-	ctx.fillStyle = game.enemy.color;
+	ctx.strokeStyle = game.enemy.color;
+	ctx.lineWidth = 5;
 	for(var i = this.width; this.width - i <= this.borders["enemy"];i--){
-		ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
+		ctx.lineTo(i,this.height-this.heightMap[i]-1)
 	};
-	ctx.fill();
+	ctx.stroke();
 	ctx.closePath();
 };
 
