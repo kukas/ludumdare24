@@ -84,7 +84,7 @@ Game.prototype.disableInterpolation = function() {
 
 Game.prototype.init = function() {
 	var _this = this;
-
+	
 	$("body").append( game.canvas );
 
 	this.centerCanvas();
