@@ -1,8 +1,9 @@
 function Building(options){
 	Object2D.call(this, options);
-	this.producing = false;
 	this.proces = 0;
-	this.toProces = 1;
+	this.toProces = false;
+	
+	this.procesQueue = [];
 }
 Building.prototype = new Object2D();
 
@@ -39,23 +40,29 @@ Building.prototype.die = function( murderer ) {
 	}
 };
 
-Building.prototype.produce = function (callback,cena){
+Building.prototype.produce = function (){
 	var _this = this;
-	if(!this.producing && callback !== undefined){
-		this.producing = callback;
-		this.toProces = cena;
-	}
-	else{
-		if(this.toProces <= this.proces){
-			this.producing();
-			this.producing = false;
-			this.toProces = 1;
+	if(this.procesQueue[0] !== undefined){
+		this.proces++;
+		if(this.toProces < this.proces){
+			this.procesQueue[0][0]();
+			this.procesQueue.splice(0,1);
+			this.toProces = this.procesQueue[0] !== undefined ? this.procesQueue[0][1] : false;
 			this.proces = 0;
 		}
-		else if (this.producing){
-			this.proces++;
-		}
 	}
+};
+
+Building.prototype.initProduction = function (callback,cena){
+	
+	if(this.procesQueue.length < this.maxQueue){
+		if(this.toProces == false){
+			this.toProces = cena;
+		}
+		this.procesQueue[this.procesQueue.length] = [callback,cena];console.log([callback,cena]);
+		return true;
+	}
+	else{return false;}
 };
 
 Building.prototype.tick = function (){

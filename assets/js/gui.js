@@ -338,7 +338,7 @@ function GUI(){
 			},
 			controls: function(){
 				_this.addControls()
-				game.eventhandler.addMouseControl(1,function () {console.log([game.eventhandler.mouse.y,game.links.terrain.middleHeight,game.links.terrain.elevation]);
+				game.eventhandler.addMouseControl(1,function () {
 					if(game.eventhandler.mouse.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
 						for(var j in game.selected){
 							game.selected[j].selected = false;
