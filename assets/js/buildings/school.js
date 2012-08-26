@@ -9,12 +9,13 @@ function School( options ){
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrize = 100;
+	this.nextTierPrice = 100;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
+	this.price = 100;
 	
-	this.texture = game.textures.get("chapel0");
+	this.texture = game.textures.get("school0");
 	var _this = this;
 	this.actions = [
 		{
@@ -47,19 +48,19 @@ function School( options ){
 	this.upgrade = function (){
 		if(this.tier < 2){
 			this.tier += 1;
-			this.texture = game.textures.get("chapel"+this.tier);
+			this.texture = game.textures.get("school"+this.tier);
 			this.maxHealth = this.health+=100;
 		}
 		else if(this.tier == 2){
 			this.tier += 1;
-			this.texture = game.textures.get("chapel"+this.tier);
+			this.texture = game.textures.get("school"+this.tier);
 			this.maxHealth = this.health+=300;
 		}
 		if(this.tier == 2){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			
+			this.nextTierPrice = 300;
 		}
 	};
 	

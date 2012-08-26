@@ -385,7 +385,61 @@ function GUI(){
 				Res.add(Gold, "gold");
 				_this.add(Res, "resources")
 				
+				var BuildMenu = new Button(40,360,{
+					width:130,
+					height:50,
+					visible:false,
+				});
 				
+				function MakeTextures(){
+					for(var i in BuildMenu.children){
+						var buttonTexture = new Texture(game.textures.get("button"));
+						buttonTexture.width = 120;
+						buttonTexture.height = 40;
+						BuildMenu.children[i].add(buttonTexture);
+					};
+				};
+				if(game.players.player.side == "creationist"){
+					var Hranice = new Button(10,0,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(Hranice);
+					
+					var Samostril = new Button(10,45,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(CrossScorpio)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(Samostril);
+					
+					MakeTextures();
+					Hranice.add(new Text({
+					x:22,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build bonfire!",
+					align: "center",
+					}));
+					
+					Samostril.add(new Text({
+					x:0,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Cross Scorpio!",
+					align: "center",
+					}));
+				}
+				
+				
+				_this.add(BuildMenu);
 			},
 			updateUnitControl: function(t, actions){
 				game.gui.links.layout.links.unitControl.children = [];

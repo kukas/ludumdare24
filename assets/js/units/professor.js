@@ -1,5 +1,5 @@
 function Professor( options ){
-	this.speed = options.speed !== undefined ? options.speed : 1;
+	this.speed = options.speed !== undefined ? options.speed : 0.2;
 
 	Unit.call(this, options);
 	

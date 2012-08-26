@@ -9,9 +9,11 @@ function Chapel( options ){
 	this.range = 64;
 	
 	this.tier = 0;
+	this.nextTierPrice = 100;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
+	this.price = 0;
 	
 	this.texture = game.textures.get("chapel0");
 	var _this = this;
@@ -41,13 +43,6 @@ function Chapel( options ){
 			description : "Upgrades your base",
 			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100);}},
 		},
-		{
-			name:"BUILD!",
-			description:"Recrutes missionary",
-			exec:function(){
-				_this.build(Chapel, 100)
-			},
-		},
 	];
 	
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -67,7 +62,7 @@ function Chapel( options ){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			
+			this.nextTierPrice = 300;
 		}
 	};
 	
