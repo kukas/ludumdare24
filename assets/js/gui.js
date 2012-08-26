@@ -317,7 +317,64 @@ function GUI(){
 					visible: false,
 				});
 				layout.add( unitControl, "unitControl" );
-
+				
+				var Gold = new Button (5,0,{
+					width : 100,
+					height : 20,
+					visible : false,
+				});
+				
+				Gold.add(new Text({
+					x:22,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 20,
+					value: game.players.player.resources.gold,
+					align: "center",
+				}), "goldtext");
+				
+				var goldtexture = new Texture(game.textures.get("gold"));
+				goldtexture.width = 20;
+				goldtexture.height = 20;
+				Gold.add(goldtexture);
+				
+				var Spec = new Button(5,30,{
+					width : 100,
+					height : 20,
+					visible : false,
+				});
+				
+				var specId = game.players.player.side == "creationist" ? "faith" : "knowledge";
+				
+				var spectexture = new Texture(game.textures.get(specId));
+				spectexture.width = 20;
+				spectexture.height = 20;
+				Spec.add(spectexture);
+				
+				Spec.add(new Text({
+					x:22,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 20,
+					value: game.players.player.resources.spec,
+					align: "center",
+				}),"spectext");
+				
+				var Res = new Button(50,300,{
+					width : 100,
+					height : 55,
+					visible : false,
+				});
+				
+				var restexture = new Texture(game.textures.get("button2"));
+				restexture.width = Res.width;
+				restexture.height = Res.height;
+				Res.add(restexture);
+				
+				Res.add(Spec, "spec");
+				Res.add(Gold, "gold");
+				_this.add(Res, "resources")
+				
 				
 			},
 			updateUnitControl: function(t, actions){

@@ -36,7 +36,7 @@ function Game(){
 		player : {
 			side:"creationist",
 			color:"#93C6CC",
-			resources:{gold:100,spec:100},
+			resources:{gold:1000,spec:100},
 			controledGround:100,
 			},
 		enemy : {
@@ -114,6 +114,7 @@ Game.prototype.tickChildren = function() {
 
 Game.prototype.tick = function() {
 	this.tickChildren();
+	this.updateResources();
 };
 
 Game.prototype.centerCanvas = function() {
@@ -210,5 +211,14 @@ Game.prototype.setPlayer = function (id){
 	else{
 		this.player = {side:"atheist",color:"#F0271D"};
 		this.enemy = {side:"creationist",color:"#93C6CC"};
+	}
+};
+
+Game.prototype.updateResources = function (){ 
+	if(game.gui.links.resources){
+		playerResources = game.players.player.resources;
+		enemyResources = game.players.enemy.resources;
+		game.gui.links.resources.links.gold.links.goldtext.text[0] = playerResources.gold;
+		game.gui.links.resources.links.spec.links.spectext.text[0] = playerResources.spec;
 	}
 };

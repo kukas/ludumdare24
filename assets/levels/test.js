@@ -75,7 +75,6 @@ Level.prototype.afterLoad = function (){
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
-		this.rotation += 0.05;
 		game.clearColor.r = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*89;
 		game.clearColor.g = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*155;
 		// console.log(game.clearColor.getRGB())

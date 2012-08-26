@@ -19,7 +19,7 @@ function Chapel( options ){
 		{
 			name:"Missionary",
 			description:"Recrutes missionary",
-			exec:function(){_this.tryProduce(Missionary,100);console.log([_this.spawnPoint,_this.owner]);},
+			exec:function(){_this.tryProduce(Missionary,100);},
 		},
 		{
 			name : "Priest",
