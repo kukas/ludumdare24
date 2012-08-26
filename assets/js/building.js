@@ -1,9 +1,12 @@
 function Building(options){
 	Object2D.call(this, options);
-	this.producing = false;
-	this.produceTime = 0;
 
 	this.zIndex = -1;
+
+	this.proces = 0;
+	this.toProces = false;
+	
+	this.procesQueue = [];
 }
 Building.prototype = new Object2D();
 
@@ -40,19 +43,30 @@ Building.prototype.die = function( murderer ) {
 	}
 };
 
-Building.prototype.produce = function (obj,cena){
+Building.prototype.produce = function (){
 	var _this = this;
-	if(!this.producing){
-		this.producing = obj;
-		game.gui.add(new ProgressBar(game.textures.get("button2"),100,{x:_this.position.x,y:_this.position.y+10,height:10,width:100}));
-	}
-	else{
-		if(this.produceTime >= 120){
-			Spawn(obj, new Vector2(this.position.x+this.width/2+32+1000,this.position.y+this.height/2+32),this.owner);
-			this.producing = false;
-		}
-		else{
-			this.produceTime++;
+	if(this.procesQueue[0] !== undefined){
+		this.proces++;
+		if(this.toProces < this.proces){
+			this.procesQueue[0][0]();
+			this.procesQueue.splice(0,1);
+			this.toProces = this.procesQueue[0] !== undefined ? this.procesQueue[0][1] : false;
+			this.proces = 0;
 		}
 	}
+};
+
+Building.prototype.initProduction = function (callback,cena){
+	
+	if(this.procesQueue.length < this.maxQueue){
+		if(this.toProces == false){
+			this.toProces = cena;
+		}
+		this.procesQueue[this.procesQueue.length] = [callback,cena];
+	}
+	else{return false;}
+};
+
+Building.prototype.tick = function (){
+		this.produce();
 };

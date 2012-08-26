@@ -190,6 +190,10 @@ Object2D.prototype.render = function(ctx) {
 					ctx.closePath();
 					if(this.health)
 						this.renderLife(ctx);
+					if(this.procesQueue){
+						if(this.procesQueue.length > 0)
+							this.renderProduction(ctx);
+					}
 				}
 			ctx.restore();
 		ctx.restore();
@@ -213,4 +217,15 @@ Object2D.prototype.renderLife = function ( ctx ){
 	ctx.fillRect(0, 0, this.width, 4);
 	ctx.fillStyle = "#0F0";
 	ctx.fillRect(0, 0, this.width * (this.health/this.maxHealth), 4);
+};
+
+Object2D.prototype.renderProduction = function (ctx){
+		ctx.fillStyle = "#000";
+		ctx.fillRect(0, 5, this.width, 4);
+		ctx.fillStyle = "#cae218";
+		ctx.fillRect(0, 5, this.width * (this.proces/this.toProces), 4);
+		for(var i = 0; i < this.procesQueue.length;i++){
+			ctx.fillStyle = "#D6D145";
+			ctx.fillRect(i*7+i*2+5,12,7,7);
+		};
 };

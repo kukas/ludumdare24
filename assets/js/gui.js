@@ -339,9 +339,11 @@ function GUI(){
 			controls: function(){
 				_this.addControls()
 				game.eventhandler.addMouseControl(1,function () {
-					for(var j in game.selected){
-						game.selected[j].selected = false;
-					};
+					if(game.eventhandler.mouse.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
+						for(var j in game.selected){
+							game.selected[j].selected = false;
+						};
+					}
 					for(var i in game.children){
 						if( game.children[i].inObject(game.eventhandler.mouse) && game.children[i].collidable ){
 							game.children[i].selected = true;
