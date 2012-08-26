@@ -97,31 +97,48 @@ Terrain.prototype.render = function(ctx) {
 };
 
 Terrain.prototype.tick = function (){
+	this.updateGround();
+};
+
+Terrain.prototype.updateGround = function() {
+	var playerMax = 0;
+	var enemyMax = 0;
 	for(var i in game.children){
-		if(game.children[i] instanceof Unit){
-			if(game.children[i].owner == "player"){
-				if(game.children[i].getDistance() > this.borders["player"])
-					this.borders["player"]  = game.children[i].getDistance();
-					game.players.player.controledGround = game.children[i].getDistance();
+		var obj = game.children[i]
+		if(obj instanceof Unit){
+			if(obj.owner == "player"){
+				var dist = obj.getDistance();
+				if(dist > playerMax)
+					playerMax = dist;
 			}
-			else{
-				if(game.children[i].getDistance() > this.borders["enemy"])
-					this.borders["enemy"]  = game.children[i].getDistance();
-					game.players.enemy.controledGround = game.children[i].getDistance();
-			}
-			var soucet = this.borders["player"]+this.borders["enemy"];
-			if(this.width < soucet){
-				if(this.borders["player"] > this.borders["enemy"]){
-					this.borders["enemy"]-=soucet - this.width;
-					game.players.enemy.controledGround -=soucet - this.width;
-				}
-				else{
-					this.borders["player"]-=soucet - this.width;
-					game.players.enemy.controledGround -=soucet - this.width;
-				}
+			else if(obj.owner == "enemy"){
+				var dist = obj.getDistance();
+				if(dist > enemyMax)
+					enemyMax = dist;
 			}
 		}
 	};
+	if(this.borders.player < playerMax){
+		this.borders.player = playerMax;
+		game.players.player.controledGround = playerMax;
+	}
+
+	if(this.borders.enemy < enemyMax){
+		this.borders.enemy = enemyMax;
+		game.players.enemy.controledGround = enemyMax;
+	}
+
+	if(this.borders.player + this.borders.enemy > this.width){
+		if(this.borders.player == playerMax){
+			this.borders.enemy = this.width - this.borders.player;
+			game.players.enemy.controledGround = this.width - this.borders.player;
+		}
+
+		else if(this.borders.enemy == enemyMax){
+			this.borders.player = this.width - this.borders.enemy;
+			game.players.player.controledGround = this.width - this.borders.enemy;
+		}
+	}
 };
 
 Terrain.prototype.setBorder = function(x, team) {

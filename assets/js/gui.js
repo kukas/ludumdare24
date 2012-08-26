@@ -424,6 +424,7 @@ function GUI(){
 				_this.addControls()
 				game.eventhandler.addMouseControl(1,function () {
 					if(game.eventhandler.mouse.projected.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
+						game.gui.links.layout.links.unitControl.children = [];
 						for(var j in game.selected){
 							game.selected[j].selected = false;
 						};
