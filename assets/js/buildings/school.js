@@ -1,4 +1,4 @@
-function Chapel( options ){
+function School( options ){
 	
 	Building.call(this, options);
 	
@@ -17,33 +17,31 @@ function Chapel( options ){
 	var _this = this;
 	this.actions = [
 		{
-			name:"Missionary",
-			description:"Recrutes missionary",
-			exec:function(){_this.tryProduce(Missionary,100);console.log([_this.spawnPoint,_this.owner]);},
+			name:"Gorilla",
+			description:"Recrutes gorilla",
+			exec:function(){_this.tryProduce(Gorilla,100);},
 		},
 		{
-			name : "Priest",
-			description : "Recrutes priest",
-			exec : function (){_this.tryProduce(Priest,100);}
+			name : "Teacher",
+			description : "Recrutes Teacher",
+			exec : function (){_this.tryProduce(Missionary,200)}
 		},
 		{
-			name : "Nun",
-			description : "Recrutes Nun",
-			exec : function (){_this.tryProduce(Nun,100);}
+			name : "Librarian",
+			description : "Recrutes Librarian",
+			exec : function (){_this.tryProduce(Nun,200);}
 		},
 		{
-			name : "Crusader",
-			description : "Recrutes crusader",
-			exec : function (){_this.tryProduce(Crusader,100);}
+			name : "Professor",
+			description : "Recrutes professor",
+			exec : function (){_this.tryProduce(Professor,100);}
 		},
 		{
 			name : "Upgrade",
 			description : "Upgrades your base",
-			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100);}},
+			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100)}},
 		},
 	];
-	
-	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 	this.upgrade = function (){
 		if(this.tier < 2){
@@ -68,4 +66,4 @@ function Chapel( options ){
 		game.jukebox.play("gorilla");
 	};
 };
-Chapel.prototype = new Building();
+School.prototype = new Building();

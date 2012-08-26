@@ -70,3 +70,21 @@ Building.prototype.initProduction = function (callback,cena){
 Building.prototype.tick = function (){
 		this.produce();
 };
+
+Building.prototype.tryProduce = function (Constructor,prize){
+	var _this = this;
+	if(Constructor != "Upgrade"){
+		if(!this.initProduction(function (){
+			Spawn(Constructor,_this.spawnPoint,_this.owner);
+			},prize)){
+			console.log("IMPASSIBRU!!")
+		}
+	}
+	else{
+		if(!this.initProduction(function (){
+			_this.upgrade();
+			},prize)){
+			console.log("IMPASSIBRU!!")
+		}
+	};
+};

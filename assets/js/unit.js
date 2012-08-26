@@ -100,12 +100,10 @@ Unit.prototype.move = function() {
 
 Unit.prototype.tick = function() {
 	if(this.ujdi > 0){
-		console.log(this.ujdi)
 		this.ujdi--;
 		this.shouldBeSpeed = -this.speed;
 	}
 	if(this.ujdi == 1){
-		console.log("troloo")
 		this.ujdi = 0;
 		this.shouldBeSpeed = this.speed;
 	}

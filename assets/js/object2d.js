@@ -46,6 +46,10 @@ Object2D.prototype.move = function(vec) {
 		this.position.subSelf(vec);
 };
 
+Object2D.prototype.onSelect = function (){
+	
+};
+
 // kolizní funkce
 Object2D.prototype.computeBoundingRadius = function() {
 	return this.boundingRadius = Math.sqrt(this.width*this.width + this.height*this.height)/2;

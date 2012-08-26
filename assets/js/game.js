@@ -113,7 +113,6 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
-	console.log(this.players.player.controledGround);
 	this.tickChildren();
 };
 
