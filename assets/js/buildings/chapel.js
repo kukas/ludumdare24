@@ -36,25 +36,28 @@ function Chapel( options ){
 		{
 			name : "Upgrade",
 			description : "Upgrades your base",
-			exec : function (){_this.produce(function () {_this.upgrade();},300);},
+			exec : function (){if(_this.tier<3){_this.produce(function () {_this.upgrade();},300);}else{console.log("IMPASSIBRU!!")}},
 		},
 	];
 	
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	
-	this.upgrade = function (){
+	this.upgrade = function (){console.log(this.tier);
 		if(this.tier < 2){
 			this.tier += 1;
 			this.texture = game.textures.get("chapel"+this.tier);
 			this.maxHealth = this.health+=100;
 		}
-		if(this.tier == 2){
+		else if(this.tier == 2){
 			this.tier += 1;
 			this.texture = game.textures.get("chapel"+this.tier);
 			this.maxHealth = this.health+=300;
 		}
-		else{
-			console.log("IMPASSIBRU!!");
+		if(this.tier == 2){
+			this.position.x-=this.width/2;
+			this.width = 256;
+			this.height = 256;
+			
 		}
 	};
 	
