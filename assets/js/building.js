@@ -59,8 +59,7 @@ Building.prototype.initProduction = function (callback,cena){
 		if(this.toProces == false){
 			this.toProces = cena;
 		}
-		this.procesQueue[this.procesQueue.length] = [callback,cena];console.log([callback,cena]);
-		return true;
+		this.procesQueue[this.procesQueue.length] = [callback,cena];
 	}
 	else{return false;}
 };
