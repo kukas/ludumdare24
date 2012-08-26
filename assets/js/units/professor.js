@@ -1,10 +1,5 @@
 function Professor( options ){
-		if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 0.2;
-	}
-	else{
-		this.speed = options.speed !== undefined ? options.speed : -0.2;
-	}
+	this.speed = options.speed !== undefined ? options.speed : 0.2;
 
 	Unit.call(this, options);
 	
@@ -19,45 +14,28 @@ function Professor( options ){
 	
 	this.spawnSound = game.jukebox.sounds["professor"];
 	
-	if(options.owner == "player"){
-		this.texture = game.textures.get("professor", {
-			totalFrames: 3,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 2,
-					speed: 7
-				},
-				attack: {
-					start: 2,
-					end: 3,
-					speed: 10,
-					cycle: true
-				}
+	this.texture = game.textures.get("professor", {
+		totalFrames: 3,
+		currentAnimation: "walking",
+		animations:{
+			walking: {
+				start: 0,
+				end: 2,
+				speed: 7
+			},
+			attack: {
+				start: 2,
+				end: 3,
+				speed: 10,
+				cycle: true
 			}
-		});
+		}
+	});
+
+	if(options.owner == "enemy"){
+		this.texture.flip = "x";
 	}
-	else{
-		this.texture = game.textures.get("professor", {
-			flip: "x",
-			totalFrames: 3,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 2,
-					speed: 7
-				},
-				attack: {
-					start: 2,
-					end: 3,
-					speed: 10,
-					cycle: true
-				}
-			}
-		});
-	}
+	
 	this.owner = options.owner !== undefined ? options.owner : false;
 };
 Professor.prototype = new Unit();

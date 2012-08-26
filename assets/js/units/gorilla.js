@@ -1,10 +1,5 @@
 function Gorilla( options ){
-		if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 0.5;
-	}
-	else{
-		this.speed = options.speed !== undefined ? options.speed : -0.5;
-	}
+	this.speed = options.speed !== undefined ? options.speed : 0.5;
 
 	Unit.call(this, options);
 	
@@ -19,45 +14,28 @@ function Gorilla( options ){
 	
 	this.spawnSound = game.jukebox.sounds["gorilla"];
 	
-	if(options.owner == "player"){
-		this.texture = game.textures.get("gorilla", {
-			totalFrames: 5,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 4,
-					speed: 7
-				},
-				attack: {
-					start: 4,
-					end: 5,
-					speed: 10,
-					cycle: false
-				}
+	this.texture = game.textures.get("gorilla", {
+		totalFrames: 5,
+		currentAnimation: "walking",
+		animations:{
+			walking: {
+				start: 0,
+				end: 4,
+				speed: 7
+			},
+			attack: {
+				start: 4,
+				end: 5,
+				speed: 10,
+				cycle: false
 			}
-		});
+		}
+	});
+
+	if(options.owner == "enemy"){
+		this.texture.flip = "x";
 	}
-	else{
-		this.texture = game.textures.get("gorilla", {
-			flip: "x",
-			totalFrames: 5,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 4,
-					speed: 7
-				},
-				attack: {
-					start: 4,
-					end: 5,
-					speed: 10,
-					cycle: true
-				}
-			}
-		});
-	}
+
 	this.owner = options.owner !== undefined ? options.owner : false;
 };
 Gorilla.prototype = new Unit();

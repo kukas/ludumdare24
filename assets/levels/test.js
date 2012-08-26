@@ -14,7 +14,6 @@ function Level(){
 
 		kaple: this.texturepath + "rotunda.png",
 
-		skull: this.texturepath + "skull.png",
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
@@ -66,6 +65,7 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(480,480),
 		width: 260,
 		height: 960,
+		zIndex: -2,
 		texture: game.textures.get("nebesa")
 	});
 	slunce.tick = function(){
@@ -88,6 +88,7 @@ Level.prototype.afterLoad = function (){
 	var terrain = new Terrain({
 		width: game.width, 
 		height: game.height,
+		zIndex: -1,
 		texture: game.textures.get("soil")
 	});
 

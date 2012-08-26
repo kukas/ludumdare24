@@ -347,6 +347,8 @@ function GUI(){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
 							_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
+
+							game.children[i].onSelect()
 						};
 					};
 				})

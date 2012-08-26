@@ -1,11 +1,7 @@
 function Crusader( options ){
-	if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 0.2;
-	}
-	else{
-		this.speed = options.speed !== undefined ? options.speed : -0.2;
-	}
 
+	this.speed = options.speed !== undefined ? options.speed : 0.2;
+	
 	Unit.call(this, options);
 	
 	this.width = 46;
@@ -19,46 +15,29 @@ function Crusader( options ){
 	
 	this.spawnSound = game.jukebox.sounds["crusader"];
 	
-	if(options.owner == "player"){
-		this.texture = game.textures.get("crusader", {
-			totalFrames: 7,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 6,
-					speed: 7
-				},
-				attack: {
-					start: 5,
-					end: 7,
-					speed: 10,
-					cycle: false
-				}
+	this.texture = game.textures.get("crusader", {
+		totalFrames: 7,
+		currentAnimation: "walking",
+		animations:{
+			walking: {
+				start: 0,
+				end: 6,
+				speed: 7
+			},
+			attack: {
+				start: 5,
+				end: 7,
+				speed: 10,
+				cycle: false
 			}
-		});
+		}
+	});
+
+	if(options.owner == "enemy"){
+		this.texture.flip = "x";
 	}
-	else{
-		this.texture = game.textures.get("crusader", {
-			flip: "x",
-			totalFrames: 7,
-			currentAnimation: "walking",
-			animations:{
-				walking: {
-					start: 0,
-					end: 6,
-					speed: 7
-				},
-				attack: {
-					start: 5,
-					end: 7,
-					speed: 10,
-					cycle: true
-				}
-			}
-		});
-	}
-	this.owner = options.owner !== undefined ? options.owner : false;
+
+	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 };
 Crusader.prototype = new Unit();

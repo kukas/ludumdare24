@@ -15,7 +15,7 @@ function Terrain(options){
 	this.grassLevel = 20;
 	this.middleHeight = options.middleHeight === undefined ? this.height/2 : options.middleHeight;
 	this.elevation = options.elevation === undefined ? 20 : options.elevation;
-	this.zoom = options.zoom === undefined ? 100 : options.zoom;
+	this.zoom = options.zoom === undefined ? 200 : options.zoom;
 
 	this.generateHeightMap( this.middleHeight, this.elevation, this.zoom )
 }

@@ -1,10 +1,5 @@
 function Troll(options){
-	if(options.owner == "player"){
-		this.speed = options.speed !== undefined ? options.speed : 2;
-	}
-	else{
-		this.speed = options.speed !== undefined ? options.speed : -2;
-	}
+	this.speed = options.speed !== undefined ? options.speed : 2;
 
 	Unit.call(this, options);
 	
@@ -17,11 +12,10 @@ function Troll(options){
 	this.maxHealth = 10;
 	this.cadency = 3;
 	
-	if(options.owner == "player"){
-		this.texture = game.textures.get("troll");
-	}
-	else{
-		this.texture = game.textures.get("troll", {flip:"x"});
+	this.texture = game.textures.get("troll");
+
+	if(options.owner == "enemy"){
+		this.texture.flip = "x";
 	}
 	
 	this.owner = options.owner !== undefined ? options.owner : false;
