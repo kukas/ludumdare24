@@ -133,6 +133,12 @@ Level.prototype.afterLoad = function (){
 	});
 	this.add(building);
 	
+	var building2 = new School({
+		position: new Vector2(game.width-100,terrain.getHeight(game.width-100)-game.textures.get("chapel0").height/2),
+		owner: "enemy",
+	});
+	this.add(building2);
+	
 	/*var crus1 = new Crusader({
 		position: new Vector2(300,0),
 		owner:"player",
