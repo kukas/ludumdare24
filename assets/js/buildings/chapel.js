@@ -19,17 +19,17 @@ function Chapel( options ){
 		{
 			name:"Missionary",
 			description:"Recrutes missionary",
-			exec:function(){_this.tryProduce(Missionary,100);},
+			exec:function(){_this.tryProduce(Missionary,10);},
 		},
 		{
 			name : "Priest",
 			description : "Recrutes priest",
-			exec : function (){_this.tryProduce(Priest,100);}
+			exec : function (){_this.tryProduce(Priest,30);}
 		},
 		{
 			name : "Nun",
 			description : "Recrutes Nun",
-			exec : function (){_this.tryProduce(Nun,100);}
+			exec : function (){_this.tryProduce(Nun,50);}
 		},
 		{
 			name : "Crusader",

@@ -5,7 +5,7 @@ function Priest( options ){
 	
 	this.width = 46;
 	this.height = 64;
-	this.range = 46;
+	this.range = 200;
 	
 	this.damage = 1;
 	this.maxHealth = 5;

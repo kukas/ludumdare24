@@ -1,10 +1,11 @@
-function Nun( options ){
+function Librarian( options ){
+	
 	this.speed = options.speed !== undefined ? options.speed : 0.2;
-
+	
 	Unit.call(this, options);
 	
-	this.width = 35;
-	this.height = 64;
+	this.width = 64;
+	this.height = 84;
 	this.range = 300;
 	
 	this.damage = 3;
@@ -12,22 +13,22 @@ function Nun( options ){
 	this.health = this.maxHealth;
 	this.cadency = 50;
 	
-	this.spawnSound = game.jukebox.sounds["nun"];
+	this.spawnSound = game.jukebox.sounds["librarian"];
 	
-	this.texture = game.textures.get("nun", {
-		totalFrames: 4,
+	this.texture = game.textures.get("librarian", {
+		totalFrames: 7,
 		currentAnimation: "walking",
 		animations:{
 			walking: {
 				start: 0,
-				end: 3,
+				end: 6,
 				speed: 7
 			},
 			attack: {
-				start: 3,
-				end: 4,
+				start: 6,
+				end: 7,
 				speed: 10,
-				cycle: true
+				cycle: false
 			}
 		}
 	});
@@ -36,7 +37,7 @@ function Nun( options ){
 		this.texture.flip = "x";
 	}
 
-	this.owner = options.owner !== undefined ? options.owner : false;
+	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 };
-Nun.prototype = new Unit();
+Librarian.prototype = new Unit();

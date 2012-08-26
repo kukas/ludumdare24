@@ -8,8 +8,8 @@ function Gorilla( options ){
 	this.range = 32;
 	
 	this.damage = 1;
-	this.health = 3;
 	this.maxHealth = 3;
+	this.health = this.maxHealth;
 	this.cadency = 30;
 	
 	this.spawnSound = game.jukebox.sounds["gorilla"];

@@ -9,6 +9,7 @@ function School( options ){
 	this.range = 64;
 	
 	this.tier = 0;
+	this.nextTierPrize = 100;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -19,17 +20,17 @@ function School( options ){
 		{
 			name:"Gorilla",
 			description:"Recrutes gorilla",
-			exec:function(){_this.tryProduce(Gorilla,100);},
+			exec:function(){_this.tryProduce(Gorilla,10);},
 		},
 		{
 			name : "Teacher",
 			description : "Recrutes Teacher",
-			exec : function (){_this.tryProduce(Missionary,200)}
+			exec : function (){_this.tryProduce(Missionary,30)}
 		},
 		{
 			name : "Librarian",
 			description : "Recrutes Librarian",
-			exec : function (){_this.tryProduce(Nun,200);}
+			exec : function (){_this.tryProduce(Librarian,50);}
 		},
 		{
 			name : "Professor",
@@ -39,7 +40,7 @@ function School( options ){
 		{
 			name : "Upgrade",
 			description : "Upgrades your base",
-			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100)}},
+			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade")}},
 		},
 	];
 	
