@@ -63,6 +63,7 @@ Building.prototype.initProduction = function (callback,cena){
 			this.toProces = cena;
 		}
 		this.procesQueue[this.procesQueue.length] = [callback,cena];
+		return true;
 	}
 	else{return false;}
 };
@@ -74,10 +75,18 @@ Building.prototype.tick = function (){
 Building.prototype.tryProduce = function (Constructor,prize){
 	var _this = this;
 	if(Constructor != "Upgrade"){
-		if(!this.initProduction(function (){
-			Spawn(Constructor,_this.spawnPoint,_this.owner);
-			},prize)){
-			console.log("IMPASSIBRU!!")
+		if(game.players[_this.owner].resources.gold - prize < 0){
+			console.log("Not enough resources.");
+		}
+		else{
+			if(!this.initProduction(function (){
+				Spawn(Constructor,_this.spawnPoint,_this.owner);
+				},prize)){
+					console.log("The queue is full.");
+			}
+			else{
+				game.players[_this.owner].resources.gold -= prize;
+			}
 		}
 	}
 	else{
