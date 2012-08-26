@@ -11,7 +11,8 @@ function Game(){
 
 	this.ticks = 0;
 
-	this.clearColor = "#BDFFFF";
+	// this.clearColor = "#BDFFFF";
+	this.clearColor = new Color(0xBDFFFF);
 	this.night = new Color(0x0, 0);
 
 	this.eventhandler = new Eventhandler( this.canvas );
@@ -57,7 +58,7 @@ Game.prototype.render = function() {
 	stats.begin();
 	this.tick();
 
-	this.ctx.fillStyle = this.clearColor;
+	this.ctx.fillStyle = this.clearColor.getRGB();
 	this.ctx.fillRect(0, 0, this.width, this.height);
 
 	this.ctx.save();
@@ -72,11 +73,8 @@ Game.prototype.render = function() {
 
 	// if(this.lights && this.renderLights)
 	// 	this.lights.renderMask(this.ctx);
-	
 
-	this.gui.render(this.ctx);
-
-
+	this.ctx.restore();
 
 	var grd=this.ctx.createRadialGradient(this.height/2, this.height/2, 0, this.height/2, this.height/2, this.height);
 	grd.addColorStop(0.5, "rgba(0,0,0,0)");
@@ -95,7 +93,9 @@ Game.prototype.render = function() {
 	this.ctx.fillStyle = this.night.getRGBA();
 	this.ctx.fillRect(0,0,this.width, this.height)
 
-	this.ctx.restore();
+	
+
+	this.gui.render(this.ctx);
 
 	stats.end();
 };
@@ -113,7 +113,7 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
-	console.log(this.players.player.controledGround);
+	// console.log(this.players.player.controledGround);
 	this.tickChildren();
 };
 

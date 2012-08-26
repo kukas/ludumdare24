@@ -45,7 +45,7 @@ Building.prototype.die = function( murderer ) {
 
 Building.prototype.produce = function (){
 	var _this = this;
-	if(this.procesQueue[0] !== undefined){
+	if(this.procesQueue.length > 0){
 		this.proces++;
 		if(this.toProces < this.proces){
 			this.procesQueue[0][0]();

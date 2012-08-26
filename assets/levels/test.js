@@ -67,14 +67,18 @@ Level.prototype.afterLoad = function (){
 	game.gui.switchGUI("in_game");
 
 	var slunce = new Background({
-		position: new Vector2(480,480),
+		position: new Vector2(game.width/2,game.width/3),
 		width: 260,
-		height: 960,
+		height: 720,
 		zIndex: -10,
 		texture: game.textures.get("nebesa")
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
+		this.rotation += 0.05;
+		game.clearColor.r = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*89;
+		game.clearColor.g = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*155;
+		// console.log(game.clearColor.getRGB())
 		game.night.alpha = Math.abs(Math.sin(this.rotation/2)*0.7);
 	}
 	this.add( slunce );

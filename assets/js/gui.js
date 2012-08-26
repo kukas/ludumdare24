@@ -286,6 +286,23 @@ function GUI(){
 		},
 		in_game: {
 			objects: function(){
+				var mapLeft = new Button(0, 0, {
+					width:20,
+					height: game.height,
+					onMouseIn: function(){
+						game.camera.x -= 1;
+					}
+				})
+				_this.add(mapLeft);
+				var mapRight = new Button(game.width-20, 0, {
+					width:20,
+					height: game.height,
+					onMouseIn: function(){
+						game.camera.x += 1;
+					}
+				})
+				_this.add(mapRight);
+
 				var layout = new Button(game.width/2 - 250, game.height - 200, {
 					width: 500,
 					height: 200,

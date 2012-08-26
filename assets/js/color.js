@@ -11,7 +11,7 @@ Color.prototype.setHex = function(hex) {
 	this.b = hex & 255;
 };
 Color.prototype.getRGB = function() {
-	return "rgb(" + this.r + "," + this.g + "," + this.b + ")";
+	return "rgb(" + Math.floor(this.r) + "," + Math.floor(this.g) + "," + Math.floor(this.b) + ")";
 };
 Color.prototype.getRGBA = function(alpha) {
 	alpha = alpha === undefined ? this.alpha : alpha;

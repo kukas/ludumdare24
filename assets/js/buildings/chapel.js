@@ -32,7 +32,7 @@ function Chapel( options ){
 		{
 			name : "Crusader",
 			description : "Recrutes crusader",
-			exec : function (){if(!_this.initProduction(function () {Spawn(Crusader_this.position.x+_this.width+32,_this.owner)},300)){console.log("IMPASSIBRU!!");}}
+			exec : function (){if(!_this.initProduction(function () {Spawn(Crusader,_this.position.x+_this.width+32,_this.owner)},300)){console.log("IMPASSIBRU!!");}}
 		},
 		{
 			name : "Upgrade",

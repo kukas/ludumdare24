@@ -6,6 +6,7 @@ function Object2D( options ){
 	this.creationTime = new Date().getTime();
 
 	this.position = options.position === undefined ? new Vector2() : options.position;
+	this.relative = false;
 	this.zIndex = options.zIndex === undefined ? 0 : options.zIndex;
 	this.rotation = options.rotation === undefined ? 0 : options.rotation;
 	
@@ -45,6 +46,8 @@ Object2D.prototype.move = function(vec) {
 	if(colls.length)
 		this.position.subSelf(vec);
 };
+
+Object2D.prototype.onSelect = function() {};
 
 // kolizní funkce
 Object2D.prototype.computeBoundingRadius = function() {
@@ -172,7 +175,10 @@ Object2D.prototype.tick = function() {
 
 Object2D.prototype.render = function(ctx) {
 	ctx.save();
-		ctx.translate(this.position.x, this.position.y);
+		if(this.relative)
+			ctx.translate(game.camera.tX(this.position.x), game.camera.tY(this.position.y));
+		else
+			ctx.translate(this.position.x, this.position.y);
 		ctx.save();
 			ctx.rotate(this.rotation)
 			ctx.save();
