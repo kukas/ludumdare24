@@ -221,7 +221,7 @@ function GUI(){
 		}
 		ctx.globalAlpha = 1;
 	}
-
+	
 	this.guis = {
 		loading_screen: {
 			objects: function(){
@@ -403,3 +403,21 @@ GUI.prototype.addControls = function() {
 		_this.mousehandler(x,y,"onMouseMove");
 	});
 };
+
+function ProgressBar(texture,maxValue, options){
+		GUIObject.call(this);
+		options = options === undefined ? {} : options;
+
+		this.x = options.x === undefined ? 0 : options.x;
+		this.y = options.y === undefined ? 0 : options.y;
+		this.width = options.width === undefined ? 0 : options.width;
+		this.height = options.height === undefined ? 0 : options.height;
+			
+		this.maxValue = maxValue === undefined ? 100 : maxValue;
+		this.value = options.value === undefined ? 0 : options.value;
+		this.texture = texture;
+		
+		this.render = function (ctx){
+			ctx.drawImage(this.texture.image,this.x,this.y,this.width*this.value/this.maxValue,this.height);
+		};
+	};
