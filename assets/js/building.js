@@ -81,7 +81,7 @@ Building.prototype.tryProduce = function (Constructor,prize){
 		else{
 			if(!this.initProduction(function (){
 				Spawn(Constructor,_this.spawnPoint,_this.owner);
-				},prize)){
+				},prize*10)){ //<-- zde se balancuje čas výroby
 					console.log("The queue is full.");
 			}
 			else{
@@ -92,8 +92,8 @@ Building.prototype.tryProduce = function (Constructor,prize){
 	else{
 		if(!this.initProduction(function (){
 			_this.upgrade();
-			},prize)){
-			console.log("IMPASSIBRU!!")
+			},this.nextTierPrize)){
+			console.log("IMPASSIBRU!!");
 		}
 	};
 };

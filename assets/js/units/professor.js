@@ -1,5 +1,5 @@
 function Professor( options ){
-	this.speed = options.speed !== undefined ? options.speed : 0.2;
+	this.speed = options.speed !== undefined ? options.speed : 1;
 
 	Unit.call(this, options);
 	
@@ -8,8 +8,8 @@ function Professor( options ){
 	this.range = 32;
 	
 	this.damage = 6;
-	this.health = 15;
 	this.maxHealth = 15;
+	this.health = this.maxHealth;
 	this.cadency = 50;
 	
 	this.spawnSound = game.jukebox.sounds["professor"];

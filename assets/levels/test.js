@@ -14,10 +14,6 @@ function Level(){
 
 		bionuke: this.texturepath + "bionuke.png",
 
-		//Zdroje
-		gold : this.texturepath + "gold.png",
-		faith : this.texturepath + "faith.png",
-		knowledge : this.texturepath + "knowledge.png",
 		//Budovy
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
@@ -33,8 +29,14 @@ function Level(){
 		missionary: this.texturepath + "missionary.png",
 		nun: this.texturepath + "nun.png",
 		priest: this.texturepath + "priest.png",
+		librarian: this.texturepath + "librarian.png",
+		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
+		//Zdroje
+		gold : this.texturepath + "gold.png",
+		faith : this.texturepath + "faith.png",
+		knowledge : this.texturepath + "knowledge.png",
 	};
 	this.sounds_src = {
 		gorilla : this.soundpath+"zvuky/opice.wav",
