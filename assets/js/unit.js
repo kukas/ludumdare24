@@ -39,16 +39,16 @@ Unit.prototype.onCollision = function(obj) {
 	// if(this.owner == obj.owner)
 	// 	return
 	if(obj instanceof Unit || obj instanceof Building){
-		console.log(42)
 		this.freeze();
 		this.attack( obj );
 	};
 };
 
 Unit.prototype.move = function() {
-	this.position.x += this.lastSpeed || this.currentSpeed;
+	var sp = this.lastSpeed || this.currentSpeed;
+	this.position.x += sp;
 
-	// this.unfreeze();
+	this.unfreeze();
 	var c = game.findCollisions(this);
 	if( c.length ){
 		for(var i in c){
@@ -56,7 +56,7 @@ Unit.prototype.move = function() {
 		}
 	}
 
-	this.position.x -= this.lastSpeed || this.currentSpeed;
+	this.position.x -= sp;
 
 	if(!this.waiting){
 		this.texture.switchAnimation("walking");
@@ -87,7 +87,6 @@ Unit.prototype.tryAim = function() {
 		if( Math.abs(this.position.x - collided[min].position.x) > Math.abs(this.position.x - collided[i].position.x) )
 			min = i;
 	}
-	console.log(89)
 	this.freeze();
 	this.attack( collided[min] );
 };
@@ -159,7 +158,6 @@ Unit.prototype.dealDamage = function (dmg, murderer){
 };
 
 Unit.prototype.die = function( murderer ) {
-	// console.log(murderer)
 	murderer.unfreeze();
 	if(this.health <= 0){
 		game.remove(this);

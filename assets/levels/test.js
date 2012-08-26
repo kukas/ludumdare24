@@ -3,8 +3,15 @@ function Level(){
 	this.links = {};
 
 	this.textures_src = {
+		// hlína
 		soil: this.texturepath + "soil.png",
-		skull: this.texturepath + "skull.png",
+		skull: this.texturepath + "v_hline/skull.png",
+		anchor: this.texturepath + "v_hline/anchor.png",
+		skeleton: this.texturepath + "v_hline/skeleton.png",
+
+		nebesa: this.texturepath + "nebesa.png",
+		mraky: this.texturepath + "mraky.png",
+
 		kaple: this.texturepath + "rotunda.png",
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -48,6 +55,29 @@ Level.prototype.afterLoad = function (){
 
 	game.gui.switchGUI("in_game");
 
+	var slunce = new Background({
+		position: new Vector2(480,480),
+		width: 260,
+		height: 960,
+		texture: game.textures.get("nebesa")
+	});
+	slunce.tick = function(){
+		this.rotation += 0.0005;
+		game.night.alpha = Math.abs(Math.sin(this.rotation/2)*0.7);
+	}
+	this.add( slunce );
+
+	// var mraky = new Background({
+	// 	position: new Vector2(480,480),
+	// 	width: 960,
+	// 	height: 960,
+	// 	texture: game.textures.get("mraky")
+	// });
+	// mraky.tick = function(){
+	// 	this.rotation += 0.01;
+	// }
+	// this.add( mraky );
+
 	var terrain = new Terrain({
 		width: game.width, 
 		height: game.height,
@@ -88,6 +118,11 @@ Level.prototype.afterLoad = function (){
 
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem")
+
+	// this.lights = new Lights();
+	// this.lights.lights.push(new Lamp({
+	// 	position: new Vector2(100,terrain.getHeight(100))
+	// }))
 
 };
 

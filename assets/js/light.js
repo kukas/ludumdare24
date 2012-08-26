@@ -69,6 +69,9 @@ Lamp.prototype.render = function (ctx) {
 function Lights(){
 	this.cacheCanvas = createCanvas(game.width, game.height);
 	this.castCache = createCanvas(game.width, game.height);
+
+	this.shadowColor = new Color(0x000000, 0.9);
+
 	this.lights = [];
 }
 
@@ -76,7 +79,7 @@ Lights.prototype.render = function(gamectx) {
 	var ctx = this.cacheCanvas.ctx;
 	ctx.clearRect(0, 0, this.cacheCanvas.width, this.cacheCanvas.height);
 
-	this.cast(ctx);
+	// this.cast(ctx);
 
 	gamectx.save();
 	gamectx.globalCompositeOperation = "lighter";
@@ -160,7 +163,7 @@ Lights.prototype.computeDarkMask = function() {
 
 	ctx.save();
 
-	ctx.fillStyle = "rgba(0,0,0,0.9)"; // barva stínu
+	ctx.fillStyle = this.shadowColor.getRGBA(); // barva stínu
 	ctx.fillRect(0, 0, game.width, game.height);
 	ctx.globalCompositeOperation = "destination-out";
 	for (var i = 0, len = this.lights.length; i < len; i++){

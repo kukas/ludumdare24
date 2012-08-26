@@ -343,7 +343,7 @@ function GUI(){
 						game.selected[j].selected = false;
 					};
 					for(var i in game.children){
-						if( game.children[i].inObject(game.eventhandler.mouse) ){
+						if( game.children[i].inObject(game.eventhandler.mouse) && game.children[i].collidable ){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
 							_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)

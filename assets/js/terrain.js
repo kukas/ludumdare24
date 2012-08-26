@@ -47,6 +47,21 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 	cache.ctx.fill();
 	cache.ctx.closePath();
 
+	// věci v půdě
+	var amount = 10;
+	var images = [game.textures.get("skull"), game.textures.get("anchor"), game.textures.get("skeleton")]
+	for(var i = 0; i < amount;i++){
+		cache.ctx.save();
+		var x = this.width/amount*i
+		var y = this.height - (this.heightMap[x]-this.grassLevel*3)*Math.random()
+		cache.ctx.translate(x,y);
+		cache.ctx.rotate(Math.PI*2*Math.random());
+		var tex = images[ Math.floor( Math.random()*images.length ) ];
+		cache.ctx.translate(-tex.width/2, -tex.height/2);
+		cache.ctx.drawImage(tex.image, 0, 0)
+		cache.ctx.restore();
+	}
+
 	this.heightMapImage = cache.canvas;
 };
 

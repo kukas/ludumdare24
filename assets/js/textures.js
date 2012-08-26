@@ -55,8 +55,8 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 	}
 	
 	if(this.animated){
-		ctx.fillStyle = "#000";
-		ctx.fillText(Math.floor(this.frame), x + addX, y + addY)
+		// ctx.fillStyle = "#000";
+		// ctx.fillText(Math.floor(this.frame), x + addX, y + addY)
 		ctx.drawImage(this.image,
 			Math.floor(this.frame)*this.frameWidth, 0,
 			this.frameWidth, this.height,

@@ -195,17 +195,17 @@ Object2D.prototype.render = function(ctx) {
 		ctx.restore();
 	ctx.restore();
 	
-	ctx.lineWidth = 1;
-	ctx.strokeStyle = "#FF00FF";
-	if(this.collisionType == "circle"){
-		ctx.beginPath();
-			ctx.arc(this.position.x, this.position.y, this.boundingRadius, 0, Math.PI*2, false );
-			ctx.stroke();
-		ctx.closePath();
-	}
-	else if(this.collisionType == "hitbox"){
-		ctx.strokeRect( this.position.x - this.width/2, this.position.y - this.height/2, this.width, this.height );
-	}
+	// ctx.lineWidth = 1;
+	// ctx.strokeStyle = "#FF00FF";
+	// if(this.collisionType == "circle"){
+	// 	ctx.beginPath();
+	// 		ctx.arc(this.position.x, this.position.y, this.boundingRadius, 0, Math.PI*2, false );
+	// 		ctx.stroke();
+	// 	ctx.closePath();
+	// }
+	// else if(this.collisionType == "hitbox"){
+	// 	ctx.strokeRect( this.position.x - this.width/2, this.position.y - this.height/2, this.width, this.height );
+	// }
 };
 
 Object2D.prototype.renderLife = function ( ctx ){
