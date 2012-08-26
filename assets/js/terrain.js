@@ -13,6 +13,7 @@ function Terrain(options){
 	this.collidable = false;
 
 	this.grassLevel = 20;
+	this.flatBorder = 200;
 	this.middleHeight = options.middleHeight === undefined ? this.height/2 : options.middleHeight;
 	this.elevation = options.elevation === undefined ? 20 : options.elevation;
 	this.zoom = options.zoom === undefined ? 200 : options.zoom;
@@ -26,7 +27,12 @@ Terrain.prototype.generateHeightMap = function(middleHeight, elevation, zoom) {
 	cache.ctx.beginPath();
 	cache.ctx.moveTo(0, this.height);
 	for(var i = 0; i <= this.width; i++){
-		var height = middleHeight + this.simplex.noise( i / zoom , 0 ) * elevation;
+		if(i < this.flatBorder)
+			var height = middleHeight + this.simplex.noise( this.flatBorder / zoom , 0 ) * elevation;
+		else if(i > this.width-this.flatBorder)
+			var height = middleHeight + this.simplex.noise( (this.width-this.flatBorder) / zoom , 0 ) * elevation;
+		else
+			var height = middleHeight + this.simplex.noise( i / zoom , 0 ) * elevation;
 		this.heightMap.push(height);
 		cache.ctx.lineTo(i, this.height - height);
 	}

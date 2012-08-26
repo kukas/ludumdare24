@@ -4,7 +4,7 @@ function Gay(options){
 	Unit.call(this, options);
 	
 	this.width = 68;
-	this.height = 90;
+	this.height = 96;
 	this.range = 34;
 		
 	this.damage = 5;

@@ -12,6 +12,8 @@ function Level(){
 		nebesa: this.texturepath + "nebesa.png",
 		mraky: this.texturepath + "mraky.png",
 
+		bionuke: this.texturepath + "bionuke.png",
+
 		kaple: this.texturepath + "rotunda.png",
 
 		chapel0: this.texturepath + "rotunda.png",
@@ -65,7 +67,7 @@ Level.prototype.afterLoad = function (){
 		position: new Vector2(480,480),
 		width: 260,
 		height: 960,
-		zIndex: -2,
+		zIndex: -10,
 		texture: game.textures.get("nebesa")
 	});
 	slunce.tick = function(){
@@ -85,10 +87,34 @@ Level.prototype.afterLoad = function (){
 	// }
 	// this.add( mraky );
 
+	var nuke = new Background({
+		position: new Vector2(480,170),
+		width: 53*3,
+		height: 64*3,
+		zIndex: -3,
+		texture: game.textures.get("bionuke", {
+			totalFrames: 12,
+			currentAnimation: "explosion",
+			animations:{
+				explosion: {
+					start: 0,
+					end: 12,
+					speed: 7
+				}
+			}
+		})
+	});
+	// nuke.tick = function(){
+	// 	this.position.y -= 1;
+	// 	if(this.texture.alpha > 0)
+	// 		this.texture.alpha -= 0.01;
+	// }
+	this.add( nuke );
+
 	var terrain = new Terrain({
 		width: game.width, 
 		height: game.height,
-		zIndex: -1,
+		zIndex: -2,
 		texture: game.textures.get("soil")
 	});
 
@@ -107,7 +133,7 @@ Level.prototype.afterLoad = function (){
 	this.add(crus1);
 	
 	var gay = new Gay({
-		position: new Vector2(game.width-500,0),
+		position: new Vector2(game.width-300,0),
 		owner: "enemy",
 		// speed: -1,
 	})
@@ -115,7 +141,7 @@ Level.prototype.afterLoad = function (){
 	this.add( gay );
 
 	var gay = new Gay({
-		position: new Vector2(game.width-400,0),
+		position: new Vector2(game.width-200,0),
 		owner: "enemy",
 		// speed: -1,
 	})

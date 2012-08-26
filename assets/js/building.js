@@ -2,6 +2,8 @@ function Building(options){
 	Object2D.call(this, options);
 	this.producing = false;
 	this.produceTime = 0;
+
+	this.zIndex = -1;
 }
 Building.prototype = new Object2D();
 
@@ -46,7 +48,7 @@ Building.prototype.produce = function (obj,cena){
 	}
 	else{
 		if(this.produceTime >= 120){
-			Spawn(obj, new Vector2(this.position.x+this.width/2+32,this.position.y+this.height/2+32),this.owner);
+			Spawn(obj, new Vector2(this.position.x+this.width/2+32+1000,this.position.y+this.height/2+32),this.owner);
 			this.producing = false;
 		}
 		else{

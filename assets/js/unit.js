@@ -9,20 +9,17 @@ function Unit(options){
 
 	this.waiting = false;
 	this.lastdeal = 0;
+	this.ujdi = 0;
 
 	this.actions = [
 		{
 			name: "Stop!",
 			description: "Stop the selected unit.",
 			exec: function(){
-				_this.shouldBeSpeed = 0;
-			}
-		},
-		{
-			name: "Forward!",
-			description: "Order the selected unit to MOVE!",
-			exec: function(){
-				_this.shouldBeSpeed = _this.speed;
+				var c = game.findCollisions(_this);
+				if( c.length < 1 ){
+					_this.shouldBeSpeed = 0;
+				}
 			}
 		},
 		{
@@ -32,13 +29,30 @@ function Unit(options){
 				_this.shouldBeSpeed = -_this.speed;
 			}
 		},
+		{
+			name: "Forward!",
+			description: "Order the selected unit to MOVE!",
+			exec: function(){
+				_this.shouldBeSpeed = _this.speed;
+			}
+		},
 	];
 }
 Unit.prototype = new Object2D();
 
 Unit.prototype.onCollision = function(obj) {
-	if(this.owner == obj.owner && this.shouldBeSpeed < 0)
-		return
+	if(this.owner == obj.owner){
+		if(this.shouldBeSpeed < 0 || obj.shouldBeSpeed < 0 || obj instanceof Building)
+			return
+		var direction = this.owner == "player" ? 1 : -1;
+		var dist = direction*(obj.position.x - this.position.x);
+		if( dist < (this.width + obj.width)/3 && dist > 0 ){
+			console.log( direction*(this.position.x - obj.position.x) )
+			this.shouldBeSpeed = -this.speed;
+			if(this.ujdi < 1)
+				this.ujdi = ((this.width+obj.width)/2)/this.speed;
+		}
+	}
 	if(obj instanceof Unit || obj instanceof Building){
 		this.freeze();
 		this.attack( obj );
@@ -69,6 +83,7 @@ Unit.prototype.move = function() {
 
 	this.position.x -= direction * sp;
 
+
 	if(!this.waiting){
 		this.texture.switchAnimation("walking");
 
@@ -84,6 +99,16 @@ Unit.prototype.move = function() {
 };
 
 Unit.prototype.tick = function() {
+	if(this.ujdi > 0){
+		console.log(this.ujdi)
+		this.ujdi--;
+		this.shouldBeSpeed = -this.speed;
+	}
+	if(this.ujdi == 1){
+		console.log("troloo")
+		this.ujdi = 0;
+		this.shouldBeSpeed = this.speed;
+	}
 	this.move();
 	if(this.range > this.width/2)
 		this.tryAim();
@@ -175,8 +200,9 @@ Unit.prototype.dealDamage = function (dmg, murderer){
 };
 
 Unit.prototype.die = function( murderer ) {
-	murderer.unfreeze();
 	if(this.health <= 0){
+		murderer.unfreeze();
+		murderer.lastdeal = 0;
 		game.remove(this);
 	}
 };

@@ -15,6 +15,8 @@ function Texture(image, options){
 	this.clip = options.clip === undefined ? {x: 0, y: 0, width: _this.width, height: _this.height} : options.clip;
 	
 	this.scale = options.scale === undefined ? new Vector2(1,1) : options.scale;
+
+	this.alpha = options.alpha === undefined ? 1 : options.alpha;
 	
 	this.animated = !!options.animations;
 	if(this.animated){
@@ -53,7 +55,7 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 			ctx.translate(0, addY);
 		}
 	}
-	
+	ctx.globalAlpha = this.alpha;
 	if(this.animated){
 		// ctx.fillStyle = "#000";
 		// ctx.fillText(Math.floor(this.frame), x + addX, y + addY)
