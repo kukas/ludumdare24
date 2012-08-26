@@ -1,7 +1,8 @@
 function Building(options){
 	Object2D.call(this, options);
 	this.producing = false;
-	this.produceTime = 0;
+	this.proces = 0;
+	this.toProces = 1;
 }
 Building.prototype = new Object2D();
 
@@ -38,19 +39,25 @@ Building.prototype.die = function( murderer ) {
 	}
 };
 
-Building.prototype.produce = function (obj,cena){
+Building.prototype.produce = function (callback,cena){
 	var _this = this;
-	if(!this.producing){
-		this.producing = obj;
-		game.gui.add(new ProgressBar(game.textures.get("button2"),100,{x:_this.position.x,y:_this.position.y+10,height:10,width:100}));
+	if(!this.producing && callback !== undefined){
+		this.producing = callback;
+		this.toProces = cena;
 	}
 	else{
-		if(this.produceTime >= 120){
-			Spawn(obj, new Vector2(this.position.x+this.width/2+32,this.position.y+this.height/2+32),this.owner);
+		if(this.toProces <= this.proces){
+			this.producing();
 			this.producing = false;
+			this.toProces = 1;
+			this.proces = 0;
 		}
-		else{
-			this.produceTime++;
+		else if (this.producing){
+			this.proces++;
 		}
 	}
+};
+
+Building.prototype.tick = function (){
+		this.produce();
 };

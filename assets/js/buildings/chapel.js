@@ -16,31 +16,31 @@ function Chapel( options ){
 		{
 			name:"Missionary",
 			description:"Recrutes missionary",
-			exec:function(){Spawn(Missionary,new Vector2(200,0),_this.owner)},
+			exec:function(){_this.produce(function () {Spawn(Missionary,new Vector2(_this.position.x+_this.width+32,this.position.y),_this.owner)},150);},
 		},
 		{
 			name : "Priest",
 			description : "Recrutes priest",
-			exec : function (){Spawn(Priest,new Vector2(200,0),_this.owner)}
+			exec : function (){_this.produce(function () {Spawn(Priest,new Vector2(_this.position.x+_this.width+32,this.position.y),_this.owner)},200);}
 		},
 		{
 			name : "Nun",
 			description : "Recrutes Nun",
-			exec : function (){_this.produce(Nun);}
+			exec : function (){_this.produce(function () {Spawn(Nun,new Vector2(_this.position.x+_this.width+32,this.position.y),_this.owner)},200);}
 		},
 		{
 			name : "Crusader",
 			description : "Recrutes crusader",
-			exec : function (){Spawn(Crusader,new Vector2(200,0),_this.owner)}
+			exec : function (){_this.produce(function () {Spawn(Crusader,new Vector2(_this.position.x+_this.width+32,this.position.y),_this.owner)},300);}
 		},
 		{
 			name : "Upgrade",
 			description : "Upgrades your base",
-			exec : function (){_this.upgrade();},
+			exec : function (){_this.produce(function () {_this.upgrade();},300);},
 		},
 	];
 	
-	this.owner = options.owner !== undefined ? options.owner : false;
+	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 	this.upgrade = function (){
 		if(this.tier < 2){

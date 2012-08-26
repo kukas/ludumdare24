@@ -14,7 +14,6 @@ function Level(){
 
 		kaple: this.texturepath + "rotunda.png",
 
-		skull: this.texturepath + "skull.png",
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
@@ -99,7 +98,7 @@ Level.prototype.afterLoad = function (){
 	});
 	this.add(building);
 	
-	var crus1 = new Crusader({
+	/*var crus1 = new Crusader({
 		position: new Vector2(300,0),
 		owner:"player",
 	});
@@ -118,7 +117,7 @@ Level.prototype.afterLoad = function (){
 		owner: "enemy",
 		// speed: -1,
 	})
-	this.add( gay );
+	this.add( gay );*/
 
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem")
