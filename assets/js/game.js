@@ -31,8 +31,20 @@ function Game(){
 			return y + this.y;
 		};
 		
-	this.player = {side:"creationist",color:"#93C6CC"};
-	this.enemy = {side:"atheist",color:"#F0271D"};
+	this.players = {
+		player : {
+			side:"creationist",
+			color:"#93C6CC",
+			resources:{gold:100,spec:100},
+			controledGround:100,
+			},
+		enemy : {
+			side:"atheist",
+			color:"#F0271D",
+			resources:{gold:100,spec:100},
+			controledGround:100,
+			},
+		};
 };
 
 Game.prototype = new Object2D();
@@ -101,6 +113,7 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
+	console.log(this.players.player.controledGround);
 	this.tickChildren();
 };
 

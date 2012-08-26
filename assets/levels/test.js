@@ -8,17 +8,19 @@ function Level(){
 		skull: this.texturepath + "v_hline/skull.png",
 		anchor: this.texturepath + "v_hline/anchor.png",
 		skeleton: this.texturepath + "v_hline/skeleton.png",
-
+		//background
 		nebesa: this.texturepath + "nebesa.png",
 		mraky: this.texturepath + "mraky.png",
-
-		kaple: this.texturepath + "rotunda.png",
-
+		//Zdroje
+		gold : this.texturepath + "gold.png",
+		faith : this.texturepath + "faith.png",
+		knowledge : this.texturepath + "knowledge.png",
+		//Budovy
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
 		chapel3: this.texturepath + "cathedral.png",
-
+		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
 		gay: this.texturepath + "gay.png",

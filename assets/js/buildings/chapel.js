@@ -17,22 +17,22 @@ function Chapel( options ){
 		{
 			name:"Missionary",
 			description:"Recrutes missionary",
-			exec:function(){if(!_this.initProduction(function () {Spawn(Missionary,new Vector2(_this.position.x+_this.width+32,_this.position.y),_this.owner)},30)){console.log("IMPASSIBRU!!");}},
+			exec:function(){if(!_this.initProduction(function () {Spawn(Missionary,_this.position.x+_this.width+32,_this.owner)},30)){console.log("IMPASSIBRU!!");}},
 		},
 		{
 			name : "Priest",
 			description : "Recrutes priest",
-			exec : function (){if(!_this.initProduction(function () {Spawn(Priest,new Vector2(_this.position.x+_this.width+32,_this.position.y),_this.owner)},90)){console.log("IMPASSIBRU!!");}}
+			exec : function (){if(!_this.initProduction(function () {Spawn(Priest,_this.position.x+_this.width+32,_this.owner)},90)){console.log("IMPASSIBRU!!");}}
 		},
 		{
 			name : "Nun",
 			description : "Recrutes Nun",
-			exec : function (){if(!_this.initProduction(function () {Spawn(Nun,new Vector2(_this.position.x+_this.width+32,_this.position.y),_this.owner)},150)){console.log("IMPASSIBRU!!");}}
+			exec : function (){if(!_this.initProduction(function () {Spawn(Nun,_this.position.x+_this.width+32,_this.owner)},150)){console.log("IMPASSIBRU!!");}}
 		},
 		{
 			name : "Crusader",
 			description : "Recrutes crusader",
-			exec : function (){if(!_this.initProduction(function () {Spawn(Crusader,new Vector2(_this.position.x+_this.width+32,_this.position.y),_this.owner)},300)){console.log("IMPASSIBRU!!");}}
+			exec : function (){if(!_this.initProduction(function () {Spawn(Crusader_this.position.x+_this.width+32,_this.owner)},300)){console.log("IMPASSIBRU!!");}}
 		},
 		{
 			name : "Upgrade",

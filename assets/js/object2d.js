@@ -190,8 +190,10 @@ Object2D.prototype.render = function(ctx) {
 					ctx.closePath();
 					if(this.health)
 						this.renderLife(ctx);
-					if(this.procesQueue.length > 0)
-						this.renderProduction(ctx);
+					if(this.procesQueue){
+						if(this.procesQueue.length > 0)
+							this.renderProduction(ctx);
+					}
 				}
 			ctx.restore();
 		ctx.restore();

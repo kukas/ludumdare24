@@ -6,8 +6,8 @@ function Terrain(options){
 	this.heightMap = [];
 
 	this.borders = {
-		player: 200,
-		enemy: 50,
+		player : game.players.player.controledGround,
+		enemy : game.players.enemy.controledGround,
 	};
 
 	this.collidable = false;
@@ -70,7 +70,7 @@ Terrain.prototype.render = function(ctx) {
 		ctx.drawImage(this.heightMapImage, this.position.x, this.position.y);
 	//player
 	ctx.beginPath();
-	ctx.strokeStyle = game.player.color;
+	ctx.strokeStyle = game.players.player.color;
 	ctx.lineWidth = 5;
 	for(var i = 0; i <= this.borders["player"];i++){
 		// ctx.fillRect(i,this.height-this.heightMap[i]-1,1,this.grassLevel/3)
@@ -81,7 +81,7 @@ Terrain.prototype.render = function(ctx) {
 	
 	//enemy
 	ctx.beginPath();
-	ctx.strokeStyle = game.enemy.color;
+	ctx.strokeStyle = game.players.enemy.color;
 	ctx.lineWidth = 5;
 	for(var i = this.width; this.width - i <= this.borders["enemy"];i--){
 		ctx.lineTo(i,this.height-this.heightMap[i]-1)
@@ -96,17 +96,23 @@ Terrain.prototype.tick = function (){
 			if(game.children[i].owner == "player"){
 				if(game.children[i].getDistance() > this.borders["player"])
 					this.borders["player"]  = game.children[i].getDistance();
+					game.players.player.controledGround = game.children[i].getDistance();
 			}
 			else{
 				if(game.children[i].getDistance() > this.borders["enemy"])
 					this.borders["enemy"]  = game.children[i].getDistance();
+					game.players.enemy.controledGround = game.children[i].getDistance();
 			}
 			var soucet = this.borders["player"]+this.borders["enemy"];
 			if(this.width < soucet){
-				if(this.borders["player"] > this.borders["enemy"])
+				if(this.borders["player"] > this.borders["enemy"]){
 					this.borders["enemy"]-=soucet - this.width;
-				else
+					game.players.enemy.controledGround -=soucet - this.width;
+				}
+				else{
 					this.borders["player"]-=soucet - this.width;
+					game.players.enemy.controledGround -=soucet - this.width;
+				}
 			}
 		}
 	};
