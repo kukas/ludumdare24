@@ -147,8 +147,8 @@ Unit.prototype.getDistance = function (){
 		var distance;
 		if(this.owner == "player")
 			distance = this.position.x;
-		if(this.owner == "enemy")
-			distance = game.links.terrain.width - this.position.x;
+		else
+			distance = game.playground.width - this.position.x;
 		return distance;
 	}
 	else{
