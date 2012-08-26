@@ -11,6 +11,7 @@ function Missionary( options ){
 	this.maxHealth = 3;
 	this.health = this.maxHealth;
 	this.cadency = 30;
+	this.prize = 10;
 	
 	this.spawnSound = game.jukebox.sounds["missionary"];
 	

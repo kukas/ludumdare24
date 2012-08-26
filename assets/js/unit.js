@@ -211,6 +211,7 @@ Unit.prototype.die = function( murderer ) {
 	if(this.health <= 0){
 		murderer.unfreeze();
 		murderer.lastdeal = 0;
+		game.players[murderer.owner].resources.gold+=2*this.prize;
 		game.remove(this);
 	}
 };

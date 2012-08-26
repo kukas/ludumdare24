@@ -12,6 +12,7 @@ function Librarian( options ){
 	this.maxHealth = 6;
 	this.health = this.maxHealth;
 	this.cadency = 50;
+	this.prize = 50;
 	
 	this.spawnSound = game.jukebox.sounds["librarian"];
 	
