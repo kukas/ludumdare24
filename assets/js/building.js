@@ -72,20 +72,20 @@ Building.prototype.tick = function (){
 		this.produce();
 };
 
-Building.prototype.tryProduce = function (Constructor,prize){
+Building.prototype.tryProduce = function (Constructor,price){
 	var _this = this;
 	if(Constructor != "Upgrade"){
-		if(game.players[_this.owner].resources.gold - prize < 0){
+		if(game.players[_this.owner].resources.gold - price < 0){
 			console.log("Not enough resources.");
 		}
 		else{
 			if(!this.initProduction(function (){
 				Spawn(Constructor,_this.spawnPoint,_this.owner);
-				},prize*10)){ //<-- zde se balancuje čas výroby
+				},price*10)){ //<-- zde se balancuje čas výroby
 					console.log("The queue is full.");
 			}
 			else{
-				game.players[_this.owner].resources.gold -= prize;
+				game.players[_this.owner].resources.gold -= price;
 			}
 		}
 	}

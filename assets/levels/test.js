@@ -30,6 +30,7 @@ function Level(){
 		nun: this.texturepath + "nun.png",
 		priest: this.texturepath + "priest.png",
 		librarian: this.texturepath + "librarian.png",
+		biologist: this.texturepath + "biologist.png",
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
@@ -50,7 +51,7 @@ function Level(){
 		librarian : this.soundpath + "zvuky/knihovnice.wav",
 		angel : this.soundpath + "zvuky/andel.wav",
 		barocoangel : this.soundpath + "zvuky/andelicek.wav",
-		biolog : this.soundpath + "zvuky/biolog.wav",
+		biologist : this.soundpath + "zvuky/biolog.wav",
 		bishop : this.soundpath + "zvuky/biskup.wav",
 		devil : this.soundpath + "zvuky/dabel.wav",
 		heretic : this.soundpath + "zvuky/heretic.wav",
@@ -99,7 +100,7 @@ Level.prototype.afterLoad = function (){
 	// }
 	// this.add( mraky );
 
-	var nuke = new Background({
+	/*var nuke = new Background({
 		position: new Vector2(480,170),
 		width: 53*3,
 		height: 64*3,
@@ -116,7 +117,7 @@ Level.prototype.afterLoad = function (){
 			}
 		})
 	});
-	this.add( nuke );
+	this.add( nuke );*/
 
 	var terrain = new Terrain({
 		width: game.playground.width, 
@@ -141,6 +142,9 @@ Level.prototype.afterLoad = function (){
 
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem");
+	
+	zlomekP = 0;
+	zlomekE = 0;
 	
 };
 

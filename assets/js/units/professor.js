@@ -11,7 +11,7 @@ function Professor( options ){
 	this.maxHealth = 15;
 	this.health = this.maxHealth;
 	this.cadency = 50;
-	this.prize = 100;
+	this.price = 100;
 	
 	this.spawnSound = game.jukebox.sounds["professor"];
 	

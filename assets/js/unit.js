@@ -37,6 +37,8 @@ function Unit(options){
 			}
 		},
 	];
+		
+	this.boomRange = -1;
 }
 Unit.prototype = new Object2D();
 
@@ -147,8 +149,8 @@ Unit.prototype.getDistance = function (){
 		var distance;
 		if(this.owner == "player")
 			distance = this.position.x;
-		else
-			distance = game.playground.width - this.position.x;
+		if(this.owner == "enemy")
+			distance = game.links.terrain.width - this.position.x;
 		return distance;
 	}
 	else{
@@ -171,6 +173,11 @@ Unit.prototype.unfreeze = function() {
 };
 
 Unit.prototype.attack = function( obj ) {
+	if(this.boomRange > 0){
+		this.boom();
+		return false;
+	}
+	else{
 	if(obj.owner == this.owner)
 		return
 	if(this.lastdeal >= this.cadency){
@@ -181,6 +188,7 @@ Unit.prototype.attack = function( obj ) {
 	}
 	else{
 		this.lastdeal++;
+	}
 	}
 };
 
@@ -203,15 +211,20 @@ Unit.prototype.dealDamage = function (dmg, murderer){
 		},
 		rotation: { min: 0, max: Math.PI }
 	});
-
+	if(murderer == this){
+		this.die();
+		return
+	}
 	this.die(murderer);
 };
 
 Unit.prototype.die = function( murderer ) {
 	if(this.health <= 0){
-		murderer.unfreeze();
-		murderer.lastdeal = 0;
-		game.players[murderer.owner].resources.gold+=2*this.prize;
+		if(murderer !== undefined && game.players[murderer.owner] !== undefined){
+			murderer.unfreeze();
+			murderer.lastdeal = 0;
+			game.players[murderer.owner].resources.gold+=2*this.price;
+		}
 		game.remove(this);
 	}
 };

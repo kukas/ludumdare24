@@ -11,7 +11,7 @@ function Gay(options){
 	this.maxHealth = 30;
 	this.health = this.maxHealth;
 	this.cadency = 20;
-	this.prize = 300;
+	this.price = 300;
 	
 	this.spawnSound = game.jukebox.sounds["gay"];
 	

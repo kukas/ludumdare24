@@ -49,20 +49,14 @@ function Game(){
 		player : {
 			side:"creationist",
 			color:"#93C6CC",
-			resources:{
-				gold:1000,
-				spec:100
-			},
-			controledGround:200,
+			resources:{gold:1000,spec:100},
+			controledGround:100,
 			},
 		enemy : {
 			side:"atheist",
 			color:"#F0271D",
-			resources:{
-				gold:1000,
-				spec:100
-			},
-			controledGround:200,
+			resources:{gold:100,spec:100},
+			controledGround:100,
 			},
 		};
 };
@@ -217,10 +211,25 @@ Game.prototype.setPlayer = function (id){
 	}
 };
 
-Game.prototype.updateResources = function (){ 
+Game.prototype.updateResources = function (){
 	if(game.gui.links.resources){
-		playerResources = game.players.player.resources;
-		enemyResources = game.players.enemy.resources;
+		//Inicializace
+		var playerResources = game.players.player.resources;
+		var enemyResources = game.players.enemy.resources;
+		var playerGround =  game.players.player.controledGround;
+		var enemyGround =  game.players.enemy.controledGround;
+		//Zvětšování
+		zlomekP += Math.sqrt(playerGround)/300;
+		zlomekE += Math.sqrt(playerGround)/300;
+		if(Math.round(zlomekP) >= 1){
+			playerResources.spec += Math.round(zlomekP);
+			zlomekP = 0;
+		}
+		if(Math.round(zlomekE) >= 1){
+			enemyResources.spec += Math.round(zlomekE);
+			zlomekE = 0;
+		}
+		//Aktualizace
 		game.gui.links.resources.links.gold.links.goldtext.text[0] = playerResources.gold;
 		game.gui.links.resources.links.spec.links.spectext.text[0] = playerResources.spec;
 	}

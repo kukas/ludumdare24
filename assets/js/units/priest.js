@@ -11,7 +11,7 @@ function Priest( options ){
 	this.maxHealth = 5;
 	this.health = this.maxHealth;
 	this.cadency = 20;
-	this.prize = 30;
+	this.price = 30;
 	
 	this.spawnSound = game.jukebox.sounds["priest"];
 	
