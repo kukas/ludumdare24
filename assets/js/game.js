@@ -225,3 +225,12 @@ Game.prototype.updateResources = function (){
 		game.gui.links.resources.links.spec.links.spectext.text[0] = playerResources.spec;
 	}
 };
+
+Game.prototype.unselectAll = function() {
+	if(game.eventhandler.mouse.projected.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
+		game.gui.links.layout.links.unitControl.children = [];
+		for(var j in game.selected){
+			game.selected[j].selected = false;
+		};
+	}
+};

@@ -41,6 +41,8 @@ function Unit(options){
 Unit.prototype = new Object2D();
 
 Unit.prototype.onCollision = function(obj) {
+	if(obj.ghost)
+		return;
 	if(this.owner == obj.owner){
 		if(this.shouldBeSpeed < 0 || obj.shouldBeSpeed < 0 || obj instanceof Building)
 			return

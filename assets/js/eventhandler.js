@@ -147,6 +147,8 @@ Eventhandler.prototype.loop = function() {
 			this.mouseControls[ m ].exec("continuous", this.mouse.x, this.mouse.y);
 		}
 	}
+	if(this.mouseControls[0])
+		this.mouseControls[0].exec("mousedown", this.mouse.x, this.mouse.y)
 }
 
 Eventhandler.prototype.resetControls = function() {

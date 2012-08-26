@@ -41,6 +41,13 @@ function Chapel( options ){
 			description : "Upgrades your base",
 			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100);}},
 		},
+		{
+			name:"BUILD!",
+			description:"Recrutes missionary",
+			exec:function(){
+				_this.build(Chapel, 100)
+			},
+		},
 	];
 	
 	this.owner = options.owner !== undefined ? options.owner : "player";

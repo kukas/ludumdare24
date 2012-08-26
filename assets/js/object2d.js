@@ -17,10 +17,13 @@ function Object2D( options ){
 	this.children = [];
 	this.links = {};
 
+	this.ghostAlpha = 0.5;
+
 	this.selected = false;
+	this.selectColor = new Color("#0000FF");
 
 	this.texture = options.texture === undefined ? false : options.texture;
-	this.rendering = true
+	this.rendering = true;
 
 	this.collidable = options.collidable === undefined ? true : options.collidable;
 	this.collisionType = "hitbox"; // "hitbox", "rotated-hitbox"
@@ -182,16 +185,22 @@ Object2D.prototype.render = function(ctx) {
 		else
 			ctx.translate(this.position.x, this.position.y);
 		ctx.save();
+			if(this.ghost)
+				ctx.globalAlpha = this.ghostAlpha;
 			ctx.rotate(this.rotation)
 			ctx.save();
 				ctx.translate(-this.width/2, -this.height/2);
 				if(this.texture){
+					if(this.ghost)
+						this.texture.alpha = this.ghostAlpha;
+					else
+						this.texture.alpha = 1;
 					this.texture.draw(ctx, 0, 0 , this.width, this.height)
 				}
 				if(this.selected){
 					ctx.beginPath();
-					ctx.fillStyle = "rgba(255, 0, 0, 0.3)"
-					ctx.strokeStyle = "rgba(255, 0, 0, 0.7)"
+					ctx.fillStyle = this.selectColor.getRGBA(0.3);
+					ctx.strokeStyle =  this.selectColor.getRGBA(0.7);
 					ctx.rect(0,0,this.width, this.height)
 					ctx.fill();
 					ctx.stroke();

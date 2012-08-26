@@ -6,6 +6,8 @@ function Color(hex, alpha){
 	return this;
 }
 Color.prototype.setHex = function(hex) {
+	if(typeof(hex) == "string")
+		hex = parseInt(hex.substr(1,6), 16);
 	this.r = hex >> 16 & 255;
 	this.g = hex >> 8 & 255;
 	this.b = hex & 255;

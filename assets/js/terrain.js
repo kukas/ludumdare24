@@ -150,6 +150,13 @@ Terrain.prototype.getHeight = function(x) {
 		return this.height - this.heightMap[Math.floor(x)];
 	}
 	else{
-		return this.middleHeight;
+		return -1000;
 	}
+};
+
+Terrain.prototype.getOwner = function(x) {
+	if(x <= this.borders.player)
+		return "player";
+	else if(x >= this.width - this.borders.enemy)
+		return "enemy";
 };

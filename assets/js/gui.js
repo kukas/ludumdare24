@@ -421,24 +421,26 @@ function GUI(){
 				}
 			},
 			controls: function(){
-				_this.addControls()
+				game.eventhandler.resetControls();
+
+				_this.addControls();
+
 				game.eventhandler.addMouseControl(1,function () {
-					if(game.eventhandler.mouse.projected.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
-						game.gui.links.layout.links.unitControl.children = [];
-						for(var j in game.selected){
-							game.selected[j].selected = false;
-						};
-					}
+					game.unselectAll();
 					for(var i in game.children){
 						if( game.children[i].inObject(game.eventhandler.mouse.projected) && game.children[i].collidable ){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
-							_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
+							if(!game.children[i].ghost)
+								_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
 
 							game.children[i].onSelect()
 						};
 					};
-				})
+				});
+				game.eventhandler.addMouseControl(3,function(){
+					game.unselectAll();
+				});
 
 				var left = function(){
 					if(game.camera.x > 0)
