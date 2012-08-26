@@ -134,7 +134,7 @@ Eventhandler.prototype.updateMouseXY = function(x,y) {
 	this.mouse.y = y;
 
 	this.mouse.projected.x = game.camera.tX(x);
-	this.mouse.projected.y = game.camera.tY(x);
+	this.mouse.projected.y = game.camera.tY(y);
 };
 Eventhandler.prototype.loop = function() {
 	for(var k in this.keyboardControls){

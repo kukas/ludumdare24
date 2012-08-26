@@ -6,6 +6,8 @@ function GUIObject(){
 	this.width = 0;
 	this.height = 0;
 
+	this.mouseIn = false;
+
 	this.parent = false;
 	this.children = [];
 	this.links = {};
@@ -23,6 +25,9 @@ GUIObject.prototype.get = function( name ) {
 };
 
 GUIObject.prototype.tickChildren = function (){
+	if(this.mouseIn && this.onMouseIn){
+		this.onMouseIn();
+	}
 	for (var i in this.children){
 		this.children[i].tick();
 		if(this.children[i].tickChildren)
@@ -46,14 +51,16 @@ GUIObject.prototype.tick = function (){
 GUIObject.prototype.render = function (ctx){
 };
 GUIObject.prototype.mousehandler = function(x,y,type) {
-
+	this.mouseIn = false;
 	if(this[type] || (type == "onMouseMove" && (this.onMouseIn || this.onMouseOut)) ){
 		if( x > this.x && x < this.x+this.width &&
 			y > this.y && y < this.y+this.height){
 			if(type != "onMouseMove")
 				this[type]();
-			else if(this.onMouseIn)
-				this.onMouseIn();
+			else if(this.onMouseIn){
+				this.mouseIn = true;
+				// this.onMouseIn();
+			}
 		}
 		else if(this.onMouseOut){
 			this.onMouseOut();
@@ -287,18 +294,21 @@ function GUI(){
 		in_game: {
 			objects: function(){
 				var mapLeft = new Button(0, 0, {
-					width:20,
+					width:40,
+					visible: false,
 					height: game.height,
 					onMouseIn: function(){
-						game.camera.x -= 1;
+						if(game.camera.x > 0)
+							game.camera.x -= 2;
 					}
 				})
 				_this.add(mapLeft);
-				var mapRight = new Button(game.width-20, 0, {
-					width:20,
+				var mapRight = new Button(game.width-40, 0, {
+					width:40,visible: false,
 					height: game.height,
 					onMouseIn: function(){
-						game.camera.x += 1;
+						if(game.camera.x < game.playground.width-game.width)
+							game.camera.x += 2;
 					}
 				})
 				_this.add(mapRight);
@@ -356,13 +366,13 @@ function GUI(){
 			controls: function(){
 				_this.addControls()
 				game.eventhandler.addMouseControl(1,function () {
-					if(game.eventhandler.mouse.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
+					if(game.eventhandler.mouse.projected.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
 						for(var j in game.selected){
 							game.selected[j].selected = false;
 						};
 					}
 					for(var i in game.children){
-						if( game.children[i].inObject(game.eventhandler.mouse) && game.children[i].collidable ){
+						if( game.children[i].inObject(game.eventhandler.mouse.projected) && game.children[i].collidable ){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
 							_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
@@ -371,6 +381,22 @@ function GUI(){
 						};
 					};
 				})
+
+				var left = function(){
+					if(game.camera.x > 0)
+							game.camera.x -= 4;
+				}
+				var right = function(){
+					if(game.camera.x < game.playground.width-game.width)
+						game.camera.x += 4;
+				}
+
+				game.eventhandler.addKeyboardControl(37, undefined, undefined, left)
+				game.eventhandler.addKeyboardControl("A", undefined, undefined, left)
+
+				game.eventhandler.addKeyboardControl(39, undefined, undefined, right)
+				game.eventhandler.addKeyboardControl("D", undefined, undefined, right)
+
 			}
 		}
 	}
@@ -424,21 +450,3 @@ GUI.prototype.addControls = function() {
 		_this.mousehandler(x,y,"onMouseMove");
 	});
 };
-
-function ProgressBar(texture,maxValue, options){
-		GUIObject.call(this);
-		options = options === undefined ? {} : options;
-
-		this.x = options.x === undefined ? 0 : options.x;
-		this.y = options.y === undefined ? 0 : options.y;
-		this.width = options.width === undefined ? 0 : options.width;
-		this.height = options.height === undefined ? 0 : options.height;
-			
-		this.maxValue = maxValue === undefined ? 100 : maxValue;
-		this.value = options.value === undefined ? 0 : options.value;
-		this.texture = texture;
-		
-		this.render = function (ctx){
-			ctx.drawImage(this.texture.image,this.x,this.y,this.width*this.value/this.maxValue,this.height);
-		};
-	};

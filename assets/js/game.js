@@ -9,6 +9,19 @@ function Game(){
 	this.height = 500;
 	this.scale = 1;
 
+	this.playground = {
+		width: 960*2,
+		height: 500
+	};
+
+	this.leftShadow = this.ctx.createRadialGradient(this.height/2, this.height/2, 0, this.height/2, this.height/2, this.height);
+	this.leftShadow.addColorStop(0.5, "rgba(0,0,0,0)");
+	this.leftShadow.addColorStop(1, "rgba(0,0,0,1)");
+
+	this.rightShadow = this.ctx.createRadialGradient(this.width - this.height/2, this.height/2, 0, this.width - this.height/2, this.height/2, this.height);
+	this.rightShadow.addColorStop(0.5, "rgba(0,0,0,0)");
+	this.rightShadow.addColorStop(1, "rgba(0,0,0,1)");
+
 	this.ticks = 0;
 
 	// this.clearColor = "#BDFFFF";
@@ -67,33 +80,17 @@ Game.prototype.render = function() {
 	this.ctx.translate(-this.camera.x, -this.camera.y)
 
 	this.renderChildren(this.ctx);
-	
-	// if(this.lights && this.renderLights)
-	// 	this.lights.render(this.ctx);
-
-	// if(this.lights && this.renderLights)
-	// 	this.lights.renderMask(this.ctx);
 
 	this.ctx.restore();
 
-	var grd=this.ctx.createRadialGradient(this.height/2, this.height/2, 0, this.height/2, this.height/2, this.height);
-	grd.addColorStop(0.5, "rgba(0,0,0,0)");
-	grd.addColorStop(1, "rgba(0,0,0,1)");
-
-	this.ctx.fillStyle = grd;
+	this.ctx.fillStyle = this.leftShadow;
 	this.ctx.fillRect(0, 0, this.height/2, this.height);
 
-	var grd=this.ctx.createRadialGradient(this.width - this.height/2, this.height/2, 0, this.width - this.height/2, this.height/2, this.height);
-	grd.addColorStop(0.5, "rgba(0,0,0,0)");
-	grd.addColorStop(1, "rgba(0,0,0,1)");
-
-	this.ctx.fillStyle = grd;
+	this.ctx.fillStyle = this.rightShadow;
 	this.ctx.fillRect(this.width - this.height/2, 0, this.height/2, this.height);
 
 	this.ctx.fillStyle = this.night.getRGBA();
-	this.ctx.fillRect(0,0,this.width, this.height)
-
-	
+	this.ctx.fillRect(0,0,this.width, this.height);
 
 	this.gui.render(this.ctx);
 

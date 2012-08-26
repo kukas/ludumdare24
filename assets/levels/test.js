@@ -75,13 +75,16 @@ Level.prototype.afterLoad = function (){
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
-		this.rotation += 0.05;
-		game.clearColor.r = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*89;
-		game.clearColor.g = 100 + (1-Math.abs(Math.sin(this.rotation/2)))*155;
-		// console.log(game.clearColor.getRGB())
-		game.night.alpha = Math.abs(Math.sin(this.rotation/2)*0.7);
+		var sinus = Math.sin(this.rotation/2);
+		var sinus3 = sinus*sinus*sinus;
+		game.clearColor.r = 100 + (1-Math.abs( sinus3 ))*89;
+		game.clearColor.g = 100 + (1-Math.abs( sinus3 ))*155;
+		// je to přičtený, protože to zlobilo
+		game.night.alpha = Math.abs(sinus3 *0.7)+0.01;
 	}
-	this.add( slunce );
+	slunce.relative = true;
+	// slunce.rendering = false;
+	this.add( slunce, "slunce" );
 
 	// var mraky = new Background({
 	// 	position: new Vector2(480,480),
@@ -111,16 +114,11 @@ Level.prototype.afterLoad = function (){
 			}
 		})
 	});
-	// nuke.tick = function(){
-	// 	this.position.y -= 1;
-	// 	if(this.texture.alpha > 0)
-	// 		this.texture.alpha -= 0.01;
-	// }
 	this.add( nuke );
 
 	var terrain = new Terrain({
-		width: game.width, 
-		height: game.height,
+		width: game.playground.width, 
+		height: game.playground.height,
 		zIndex: -2,
 		texture: game.textures.get("soil")
 	});
@@ -128,46 +126,20 @@ Level.prototype.afterLoad = function (){
 	this.add( terrain, "terrain" );
 	
 	var building = new Chapel({
-		position: new Vector2(100,terrain.getHeight(100)-game.textures.get("chapel0").height/2),
+		position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
 		owner: "player",
 	});
 	this.add(building);
 	
 	var building2 = new School({
-		position: new Vector2(game.width-100,terrain.getHeight(game.width-100)-game.textures.get("chapel0").height/2),
+		position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
 		owner: "enemy",
 	});
 	this.add(building2);
-	
-	/*var crus1 = new Crusader({
-		position: new Vector2(300,0),
-		owner:"player",
-	});
-	this.add(crus1);
-	
-	var gay = new Gay({
-		position: new Vector2(game.width-300,0),
-		owner: "enemy",
-		// speed: -1,
-	})
-
-	this.add( gay );
-
-	var gay = new Gay({
-		position: new Vector2(game.width-200,0),
-		owner: "enemy",
-		// speed: -1,
-	})
-	this.add( gay );*/
 
 	var ps = new ParticleSystem();
-	this.add(ps, "particlesystem")
-
-	// this.lights = new Lights();
-	// this.lights.lights.push(new Lamp({
-	// 	position: new Vector2(100,terrain.getHeight(100))
-	// }))
-
+	this.add(ps, "particlesystem");
+	
 };
 
 var level = new Level();

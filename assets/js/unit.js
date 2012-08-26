@@ -46,7 +46,7 @@ Unit.prototype.onCollision = function(obj) {
 			return
 		var direction = this.owner == "player" ? 1 : -1;
 		var dist = direction*(obj.position.x - this.position.x);
-		if( dist < (this.width + obj.width)/2-obj.speed && dist > 0 ){
+		if( dist < (this.width + obj.width)/2-obj.speed-this.speed && dist > 0 ){
 			// console.log( direction*(this.position.x - obj.position.x) )
 			this.shouldBeSpeed = -this.speed;
 			if(this.ujdi < 1)
@@ -55,6 +55,15 @@ Unit.prototype.onCollision = function(obj) {
 		}
 	}
 	if(obj instanceof Unit || obj instanceof Building){
+		if( dist < (this.width + obj.width)/2-obj.speed && dist > 0 ){
+			this.shouldBeSpeed = -this.speed;
+			obj.shouldBeSpeed = -this.speed;
+			if(this.ujdi < 1)
+				this.ujdi = Math.ceil( (this.width+(obj.width/obj.speed)*this.speed )/2/this.speed + Math.random() + 2);
+			if(obj.ujdi < 1)
+				obj.ujdi = Math.ceil( (obj.width+(this.width/this.speed)*obj.speed )/2/obj.speed + Math.random() + 2);
+			return
+		}
 		this.freeze();
 		this.attack( obj );
 	};

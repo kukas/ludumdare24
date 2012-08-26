@@ -20,6 +20,7 @@ function Object2D( options ){
 	this.selected = false;
 
 	this.texture = options.texture === undefined ? false : options.texture;
+	this.rendering = true
 
 	this.collidable = options.collidable === undefined ? true : options.collidable;
 	this.collisionType = "hitbox"; // "hitbox", "rotated-hitbox"
@@ -162,7 +163,8 @@ Object2D.prototype.renderChildren = function(ctx) {
 	ctx.save();
 	ctx.translate(this.position.x, this.position.y);
 	for (var i = 0, len = this.children.length; i < len; i++){
-		this.children[i].render(ctx);
+		if(this.children[i].rendering)
+			this.children[i].render(ctx);
 		if(this.children[i].renderChildren)
 			this.children[i].renderChildren(ctx);
 	};
