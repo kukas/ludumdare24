@@ -167,6 +167,7 @@ Level.prototype.afterLoad = function (){
 			owner: "enemy",
 		});
 		this.add(building2);
+		game.ai.property.push(building2);
 	}
 	else{
 		var building = new Chapel({
@@ -174,6 +175,7 @@ Level.prototype.afterLoad = function (){
 			owner: "enemy",
 		});
 		this.add(building);
+		game.ai.property.push(building);
 	
 		var building2 = new School({
 			position: new Vector2(150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),

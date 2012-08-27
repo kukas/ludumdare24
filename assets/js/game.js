@@ -33,6 +33,7 @@ function Game(){
 	this.gui = new GUI();
 	this.textures = new Textures();
 	this.jukebox = new Jukebox();
+	this.ai = new AI();
 
 	this.lights = undefined;
 	this.renderLights = true;
@@ -113,6 +114,7 @@ Game.prototype.tickChildren = function() {
 Game.prototype.tick = function() {
 	this.tickChildren();
 	this.updateResources();
+	this.ai.tick();
 	if(this.script)
 		this.runScript( new Date().getTime() - this.creationTime );
 	if(this.fade){

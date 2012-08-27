@@ -129,6 +129,11 @@ Object2D.prototype.remove = function(obj){
 		if(this.links[i] == obj)
 			delete this.links[i];
 	};
+
+	for (var i = 0; i < game.ai.property.length; i++) {
+		if(this.links[i] == obj)
+			delete game.ai.property[i];
+	};
 };
 
 Object2D.prototype.getSortedChildrenHash = function(){
