@@ -25,7 +25,7 @@ function Slum( options ){
 				description: "Fast moving hero who fight with machinegun. She is only one who can hope to stop T-Rex.",
 				quote: "Be faithful in small things, like bullets because it is in them that your strength lies."
 			},
-			exec:function(){_this.tryProduce(Gorilla,10);},
+			exec:function(){_this.tryProduce(Terese,10);},
 		},
 	];
 	

@@ -42,6 +42,7 @@ function Level(){
 		zpovednice: this.texturepath + "zpovednice.png",
 		golgota: this.texturepath + "golgota.png",
 		altar: this.texturepath + "altar.png",
+		portal: this.texturepath + "portal.png",
 		slum: this.texturepath + "slum.png",
 
 		holyfire: this.texturepath + "holyfire.png",
@@ -63,6 +64,10 @@ function Level(){
 		heretic: this.texturepath + "heretic.png",
 		angel: this.texturepath + "angel.png",
 		devil: this.texturepath + "devil.png",
+		terese: this.texturepath + "tereza.png",
+		wallace: this.texturepath + "wallace.png",
+		trex: this.texturepath + "trex.png",
+		jesus: this.texturepath + "jesus.png",
 		
 		//GUI
 		button: this.texturepath + "button.jpg",
@@ -129,6 +134,7 @@ function Level(){
 		crossScorpioParticle : this.texturepath + "kriz.png",
 		fireball : this.texturepath + "koule.png",
 		sancWater : this.texturepath + "sancwater.png",
+		litajici_zaba : this.texturepath + "litajici_zaba.png",
 	};
 	this.sounds_src = {
 		gorilla : this.soundpath+"zvuky/opice.wav",
@@ -159,7 +165,7 @@ Level.prototype.afterLoad = function (){
 	var _this = this;
 
 	game.buildingCreationist = [
-		{ // UPDATE
+		{
 			icon: "b_holyfire",
 			description: {
 				name: "Holy flame",
@@ -215,7 +221,7 @@ Level.prototype.afterLoad = function (){
 				}
 			}
 		},
-		{ // UPDATE
+		{
 			icon: "b_confessor",
 			description: {
 				name: "Confessory",
@@ -229,7 +235,7 @@ Level.prototype.afterLoad = function (){
 				}
 			}
 		},
-		{ // UPDATE
+		{
 			icon: "b_altar",
 			description: {
 				name: "Altar",
@@ -238,7 +244,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Painting)){
+				if(!game.links.base.build(Altar)){
 					console.log("not enough resources");
 				}
 			}
@@ -354,7 +360,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Bookmine)){
+				if(!game.links.base.build(Portal)){
 					console.log("not enough resources");
 				}
 			}
