@@ -798,7 +798,7 @@ function GUI(){
 
 				hoverText.change = function(desc){
 					this.visible = true;
-					this.links.name.changeText(desc.fullName);
+					this.links.name.changeText(desc.name);
 					var price = "price: "
 					var specName = game.players.player.side == "atheist" ? "knowledge" : "faith";
 					if(desc.gold)
@@ -886,7 +886,16 @@ function GUI(){
 				_this.addControls();
 
 				game.eventhandler.addMouseControl(1,function () {
+					if(game.eventhandler.mouse.y > game.links.terrain.middleHeight+game.links.terrain.elevation)
+						return;
+
 					game.unselectAll();
+					if(game.players.player.side == "creationist"){
+						_this.guis.in_game.updateActions(game.buildingCreationist);
+					}
+					else{
+						_this.guis.in_game.updateActions(game.buildingAtheists);
+					}
 					for(var i in game.children){
 						if( game.children[i].inObject(game.eventhandler.mouse.projected) && game.children[i].collidable ){
 							game.children[i].selected = true;
@@ -900,6 +909,12 @@ function GUI(){
 				});
 				game.eventhandler.addMouseControl(3,function(){
 					game.unselectAll();
+					if(game.players.player.side == "creationist"){
+						_this.guis.in_game.updateActions(game.buildingCreationist);
+					}
+					else{
+						_this.guis.in_game.updateActions(game.buildingAtheists);
+					}
 				});
 
 				var left = function(){

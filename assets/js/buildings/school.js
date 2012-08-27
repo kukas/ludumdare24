@@ -64,7 +64,13 @@ function School( options ){
 		},
 		{
 			name : "Upgrade",
-			description : "Upgrades your base",
+			icon: "upgrade",
+			description : {
+				name: "Upgrade",
+				gold: 10,
+				description: "Upgrade your base to unlock more building options!",
+				quote: " "
+			},
 			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade")}},
 		},
 	];

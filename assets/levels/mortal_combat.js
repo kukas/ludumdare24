@@ -65,13 +65,13 @@ Level.prototype.afterLoad = function (){
 		24000: {exec:function(){
 			game.fade = false;
 			game.gui.links.xicht.links.xicht.image.alpha = 0.1;
-			game.gui.links.subtitles.y = 100;
+			game.gui.links.subtitles.y = 50;
 			game.gui.links.subtitles.font = "Arial";
 			game.gui.links.subtitles.text = [
-			"Credits"," ","Programming: Jirka Balhar, Štěpán Marek"," ",
+			"Credits"," ","Programming: Jirka Balhar, Štěpán Marek, Martin Mach"," ",
 			"Graphics: Martin Mach, Hynek Bečka"," ", "Game design: Hynek Bečka, Štěpán Marek, Jirka Balhar, Martin Mach"," ",
 			"Dubbing: Hynek Bečka, Martin Mach, Jiří Zbytovský"," ",
-			"SFX: Jiří Zbytovský"," "," ", "Qaterknan (c) 2012"
+			"SFX: Jiří Zbytovský"," ","Music: Jan Mesany"," ","Barista: Jan Mesany", " "," ", "Qaterknan (c) 2012"
 			]
 		}},
 	}

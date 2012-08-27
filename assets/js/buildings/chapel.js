@@ -22,7 +22,7 @@ function Chapel( options ){
 			name:"Missionary",
 			icon: "b_misionar",
 			description:{
-				fullName: "Missionary",
+				name: "Missionary",
 				gold: 10,
 				description: "Fast moving infantry, not very effective in combat, but useful as scout.",
 				quote: "Can we have a little talk about Jesus?"
@@ -33,7 +33,7 @@ function Chapel( options ){
 			name : "Priest",
 			icon: "b_knez",
 			description:{
-				fullName: "Priest",
+				name: "Priest",
 				gold: 10,
 				description: "Your first real soldier. He can shoot pretty fast, good against biologist.",
 				quote: "And now... punishment!"
@@ -44,7 +44,7 @@ function Chapel( options ){
 			name : "Nun",
 			icon: "b_jeptiska",
 			description: {
-				fullName: "Nun",
+				name: "Nun",
 				gold: 10,
 				description: "Slow, but strong archer. Effective against professor.",
 				quote: "I like Jesus. He is so muscular."
@@ -55,7 +55,7 @@ function Chapel( options ){
 			name : "Crusader",
 			icon: "b_krizak",
 			description: {
-				fullName: "Crusader",
+				name: "Crusader",
 				gold: 10,
 				description: "Holy warrior of Jesus. Slow and strong, like Jesus itself. Good against teachers.",
 				quote: "To the holy land!"
@@ -64,7 +64,13 @@ function Chapel( options ){
 		},
 		{
 			name : "Upgrade",
-			description : "Upgrades your base",
+			icon: "upgrade",
+			description : {
+				name: "Upgrade",
+				gold: 10,
+				description: "Upgrade your base to unlock more building options!",
+				quote: " "
+			},
 			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",this.description.gold);}},
 		},
 	];

@@ -20,7 +20,7 @@ function Altar( options ){
 			name:"Angel",
 			icon: "b_andel",
 			description: {
-				name:  "Angel",
+				name: "Angel",
 				gold: 10,
 				description: "Very balanced and effective unit. Good for everything. He can shoot fire balls. Holy fire balls.",
 				quote: "Glorious doom to the unbelivers."

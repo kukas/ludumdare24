@@ -17,7 +17,7 @@ function Galapags( options ){
 	var _this = this;
 	this.actions = [
 		{
-			name:"A. R. Wallace",
+			name:"Mother Tereze",
 			icon: "b_wallace",
 			description: {
 				name:  "A. R. Wallace",

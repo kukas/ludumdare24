@@ -40,17 +40,17 @@ function Unit(options){
 Unit.prototype = new FieldObject();
 
 Unit.prototype.stop = function() {
-	var c = game.findCollisions(_this);
+	var c = game.findCollisions(this);
 	if( c.length < 1 ){
-		_this.shouldBeSpeed = 0;
+		this.shouldBeSpeed = 0;
 	}
 };
 
 Unit.prototype.forward = function() {
-	_this.shouldBeSpeed = _this.speed;
+	this.shouldBeSpeed = this.speed;
 };
 Unit.prototype.backward = function() {
-	_this.shouldBeSpeed = -_this.speed;
+	this.shouldBeSpeed = -this.speed;
 };
 
 
