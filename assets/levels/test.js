@@ -46,6 +46,8 @@ function Level(){
 		slum: this.texturepath + "slum.png",
 
 		holyfire: this.texturepath + "holyfire.png",
+		machinegun: this.texturepath + "machinegun.png",
+
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
