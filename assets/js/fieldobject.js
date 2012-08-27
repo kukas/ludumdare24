@@ -15,7 +15,7 @@ FieldObject.prototype.tryAim = function() {
 			collided.push(game.children[i]);
 		
 	}
-	if(!collided.length)
+	if(!collided.length || this.ghost)
 		return false;
 	var min = 0;
 	for(var i=0;i<collided.length;i++){
