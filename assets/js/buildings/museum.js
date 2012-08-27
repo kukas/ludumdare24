@@ -2,7 +2,7 @@ function Museum( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 150;
+	this.maxHealth = 200;
 	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
@@ -12,7 +12,7 @@ function Museum( options ){
 	this.maxQueue = 1;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 100;
+	this.price = 200;
 	
 	this.texture = game.textures.get("museum",{
 		totalFrames: 2,
@@ -37,7 +37,7 @@ function Museum( options ){
 			icon: "b_dino",
 			description: {
 				name:  "T-REX",
-				gold: 10,
+				gold: 2000,
 				description: "Slow dinosaur. He smashes the buildings, he eats the people. Truly, almost nothing can kill this ultimate killer.",
 				quote: "Raaaaaaar!"
 			},

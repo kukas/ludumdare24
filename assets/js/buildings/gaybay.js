@@ -31,7 +31,7 @@ function GayBay( options ){
 			icon: "b_gay",
 			description: {
 				name:  "GAY",
-				gold: 10,
+				gold: 300,
 				description: "Fast unit that can destroy the toughes defense. Good against nuns and buildings.",
 				quote: "Yeah, I have been very nasty."
 			},
@@ -42,7 +42,7 @@ function GayBay( options ){
 			icon: "b_heretic",
 			description: {
 				name:  "Heretic",
-				gold: 10,
+				gold: 400,
 				description: "This one is quite slow, but can take lot of damage and deal it too. Effective against prophets.",
 				quote: "Pssst. Wanna some weed?"
 			},

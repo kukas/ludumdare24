@@ -2,14 +2,14 @@ function School( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 100;
+	this.maxHealth = 500;
 	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrice = 10;
+	this.nextTierPrice = 100;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -34,7 +34,7 @@ function School( options ){
 			icon:"b_ucitel",
 			description: {
 				name:  "Teacher",
-				gold: 10,
+				gold: 30,
 				description: "This one is good against cherubs. He has very good rate of fire.",
 				quote: "Free knowledge to everyone!"
 			},
@@ -45,7 +45,7 @@ function School( options ){
 			icon:"b_knihovnice",
 			description: {
 				name:  "Librarian",
-				gold: 10,
+				gold: 50,
 				description: "Not very fast, but when she hits she hits hard. Good against crusader.",
 				quote: "Burning books? Die bitch!"
 			},
@@ -56,7 +56,7 @@ function School( options ){
 			icon:"b_profesor",
 			description: {
 				name:  "Professor",
-				gold: 10,
+				gold: 100,
 				description: "Bringer of knowledge. It takes a while to bring it, but then everyone will die. Effective against priests.",
 				quote: "Die morons!"
 			},

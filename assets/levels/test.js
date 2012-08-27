@@ -424,7 +424,7 @@ Level.prototype.afterLoad = function (){
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
-		this.rotation += 0.01;
+		// this.rotation += 0.01;
 		var sinus = Math.sin(this.rotation/2);
 		var sinus3 = sinus*sinus*sinus;
 		game.clearColor.r = 100 + (1-Math.abs( sinus3 ))*89;

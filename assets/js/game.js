@@ -238,12 +238,12 @@ Game.prototype.add = function(obj, name) {
 
 Game.prototype.setPlayer = function (id){
 	if(id == "creationist"){
-		this.players.player = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100,hero:false};
-		this.players.enemy = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100,hero:false};
+		this.players.player = {side:"creationist",color:"#93C6CC",resources:{gold:100,spec:100},controledGround:100,hero:false};
+		this.players.enemy = {side:"atheist",color:"#F0271D",resources:{gold:100,spec:100},controledGround:100,hero:false};
 	}
 	else{
-		this.players.player = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100,hero:false};
-		this.players.enemy = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100,hero:false};
+		this.players.player = {side:"atheist",color:"#F0271D",resources:{gold:100,spec:100},controledGround:100,hero:false};
+		this.players.enemy = {side:"creationist",color:"#93C6CC",resources:{gold:100,spec:100},controledGround:100,hero:false};
 	}
 };
 
@@ -255,8 +255,8 @@ Game.prototype.updateResources = function (){
 		var playerGround =  game.players.player.controledGround;
 		var enemyGround =  game.players.enemy.controledGround;
 		//Zvětšování
-		zlomekP += Math.sqrt(playerGround)/800;
-		zlomekE += Math.sqrt(playerGround)/800;
+		zlomekP += Math.sqrt(playerGround)/1000;
+		zlomekE += Math.sqrt(playerGround)/1000;
 		if(Math.round(zlomekP) >= 1){
 			playerResources.spec += Math.round(zlomekP);
 			zlomekP = 0;

@@ -2,7 +2,7 @@ function Bookmine( options ){
 		
 	Building.call(this, options);
 	
-	this.maxHealth = 30;
+	this.maxHealth = 1;
 	this.health = this.maxHealth;
 	this.width = 64;
 	this.height = 64;

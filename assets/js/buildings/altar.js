@@ -11,7 +11,7 @@ function Altar( options ){
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 10;
+	this.price = 100;
 	
 	this.texture = game.textures.get("altar");
 	var _this = this;
@@ -21,7 +21,7 @@ function Altar( options ){
 			icon: "b_andel",
 			description: {
 				name: "Angel",
-				gold: 10,
+				gold: 666,
 				description: "Very balanced and effective unit. Good for everything. He can shoot fire balls. Holy fire balls.",
 				quote: "Glorious doom to the unbelivers."
 			},

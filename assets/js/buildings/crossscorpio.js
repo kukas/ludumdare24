@@ -2,10 +2,10 @@ function CrossScorpio( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 30;
+	this.maxHealth = 15;
 	this.health = this.maxHealth;
 	this.damage = 1;
-	this.cadency = 30;
+	this.cadency = 60;
 	
 	this.width = 96;
 	this.height = 96;

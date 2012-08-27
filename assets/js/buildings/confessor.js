@@ -11,7 +11,7 @@ function Confessor( options ){
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 10;
+	this.price = 100;
 	
 	this.texture = game.textures.get("zpovednice");
 	var _this = this;
@@ -21,7 +21,7 @@ function Confessor( options ){
 			icon: "b_biskup",
 			description: {
 				name: "Bishop",
-				gold: 100,
+				gold: 400,
 				description: "Strong and tough unit. He is best againts homosexuals.",
 				quote: "God bless you."
 			},
@@ -32,7 +32,7 @@ function Confessor( options ){
 			icon: "b_prorok",
 			description: {
 				name:  "Prophet",
-				gold: 100,
+				gold: 300,
 				description: "Fast moving infantry with solid attack speed. He can break through defensive buildings very fast. Effective against librarian.",
 				quote: "The end is near! Here, take this pamphlet."
 			},
