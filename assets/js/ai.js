@@ -20,20 +20,21 @@ function AI(){
 		build : function (){
 			var id = Math.round(Math.random()*(3+_this.property[0].tier));
 				var building = new _this.buildings[id]({});
-				building.position.x = _this.property[0].position.x-_this.property[0].width-building.width;console.log(building);
+				building.owner = "enemy";
+				building.position.x = _this.property[0].position.x-_this.property[0].width/2-building.width/2;
+				building.position.y = game.links.terrain.getHeight(building.position.x)-building.height/2;
 				if(game.links.terrain.getOwner(building.position.x) == building.owner && game.findCollisions(building).length < 1){
 					// samotné postavení
 					building.ghost = true;
 					building.building = true;
 
-					building.selected = false;
-					//building.selectColor.setHex("#0000FF");
 					building.spawnPoint = building.owner == "player" ? building.position.x+building.width+32 : building.position.x-building.width-32;
 			
 					building.afterPlacement();
 					game.players[building.owner].resources.spec -= building.price;
-
+					
 					building.tryProduce("Self", building.price);
+					game.add(building);
 				}
 		},
 		makeApe : function (){
@@ -59,6 +60,7 @@ AI.prototype.tick = function() {
 AI.prototype.chooseAction = function() {
 	var actionNames = Object.keys(this.actions);
 	var actionLength = actionNames.length;
+	this.actions.build();
 	return actionNames[Math.floor(actionLength*Math.random())];
 };
 
