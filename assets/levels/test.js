@@ -224,7 +224,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Bonfire)){
+				if(!game.links.base.build(Confessor)){
 					console.log("not enough resources");
 				}
 			}
@@ -312,7 +312,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Bookmine)){
+				if(!game.links.base.build(Dino)){
 					console.log("not enough resources");
 				}
 			}
