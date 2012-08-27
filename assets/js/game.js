@@ -56,10 +56,12 @@ function Game(){
 		enemy : {
 			side:"atheist",
 			color:"#F0271D",
-			resources:{gold:100,spec:1000},
+			resources:{gold:100,spec:100},
 			controledGround:100,
 			},
 		};
+		
+		this.timedEvents = [];
 };
 
 Game.prototype = new Object2D();
@@ -123,6 +125,15 @@ Game.prototype.tick = function() {
 			if(this.gui.links.xicht.links.xicht.image.alpha >= 1)
 				this.totalWin3();
 		}
+	}
+	if(this.timedEvents.length > 0){
+		for(var i in this.timedEvents){
+			this.timedEvents[i].toInit--;
+			if(this.timedEvents[i].toInit <= 0){
+				this.timedEvents[i].init();
+				this.timedEvents.splice(i-1,1);
+			}
+		};
 	}
 };
 
@@ -284,4 +295,11 @@ Game.prototype.totalWin3 = function() {
 Game.prototype.playScript = function(script) {
 	this.script = script;
 	this.creationTime = new Date().getTime();
+};
+
+Game.prototype.setTimeout = function (fce,mills){
+	this.timedEvents.push({
+		init : fce,
+		toInit : mills,
+	});
 };

@@ -41,7 +41,7 @@ function Librarian( options ){
 			being : {
 				start : 0,
 				end : 3,
-				speed : 20,
+				speed : 10,
 			},
 		},
 	});

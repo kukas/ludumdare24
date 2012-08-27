@@ -714,81 +714,81 @@ function GUI(){
 					MakeTextures();
 					
 					holyfire.add(new Text({
-					x:35,
+					x:15,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Holy fire mine!",
 					align: "center",
 					}));
 					
 					Samostril.add(new Text({
-					x:35,
+					x:15,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Cross Scorpio!",
 					align: "center",
 					}));
 					
 					Hranice.add(new Text({
-					x:55,
+					x:40,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build bonfire!",
 					align: "center",
 					}));
 					
 					painting.add(new Text({
-					x:22,
+					x:7,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Painting!",
 					align: "center",
 					}));
 					
 					confessory.add(new Text({
-					x:13,
+					x:-3.5,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build confessory!",
 					align: "center",
 					}));
 					
 					altar.add(new Text({
-					x:25,
+					x:15,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Altar!",
 					align: "center",
 					}));
 					
 					slum.add(new Text({
-					x:27,
+					x:20,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build slum!",
 					align: "center",
 					}));
 					
 					golgota.add(new Text({
-					x:20,
+					x:10,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Golgota!",
 					align: "center",
 					}));

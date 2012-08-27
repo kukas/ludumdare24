@@ -49,11 +49,9 @@ FieldObject.prototype.attack = function( obj ) {
 			if(obj.owner == this.owner)
 				return
 			if(this.lastdeal >= this.cadency){
-				this.texture.switchAnimation("attack");
-				obj.dealDamage(this.damage, this);
-				this.lastdeal = 0;
-				//Projektil
-				if(this.range > this.width/2){console.log("firing");
+				if(this.range > this.width/2){
+					//Projektil
+					this.texture.switchAnimation("attack");
 					var _this = this;
 					var difr = this.position.x-obj.position.x;
 					var vlevo = difr < 0 ? 1:-1;
@@ -75,6 +73,14 @@ FieldObject.prototype.attack = function( obj ) {
 							max : 0.1,
 						},
 					});
+					game.setTimeout(function (){obj.dealDamage(_this.damage, _this);},Math.floor(Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)));
+					console.log(["fired projectile from",this," to "],obj);
+					this.lastdeal = 0;
+				}
+				else{
+					this.texture.switchAnimation("attack");
+					obj.dealDamage(this.damage, this);
+					this.lastdeal = 0;
 				}
 			}
 		}
@@ -83,7 +89,7 @@ FieldObject.prototype.attack = function( obj ) {
 
 FieldObject.prototype.dealDamage = function (dmg, murderer){
 	murderer = murderer === undefined ? this : murderer;
-	this.health -= dmg;
+	this.health -= dmg;console.log("dealing damage");
 	// krev
 	var vlevo = (this.position.x < murderer.position.x) ? 1 : 0;
 	game.links.particlesystem.emit(Particle, 20, {
