@@ -9,10 +9,20 @@
 }
 
 @font-face {
-    font-family: '1942report';
-    src: url('../fonts/1942-webfont.eot');
-    src: url('../fonts/1942-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/1942-webfont.ttf') format('truetype');
+    font-family: 'CarbonTypeRegular';
+    src: url('../fonts/carbontype-webfont.eot');
+    src: url('../fonts/carbontype-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/carbontype-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'akashiregular';
+    src: url('../fonts/akashi-webfont.eot');
+    src: url('../fonts/akashi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/akashi-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 

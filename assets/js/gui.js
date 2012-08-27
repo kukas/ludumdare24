@@ -6,6 +6,8 @@ function GUIObject(){
 	this.width = 0;
 	this.height = 0;
 
+	this.ticks = 0;
+
 	this.mouseIn = false;
 
 	this.parent = false;
@@ -20,6 +22,20 @@ GUIObject.prototype.add = function( obj, name ) {
 		this.links[name] = obj;
 	}
 };
+
+
+GUIObject.prototype.remove = function(obj){
+	var search = this.children.indexOf(obj);
+	if(search > -1){
+		this.children.splice(search, 1);
+	}
+
+	for (var i = 0; i < this.links.length; i++) {
+		if(this.links[i] == obj)
+			delete this.links[i];
+	};
+};
+
 GUIObject.prototype.get = function( name ) {
 	return this.links[name];
 };
@@ -110,40 +126,53 @@ function GUI(){
 		this.y = options.y === undefined ? 0 : options.y;
 
 		this.value = options.value;
-		this.text = [];
+		this.text = options.text === undefined ? [] : options.text;
 		this.color = options.color === undefined ? "#FFF" : options.color;
+		this.blink = options.blink === undefined ? false : options.blink;
 		this.size = options.size === undefined ? 16 : options.size;
 		this.lineSpacing = options.lineSpacing === undefined ? 1 : options.lineSpacing;
 		this.font = options.font === undefined ? "Verdana" : options.font;
 		this.weight = options.weight === undefined ? 400 : options.weight;
 		this.shadow = options.shadow === undefined ? false : options.shadow;
 
+		this.visible = options.visible === undefined ? true : options.visible;
+
 		var ctx = document.createElement("canvas").getContext("2d");
 		ctx.font = this.weight + " " + this.size + "px " + this.font;
 
 		// zalamování textu
-		if(options.width){
-			this.width = options.width;
+		if(this.text.length < 1){
+			if(options.width){
+				this.width = options.width;
 
-			var pole_slov = this.value.split(" ");
-			var last_slovo = 0;
-			while(last_slovo < pole_slov.length){
-				var pokus_radek = pole_slov[last_slovo];
-				novy_radek = pokus_radek;
-				for(var i = last_slovo+1; i < pole_slov.length; i++){
-					pokus_radek += " " + pole_slov[i];
-					if(ctx.measureText(pokus_radek).width > this.width){
-						break;
-					}
+				var pole_slov = this.value.split(" ");
+				var last_slovo = 0;
+				while(last_slovo < pole_slov.length){
+					var pokus_radek = pole_slov[last_slovo];
 					novy_radek = pokus_radek;
+					for(var i = last_slovo+1; i < pole_slov.length; i++){
+						pokus_radek += " " + pole_slov[i];
+						if(ctx.measureText(pokus_radek).width > this.width){
+							break;
+						}
+						novy_radek = pokus_radek;
+					}
+					last_slovo = i;
+					this.text.push(novy_radek);
 				}
-				last_slovo = i;
-				this.text.push(novy_radek);
+			}
+			else {
+				this.width = ctx.measureText(this.value).width;
+				this.text.push(this.value);
 			}
 		}
 		else {
-			this.width = ctx.measureText(this.value).width;
-			this.text.push(this.value);
+			if(options.width){
+				this.width = options.width;
+			}
+			else {
+				this.width = ctx.measureText(this.text[0]).width;
+			}
 		}
 		// var m_size = this.size;
 		
@@ -164,9 +193,25 @@ function GUI(){
 		}
 	}
 	Text.prototype = new GUIObject();
+	Text.prototype.changeText = function(text) {
+		this.value = text;
+		this.text = [];
+
+		this.text.push(this.value);
+	};
 	Text.prototype.render = function(ctx) {
+		if(!this.visible)
+			return
 		ctx.font = this.weight + " " + this.size + "px " + this.font;
-		ctx.fillStyle = this.color;
+
+		if(this.blink){
+			if(game.ticks % 10 > 0 && game.ticks % 10 < 5) 
+				ctx.fillStyle = this.color;
+			else
+				ctx.fillStyle = this.blink;
+		}
+		else
+			ctx.fillStyle = this.color;
 
 		var spacing = 0;
 		for(var i = 0; i < this.text.length; i++){
@@ -211,6 +256,7 @@ function GUI(){
 	}
 	Texture.prototype = new GUIObject();
 	Texture.prototype.render = function(ctx){
+		ctx.save();
 		ctx.globalAlpha = this.opacity;
 		if(this.repeat){
 			if(this.scale !== 1){
@@ -226,7 +272,7 @@ function GUI(){
 		else {
 			this.image.draw(ctx, this.x, this.y, this.width, this.height);
 		}
-		ctx.globalAlpha = 1;
+		ctx.restore();
 	}
 	
 	this.guis = {
@@ -291,6 +337,182 @@ function GUI(){
 				_this.addControls();
 			}
 		},
+		mortal_combat: {
+			objects: function(){
+				var healthbarPlayer = new Button( game.width/2 + 30, 10, {
+					width: 300,
+					height: 10
+				} );
+				healthbarPlayer.add( new Button(0,0,{
+					width: 100,
+					height: 10,
+					color: "#0F0"
+				}), "hp" )
+
+				healthbarPlayer.set = function(perc){
+					perc = perc > 0 ? perc : 0;
+
+					this.links.hp.width = perc*300;
+
+					if(perc < 0.5)
+						this.links.hp.color = "#FADE25";
+
+					if(perc < 0.2)
+						this.links.hp.color = "#E01414";
+				}
+				healthbarPlayer.set(1);
+
+				_this.add(healthbarPlayer, "hp_player");
+
+				var healthbarEnemy = new Button( game.width/2 - 30 - 300, 10, {
+					width: 300,
+					height: 10
+				} );
+				healthbarEnemy.add( new Button(0,0,{
+					width: 100,
+					height: 10,
+					color: "#0F0"
+				}), "hp" );
+
+				healthbarEnemy.set = function(perc){
+					perc = perc > 0 ? perc : 0;
+
+					this.links.hp.width = perc*300;
+					this.links.hp.x = this.width - this.links.hp.width;
+
+					if(perc < 0.5)
+						this.links.hp.color = "#FADE25";
+
+					if(perc < 0.2)
+						this.links.hp.color = "#E01414";
+				}
+				healthbarEnemy.set(1);
+
+				_this.add(healthbarEnemy, "hp_enemy");
+
+
+				var nameGod = new Text( {
+					x: 10, 
+					y: 30,
+					value: "GOD",
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 50,
+				} );
+
+				_this.add(nameGod);
+
+				var nameDar = new Text( {
+					x: 0, 
+					y: 30,
+					width: game.width-10,
+					value: "DARWIN",
+					color: "#000",
+					font: "CarbonTypeRegular",
+					align: "right",
+					size: 50,
+				} );
+
+				_this.add(nameDar);
+
+				var finish_him = new Text( {
+					y: game.height/2-50,
+					width: game.width-10,
+					value: "FINISH HIM",
+					color: "#000",
+					font: "akashiregular",
+					visible: false,
+					align: "center",
+					blink: "#F00",
+					size: 130,
+				} );
+
+				_this.add(finish_him, "finish_him");
+
+				var xicht = new Button( game.width/2 - 75*2,20, {
+					width: 75*4,
+					height:95*4,
+					visible: false,
+				} );
+				xicht.tick = function(){
+					this.ticks += 1;
+					this.y += Math.sin(this.ticks/20)/5;
+				}
+				_this.add(xicht, "xicht");
+
+				var xichtTex = new Texture( game.textures.get("god") );
+				xichtTex.width = 75*4;
+				xichtTex.height = 95*4;
+				xichtTex.image.alpha = 0;
+				console.log(xichtTex)
+
+				xicht.add(xichtTex, "xicht");
+
+				var subs = new Text( {
+					y: game.height-60,
+					width: game.width,
+					value: " ",
+					color: "#FFF",
+					font: "akashiregular",
+					visible: false,
+					align: "center",
+					size: 20,
+				} );
+
+				_this.add(subs, "subtitles");
+
+				var tut = new Text( {
+					y: 20,
+					// x: game.width - 150,
+					width: game.width,
+					text: ["Use A to cover yourself and S, D to fight!","Move using your arrow keys!"],
+					color: "#F00",
+					font: "akashiregular",
+					visible: false,
+					align: "center",
+					size: 20,
+				} );
+
+				_this.add(tut, "tutorial");
+			},
+			controls: function(){
+				game.eventhandler.resetControls();
+
+				_this.addControls();
+
+				game.eventhandler.addKeyboardControl(" ", function(){
+					game.links.god.jump( new Vector2(0, -10) );
+				})
+				// left
+				game.eventhandler.addKeyboardControl(39, function(){
+					game.links.god.go( new Vector2(3, 0) );
+				}, function(){
+					game.links.god.stop();
+				});
+				// right
+				game.eventhandler.addKeyboardControl(37, function(){
+					game.links.god.go( new Vector2(-3, 0) );
+				}, function(){
+					game.links.god.stop();
+				});
+				game.eventhandler.addKeyboardControl("A", function(){
+					game.links.god.cover();
+				}, function(){
+					game.links.god.uncover();
+				});
+				game.eventhandler.addKeyboardControl("S", function(){
+					game.links.god.attack("kick");
+				});
+				game.eventhandler.addKeyboardControl("D", function(){
+					game.links.god.attack("punch");
+				});
+				// game.eventhandler.addKeyboardControl("A", undefined, undefined, left)
+
+				// game.eventhandler.addKeyboardControl(39, undefined, undefined, right)
+				// game.eventhandler.addKeyboardControl("D", undefined, undefined, right)
+
+			}
+		},
 		in_game: {
 			objects: function(){
 				var mapLeft = new Button(0, 0, {
@@ -312,6 +534,25 @@ function GUI(){
 					}
 				})
 				_this.add(mapRight);
+
+				var enterMortality = new Button(game.width/2 - 130, 10, {
+					width: 260,
+					height: 30,
+					onMouseUp: function(){
+						game.loadLevel("mortal_combat");
+					}
+				});
+				enterMortality.add( new Text({
+					width: 260,
+					y: 3,
+					color: "#F00",
+					font: "Arial",
+					size: 20,
+					value: "ENTER THE BRUTALITY",
+					align: "center",
+				}) );
+				_this.add(enterMortality);
+
 
 				var layout = new Button(game.width/2 - 250, game.height - 200, {
 					width: 500,

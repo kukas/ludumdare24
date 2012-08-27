@@ -17,6 +17,8 @@ function Object2D( options ){
 	this.children = [];
 	this.links = {};
 
+	this.ticks = 0;
+
 	this.ghostAlpha = 0.5;
 
 	this.selected = false;

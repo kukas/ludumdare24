@@ -10,7 +10,12 @@ function Level(){
 		skeleton: this.texturepath + "v_hline/skeleton.png",
 		//background
 		nebesa: this.texturepath + "nebesa.png",
-		mraky: this.texturepath + "mraky.png",
+		//mraky
+		cloud1: this.texturepath + "clouds/mrak1.png",
+		cloud2: this.texturepath + "clouds/mrak2.png",
+		cloud3: this.texturepath + "clouds/mrak3.png",
+		cloud4: this.texturepath + "clouds/mrak4.png",
+		cloud5: this.texturepath + "clouds/mrak5.png",
 
 		bionuke: this.texturepath + "bionuke.png",
 
@@ -19,6 +24,8 @@ function Level(){
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
 		chapel3: this.texturepath + "cathedral.png",
+
+		dino: this.texturepath + "dino.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -89,35 +96,42 @@ Level.prototype.afterLoad = function (){
 	// slunce.rendering = false;
 	this.add( slunce, "slunce" );
 
-	// var mraky = new Background({
-	// 	position: new Vector2(480,480),
-	// 	width: 960,
-	// 	height: 960,
-	// 	texture: game.textures.get("mraky")
-	// });
-	// mraky.tick = function(){
-	// 	this.rotation += 0.01;
-	// }
-	// this.add( mraky );
+	for(var i=0;i<10;i++){
+		var mrak = new Background({
+			position: new Vector2(Math.random()*game.playground.width,Math.random()*game.height/3),
+			// position: new Vector2(10,10),
+			width: 96,
+			height: 50,
+			zIndex: -2,
+			texture: game.textures.get("cloud"+Math.floor(1+Math.random()*5))
+		});
+		mrak.speed = Math.random()*0.5
+		mrak.tick = function(){
+			if(this.position.x > game.playground.width + this.width/2)
+				this.position.x = -48 - Math.random()*game.playground.width
+			this.position.x += this.speed;
+		}
+		this.add( mrak );
+	}
 
-	/*var nuke = new Background({
-		position: new Vector2(480,170),
-		width: 53*3,
-		height: 64*3,
-		zIndex: -3,
-		texture: game.textures.get("bionuke", {
-			totalFrames: 12,
-			currentAnimation: "explosion",
-			animations:{
-				explosion: {
-					start: 0,
-					end: 12,
-					speed: 7
-				}
-			}
-		})
-	});
-	this.add( nuke );*/
+	// var nuke = new Background({
+	// 	position: new Vector2(480,170),
+	// 	width: 53*3,
+	// 	height: 64*3,
+	// 	zIndex: -3,
+	// 	texture: game.textures.get("bionuke", {
+	// 		totalFrames: 12,
+	// 		currentAnimation: "explosion",
+	// 		animations:{
+	// 			explosion: {
+	// 				start: 0,
+	// 				end: 12,
+	// 				speed: 7
+	// 			}
+	// 		}
+	// 	})
+	// });
+	// this.add( nuke );
 
 	var terrain = new Terrain({
 		width: game.playground.width, 
@@ -129,7 +143,7 @@ Level.prototype.afterLoad = function (){
 	this.add( terrain, "terrain" );
 	
 	var building = new Chapel({
-		position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
+		position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2+30),
 		owner: "player",
 	});
 	this.add(building);
