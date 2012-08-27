@@ -20,6 +20,7 @@ function Chapel( options ){
 	this.actions = [
 		{
 			name:"Missionary",
+			icon: "b_misionar",
 			description:{
 				fullName: "Missionary",
 				gold: 10,
@@ -30,16 +31,19 @@ function Chapel( options ){
 		},
 		{
 			name : "Priest",
+			icon: "b_knez",
 			description : "Recrutes priest",
 			exec : function (){_this.tryProduce(Priest,30);}
 		},
 		{
 			name : "Nun",
+			icon: "b_jeptiska",
 			description : "Recrutes Nun",
 			exec : function (){_this.tryProduce(Nun,50);}
 		},
 		{
 			name : "Crusader",
+			icon: "b_krizak",
 			description : "Recrutes crusader",
 			exec : function (){_this.tryProduce(Crusader,100);}
 		},

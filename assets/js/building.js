@@ -42,7 +42,8 @@ Building.prototype.dealDamage = function (dmg, murderer){
 
 Building.prototype.die = function( murderer ) {
 	// console.log(murderer)
-	murderer.unfreeze();
+	if(murderer instanceof Unit)
+		murderer.unfreeze();
 	if(this.health <= 0){
 		this.onDie !== undefined ? this.onDie() : false;
 		game.remove(this);

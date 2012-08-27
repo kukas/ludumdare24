@@ -39,6 +39,21 @@ function Unit(options){
 }
 Unit.prototype = new FieldObject();
 
+Unit.prototype.stop = function() {
+	var c = game.findCollisions(_this);
+	if( c.length < 1 ){
+		_this.shouldBeSpeed = 0;
+	}
+};
+
+Unit.prototype.forward = function() {
+	_this.shouldBeSpeed = _this.speed;
+};
+Unit.prototype.backward = function() {
+	_this.shouldBeSpeed = -_this.speed;
+};
+
+
 Unit.prototype.onCollision = function(obj) {
 	if(obj.ghost)
 		return;
@@ -60,9 +75,9 @@ Unit.prototype.onCollision = function(obj) {
 			this.shouldBeSpeed = -this.speed;
 			obj.shouldBeSpeed = -this.speed;
 			if(this.ujdi < 1)
-				this.ujdi = Math.ceil( (this.width+(obj.width/obj.speed)*this.speed )/2/this.speed + Math.random() + 2);
+				this.ujdi = Math.ceil( (this.width+(obj.width/obj.speed)*this.speed )/3/this.speed + Math.random() + 2);
 			if(obj.ujdi < 1)
-				obj.ujdi = Math.ceil( (obj.width+(this.width/this.speed)*obj.speed )/2/obj.speed + Math.random() + 2);
+				obj.ujdi = Math.ceil( (obj.width+(this.width/this.speed)*obj.speed )/3/obj.speed + Math.random() + 2);
 			return
 		}
 		this.freeze();

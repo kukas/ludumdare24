@@ -58,6 +58,56 @@ function Level(){
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
 		button_off: this.texturepath + "button_off.jpg",
+
+		layout: this.texturepath + "menu/background.png",
+		layout_bg: this.texturepath + "menu/white_bg.png",
+		// buttons
+		b_stop: this.texturepath + "menu/stop.png",
+		b_backward: this.texturepath + "menu/back.png",
+		b_forward: this.texturepath + "menu/front.png",
+
+		b_gold: this.texturepath + "menu/money.png",
+		b_knowledge: this.texturepath + "menu/inteligence.png",
+		b_faith: this.texturepath + "menu/faith.png",
+
+		b_laboratory: this.texturepath + "menu/laboratory.png",
+		b_gaybar: this.texturepath + "menu/geybar.png",
+		b_portal: this.texturepath + "menu/devilgate.png",
+		b_museum: this.texturepath + "menu/muzeum.png",
+		b_galapags: this.texturepath + "menu/galapagy.png",
+		b_machinegun: this.texturepath + "menu/kulomet.png",
+		b_book: this.texturepath + "menu/book.png",
+
+		b_holyfire: this.texturepath + "menu/hellfire.png",
+		b_crossscorpion: this.texturepath + "menu/crossscorpion.png",
+		b_bonfire: this.texturepath + "menu/bonfire.png",
+		b_picture: this.texturepath + "menu/baroquepicture.png",
+		b_confessor: this.texturepath + "menu/confessor.png",
+		b_altar: this.texturepath + "menu/altar.png",
+		b_slum: this.texturepath + "menu/slum.png",
+		b_golgota: this.texturepath + "menu/golgota.png",
+		// unit icons
+		b_andelicek: this.texturepath + "unit_icons/andelicek.png",
+		b_biskup: this.texturepath + "unit_icons/biskup.png",
+		b_jezis: this.texturepath + "unit_icons/jezis.png",
+		b_krizak: this.texturepath + "unit_icons/krizak.png",
+		b_prorok: this.texturepath + "unit_icons/prorok.png",
+		b_andel: this.texturepath + "unit_icons/andel.png",
+		b_jeptiska: this.texturepath + "unit_icons/jeptiska.png",
+		b_knez: this.texturepath + "unit_icons/knez.png",
+		b_misionar: this.texturepath + "unit_icons/misionar.png",
+		b_tereza: this.texturepath + "unit_icons/tereza.png",
+
+		b_biolog: this.texturepath + "unit_icons2/biolog.png",
+		b_dino: this.texturepath + "unit_icons2/dino.png",
+		b_gorila: this.texturepath + "unit_icons2/gorila.png",
+		b_knihovnice: this.texturepath + "unit_icons2/knihovnice.png",
+		b_ucitel: this.texturepath + "unit_icons2/ucitel.png",
+		b_dabel: this.texturepath + "unit_icons2/dabel.png",
+		b_gay: this.texturepath + "unit_icons2/gay.png",
+		b_heretic: this.texturepath + "unit_icons2/heretic.png",
+		b_profesor: this.texturepath + "unit_icons2/profesor.png",
+		b_wallace: this.texturepath + "unit_icons2/wallace.png",
 		//Particles
 		basicParticle : this.texturepath + "basicparticle.png",
 		crossParticle : this.texturepath + "cross.png",
@@ -67,10 +117,6 @@ function Level(){
 		crossScorpioParticle : this.texturepath + "kriz.png",
 		fireball : this.texturepath + "koule.png",
 		sancWater : this.texturepath + "sancwater.png",
-		//Zdroje
-		gold : this.texturepath + "gold.png",
-		faith : this.texturepath + "faith.png",
-		knowledge : this.texturepath + "knowledge.png",
 	};
 	this.sounds_src = {
 		gorilla : this.soundpath+"zvuky/opice.wav",
@@ -100,6 +146,237 @@ Level.prototype = new Levels();
 Level.prototype.afterLoad = function (){
 	var _this = this;
 
+	game.buildingCreationist = [
+		{ // UPDATE
+			icon: "b_holyfire",
+			description: {
+				fullName: "Holy flamev",
+				spec: 10,
+				description: "When someone unclean would step on mark of holy fire, he will be destroyed by a holy nuke. Simple.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bookmine)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{
+			icon: "b_crossscorpion",
+			description: {
+				fullName: "Cross Scorpion",
+				spec: 10,
+				description: "It throws huge crosses. Yep. All unbelievers will know the pain if you will build this turret.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(CrossScorpio)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{
+			icon: "b_bonfire",
+			description: {
+				fullName: "Bonfire",
+				spec: 10,
+				description: "With this “building” you can slow enemies movement.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bonfire)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{
+			icon: "b_picture",
+			description: {
+				fullName: "Baroque paint",
+				spec: 10,
+				description: "This magical paint is guarded by two golden cherubs. With the power of faith they can come to life and explode in enemies lines.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Painting)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ // UPDATE
+			icon: "b_confessor",
+			description: {
+				fullName: "Confessory",
+				spec: 10,
+				description: "This is where bishops and prophets are trained. Their training is hard, but at the end you have powerful units.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bonfire)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ // UPDATE
+			icon: "b_altar",
+			description: {
+				fullName: "Altar",
+				spec: 10,
+				description: "On the holy altar the angels are summoned. From the very haven they came to defend all faithful.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Painting)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ // UPDATE
+			icon: "b_slum",
+			description: {
+				fullName: "Slum",
+				spec: 10,
+				description: "Mother Teresa works here. Here she makes hers bullets, prepare to battles and stuff.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Painting)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ // UPDATE
+			icon: "b_golgota",
+			description: {
+				fullName: "Golgota",
+				spec: 10,
+				description: "This is place where Jesus died and also place where his cross stayed. Now he came back. With cross. And it is super effective against all sinners.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Painting)){
+					console.log("not enough resources");
+				}
+			}
+		},
+	];
+	
+
+	game.buildingAtheists = [
+		{ 
+			icon: "b_book",
+			description: {
+				fullName: "Explosive book",
+				spec: 10,
+				description: "Classic explosive mine.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bookmine)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_machinegun",
+			description: {
+				fullName: "Machinegun",
+				spec: 10,
+				description: "Classic defensive turret.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bookmine)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_dino",
+			description: {
+				fullName: "Dino bones",
+				spec: 10,
+				description: "Use it to block your enemies. Than you can shoot at them, while they are trying to prove this is actually dragon, not the dino.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bookmine)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_laboratory",
+			description: {
+				fullName: "Laboratory",
+				spec: 10,
+				description: "If you are going to need some explosive and poisoned stuff, use this building.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Laboratory)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_gaybar",
+			description: {
+				fullName: "Gay bar",
+				spec: 10,
+				description: "Wohoo! Here you can have lot of fun. And of course, this is the place where you can find almost best warriors in your realm, gays and heretics.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Gaybar)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_portal",
+			description: {
+				fullName: "Portal",
+				spec: 10,
+				description: "Muhuhuha! Unholy powers have come to your help! From this wound in reality marches legions of daemons!",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Bookmine)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_museum",
+			description: {
+				fullName: "Museum",
+				spec: 10,
+				description: "This mighty building can show the world the most fearsome creature that ever was! T-REX! All should be terrified by his wrath!",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Museum)){
+					console.log("not enough resources");
+				}
+			}
+		},
+		{ 
+			icon: "b_galapags",
+			description: {
+				fullName: "Galapagos islands",
+				spec: 10,
+				description: "Good place to find some real scientist. Like Wallace. A man with flying frogs.",
+				quote: " "
+			},
+			exec: function(){
+				if(!game.links.base.build(Galapags)){
+					console.log("not enough resources");
+				}
+			}
+		},
+	];
+
 	game.gui.switchGUI("in_game");
 
 	var slunce = new Background({
@@ -111,6 +388,7 @@ Level.prototype.afterLoad = function (){
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
+		this.rotation += 0.01;
 		var sinus = Math.sin(this.rotation/2);
 		var sinus3 = sinus*sinus*sinus;
 		game.clearColor.r = 100 + (1-Math.abs( sinus3 ))*89;
@@ -119,8 +397,8 @@ Level.prototype.afterLoad = function (){
 		game.night.alpha = Math.abs(sinus3 *0.7)+0.01;
 	}
 	slunce.relative = true;
-	// slunce.rendering = false;
 	this.add( slunce, "slunce" );
+	console.log(this.links);
 
 	for(var i=0;i<10;i++){
 		var mrak = new Background({
@@ -139,25 +417,6 @@ Level.prototype.afterLoad = function (){
 		}
 		this.add( mrak );
 	}
-
-	// var nuke = new Background({
-	// 	position: new Vector2(480,170),
-	// 	width: 53*3,
-	// 	height: 64*3,
-	// 	zIndex: -3,
-	// 	texture: game.textures.get("bionuke", {
-	// 		totalFrames: 12,
-	// 		currentAnimation: "explosion",
-	// 		animations:{
-	// 			explosion: {
-	// 				start: 0,
-	// 				end: 12,
-	// 				speed: 7
-	// 			}
-	// 		}
-	// 	})
-	// });
-	// this.add( nuke );
 
 	var terrain = new Terrain({
 		width: game.playground.width, 

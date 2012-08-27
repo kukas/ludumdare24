@@ -103,6 +103,10 @@ function GUI(){
 		this.color = options.color === undefined ? "#000" : options.color;
 		this.visible = options.visible === undefined ? true : options.visible;
 
+		if(options.texture){
+			this.add(options.texture);
+		}
+
 		this.onMouseDown = options.onMouseDown;
 		this.onMouseUp = options.onMouseUp;
 		this.onMouseIn = options.onMouseIn;
@@ -125,7 +129,7 @@ function GUI(){
 		this.x = options.x === undefined ? 0 : options.x;
 		this.y = options.y === undefined ? 0 : options.y;
 
-		this.value = options.value;
+		this.value = options.value === undefined ? " " : options.value;
 		this.text = options.text === undefined ? [] : options.text;
 		this.color = options.color === undefined ? "#FFF" : options.color;
 		this.blink = options.blink === undefined ? false : options.blink;
@@ -198,7 +202,24 @@ function GUI(){
 		this.value = text;
 		this.text = [];
 
-		this.text.push(this.value);
+		var ctx = document.createElement("canvas").getContext("2d");
+		ctx.font = this.style + " " + this.weight + " " + this.size + "px " + this.font;
+
+		var pole_slov = this.value.split(" ");
+		var last_slovo = 0;
+		while(last_slovo < pole_slov.length){
+			var pokus_radek = pole_slov[last_slovo];
+			novy_radek = pokus_radek;
+			for(var i = last_slovo+1; i < pole_slov.length; i++){
+				pokus_radek += " " + pole_slov[i];
+				if(ctx.measureText(pokus_radek).width > this.width){
+					break;
+				}
+				novy_radek = pokus_radek;
+			}
+			last_slovo = i;
+			this.text.push(novy_radek);
+		}
 	};
 	Text.prototype.render = function(ctx) {
 		if(!this.visible)
@@ -246,19 +267,16 @@ function GUI(){
 
 		this.x = options.x === undefined ? 0 : options.x;
 		this.y = options.y === undefined ? 0 : options.y;
-		this.width = options.width === undefined ? 0 : options.width;
-		this.height = options.height === undefined ? 0 : options.height;
+		this.width = options.width === undefined ? image.width : options.width;
+		this.height = options.height === undefined ? image.height : options.height;
 
 		this.image = image;
 		this.repeat = options.repeat === undefined ? false : options.repeat;
 
 		this.scale = options.scale === undefined ? 1 : options.scale;
-		this.opacity = options.opacity === undefined ? 1 : options.opacity;
 	}
 	Texture.prototype = new GUIObject();
 	Texture.prototype.render = function(ctx){
-		ctx.save();
-		ctx.globalAlpha = this.opacity;
 		if(this.repeat){
 			if(this.scale !== 1){
 				ctx.save();
@@ -273,7 +291,6 @@ function GUI(){
 		else {
 			this.image.draw(ctx, this.x, this.y, this.width, this.height);
 		}
-		ctx.restore();
 	}
 	
 	this.guis = {
@@ -600,508 +617,267 @@ function GUI(){
 				}) );
 				_this.add(enterMortality);
 
-				var layout = new Button(game.width/2 - 250, game.height - 200, {
-					width: 500,
-					height: 200,
+				// LAYOUT --------------------------
+				var layout = new Button( game.width/2 - 673/2, game.height - 100, {
+					width: 673,
+					height: 63,
 					visible: false
-				});
-				// layout.add( new Text({value:"ASDF"}) );
+				} )
+				layout.add(new Texture(game.textures.get("layout_bg"),{x:-143}))
+				layout.add(new Texture(game.textures.get("layout")))
 				_this.add(layout, "layout");
+				// OVLÁDACÍ TLAČÍTKA --------------------------
+				var forward = new Button( 102, 63/2 - 41/2, {
+					width: 41,
+					height: 41,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseDown: function(){
+						for(var i in game.selected){
+							if(game.selected[i] instanceof Unit){
+								game.selected[i].forward();
+							}
+						}
+					},
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} )
+				forward.add(new Texture(game.textures.get("b_forward"),{x:41/2-20/2}))
+				layout.add(forward, "forward");
 
-				var hoverText = new Button(game.width - 400, game.height - 141, {
-					width: 380,
-					height: 131,
-					visible: true
+				var stop = new Button( 61, 63/2 - 41/2, {
+					width: 41,
+					height: 41,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseDown: function(){
+						for(var i in game.selected){
+							if(game.selected[i] instanceof Unit){
+								game.selected[i].stop();
+							}
+						}
+					},
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} )
+				stop.add(new Texture(game.textures.get("b_stop"),{y:41/2-28/2,x:41/2-28/2}))
+				layout.add(stop, "stop");
+
+				var backward = new Button( 20, 63/2 - 41/2, {
+					width: 41,
+					height: 41,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseDown: function(){
+						for(var i in game.selected){
+							if(game.selected[i] instanceof Unit){
+								game.selected[i].backward();
+							}
+						}
+					},
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} )
+				backward.add(new Texture(game.textures.get("b_backward"),{x:41/2-28/2}))
+				layout.add(backward, "backward");
+
+				// RESOURCES --------------------------
+				var gold = new Button( 160, 5, {
+					width: 100,
+					height: 25,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} )
+				gold.add(new Texture(game.textures.get("b_gold")));
+				gold.add(new Text({
+					x: 27,
+					value:"1000",
+					size:20
+				}), "text")
+				layout.add(gold, "gold");
+
+				var spec = new Button( 160, 34, {
+					width: 100,
+					height: 25,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} );
+				spec.add(new Texture(game.textures.get("b_faith"),{height:25, width:18}))
+				spec.add(new Text({
+					x: 27,
+					value:"1000",
+					size:20
+				}), "text")
+				layout.add(spec, "spec");
+				// actions -------------------------------
+				var actions = new Button( 270, 6, {
+					width: 370,
+					height: 50,
+					visible: false,
+					color: "rgba(255,255,255,0.2)",
+					onMouseIn: function(){
+						this.visible = true;
+					},
+					onMouseOut: function(){
+						this.visible = false;
+					}
+				} )
+				layout.add(actions, "actions");
+
+				var hoverText = new Button(0,-100, {
+					width: 673,
+					height: 100,
+					visible: false,
+					color: "rgba(255,255,255,0.8)"
 				});
 				var name = new Text({
 					y: 0,
-					width: 380,
+					width: 673,
 					value: " ",
 					font: "Arial",
+					color: "#000",
 					size: 18,
 				});
 				hoverText.add(name, "name");
 
 				var price = new Text({
-					y: 20,
-					width: 380,
+					y: 0,
+					x: 200,
+					width: 673,
 					value: " ",
 					font: "Arial",
+					color: "#000",
 					size: 18,
 				});
 				hoverText.add(price, "price");
 
 				var description = new Text({
 					y: 40,
-					width: 380,
+					width: 673,
 					value: " ",
 					font: "Arial",
+					color: "#000",
 					size: 18,
 				});
 				hoverText.add(description, "description");
 
 				var quote = new Text({
 					y: 80,
-					width: 380,
+					width: 673,
 					value: " ",
 					font: "Arial",
+					color: "#000",
 					style: "italic",
 					size: 18,
 				});
 				hoverText.add(quote, "quote");
 
 				hoverText.change = function(desc){
+					this.visible = true;
 					this.links.name.changeText(desc.fullName);
+					var price = "price: "
+					var specName = game.players.player.side == "atheist" ? "knowledge" : "faith";
 					if(desc.gold)
-						this.links.price.changeText(desc.gold);
+						this.links.price.changeText(price + desc.gold + " gold");
 					else if(desc.spec)
-						this.links.price.changeText(desc.spec);
+						this.links.price.changeText(price + desc.spec + " " + specName);
 					this.links.description.changeText(desc.description);
 					this.links.quote.changeText(desc.quote);
 				}
-				_this.add(hoverText, "hoverText");
-
-				var unitControl = new Button(10, 10, {
-					width: 1,
-					height: 1,
-					visible: false,
-				});
-				layout.add( unitControl, "unitControl" );
-				
-				var Gold = new Button (5,0,{
-					width : 100,
-					height : 20,
-					visible : false,
-				});
-				
-				Gold.add(new Text({
-					x:22,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 20,
-					value: game.players.player.resources.gold,
-					align: "center",
-				}), "goldtext");
-				
-				var goldtexture = new Texture(game.textures.get("gold"));
-				goldtexture.width = 20;
-				goldtexture.height = 20;
-				Gold.add(goldtexture);
-				
-				var Spec = new Button(5,30,{
-					width : 100,
-					height : 20,
-					visible : false,
-				});
-				
-				var specId = game.players.player.side == "creationist" ? "faith" : "knowledge";
-				
-				var spectexture = new Texture(game.textures.get(specId));
-				spectexture.width = 20;
-				spectexture.height = 20;
-				Spec.add(spectexture);
-				
-				Spec.add(new Text({
-					x:22,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 20,
-					value: game.players.player.resources.spec,
-					align: "center",
-				}),"spectext");
-				
-				var Res = new Button(50,300,{
-					width : 100,
-					height : 55,
-					visible : false,
-				});
-				
-				var restexture = new Texture(game.textures.get("button2"));
-				restexture.width = Res.width;
-				restexture.height = Res.height;
-				Res.add(restexture);
-				
-				Res.add(Spec, "spec");
-				Res.add(Gold, "gold");
-				_this.add(Res, "resources")
-				
-				var BuildMenu = new Button(40,360,{
-					width:130,
-					height:50,
-					visible:false,
-				});
-				
-				function MakeTextures(){
-					for(var i = 0; i < 4;i++){
-						var buttonTexture = new Texture(game.textures.get("button"));
-						buttonTexture.width = BuildMenu.children[i].width;
-						buttonTexture.height = BuildMenu.children[i].height;
-						BuildMenu.children[i].add(buttonTexture);
-					};
-					for(var j = 4; j < BuildMenu.children.length;j++){
-						var buttonTexture = new Texture(game.textures.get("button_off"));
-						buttonTexture.width = 120;
-						buttonTexture.height = 40;
-						BuildMenu.children[j].add(buttonTexture);
-					};
-				};
+				hoverText.hide = function(){
+					this.visible = false;
+					this.links.name.changeText(" ");
+					this.links.price.changeText(" ");
+					this.links.description.changeText(" ");
+					this.links.quote.changeText(" ");
+				}
+				layout.add(hoverText, "hoverText");
+				var spacing = 49;
 				if(game.players.player.side == "creationist"){
-					var holyfire = new Button(270,0,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Bookmine)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(holyfire);
-					
-					var Samostril = new Button(270,45,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(CrossScorpio)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(Samostril);
-					
-					var Hranice = new Button(270,90,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(Hranice);
-					
-					var painting = new Button(10,0,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Painting)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(painting);
-					
-					var confessory = new Button(10,45,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(confessory);
-					
-					var altar = new Button(10,90,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(altar);
-					
-					var slum = new Button(140,0,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(slum);
-					
-					var golgota = new Button(140,45,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(golgota);
-					
-					MakeTextures();
-					
-					holyfire.add(new Text({
-					x:15,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Holy fire mine!",
-					align: "center",
-					}));
-					
-					Samostril.add(new Text({
-					x:15,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Cross Scorpio!",
-					align: "center",
-					}));
-					
-					Hranice.add(new Text({
-					x:40,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build bonfire!",
-					align: "center",
-					}));
-					
-					painting.add(new Text({
-					x:7,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Painting!",
-					align: "center",
-					}));
-					
-					confessory.add(new Text({
-					x:-3.5,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build confessory!",
-					align: "center",
-					}));
-					
-					altar.add(new Text({
-					x:15,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Altar!",
-					align: "center",
-					}));
-					
-					slum.add(new Text({
-					x:20,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build slum!",
-					align: "center",
-					}));
-					
-					golgota.add(new Text({
-					x:10,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Golgota!",
-					align: "center",
-					}));
-					
+					_this.guis.in_game.updateActions(game.buildingCreationist);
 				}
 				else{
-					var book = new Button(270,0,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Bookmine)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(book);
-					
-					var machinegun = new Button(270,45,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(machinegun);
-					
-					var bookpile = new Button(270,90,{
-					width:190,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(bookpile);
-					
-					var laboratory = new Button(10,0,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Laboratory)){console.log("not enough resources");};},
-					});
-					BuildMenu.add(laboratory);
-					
-					var gaybar = new Button(10,45,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(GayBay)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(gaybar);
-					
-					var portal = new Button(10,90,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(portal);
-					
-					var museum = new Button(140,0,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Museum)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(museum);
-					
-					var galapags = new Button(140,45,{
-					width:120,
-					height:40,
-					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
-					});
-					BuildMenu.add(galapags);
-					
-					MakeTextures();
-					
-					book.add(new Text({
-					x:17,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Explosive book!",
-					align: "center",
-					}));
-					
-					machinegun.add(new Text({
-					x:7,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build build machine gun!",
-					align: "center",
-					}));
-					
-					bookpile.add(new Text({
-					x:25,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Pile of books!",
-					align: "center",
-					}));
-					
-					laboratory.add(new Text({
-					x:0,
-					y:10,
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build laboratory!",
-					align: "center",
-					}));
-					
-					gaybar.add(new Text({
-					x:3,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Gay Bay!",
-					align: "center",
-					}));
-					
-					portal.add(new Text({
-					x:12,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build portal!",
-					align: "center",
-					}));
-					
-					museum.add(new Text({
-					x:5,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build museum!",
-					align: "center",
-					}));
-					
-					galapags.add(new Text({
-					x:3,
-					y:10,
-					color: "#FFF",
-					font: "PlainBlackNormal",
-					size: 18,
-					value: "Build Galapags!",
-					align: "center",
-					}));
+					_this.guis.in_game.updateActions(game.buildingAtheists);
 				}
-				BuildMenu.enableTier = function (n){
-					if(n < 3){
-						this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
-						this.children[n+3].children[0].width = 120;
-						this.children[n+3].children[0].height = 40;
+				// BuildMenu.enableTier = function (n){
+				// 	if(n < 3){
+				// 		this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
+				// 		this.children[n+3].children[0].width = 120;
+				// 		this.children[n+3].children[0].height = 40;
 						
-						this.children[n+3].children[1].color = "#000";
-					}
-					if(n == 3){
-						this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
-						this.children[n+3].children[0].width = 120;
-						this.children[n+3].children[0].height = 40;
+				// 		this.children[n+3].children[1].color = "#000";
+				// 	}
+				// 	if(n == 3){
+				// 		this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
+				// 		this.children[n+3].children[0].width = 120;
+				// 		this.children[n+3].children[0].height = 40;
 						
-						this.children[n+3].children[1].color = "#000";
+				// 		this.children[n+3].children[1].color = "#000";
 						
-						this.children[n+4].children[0] = new this.onTexture(game.textures.get("button"));
-						this.children[n+4].children[0].width = 120;
-						this.children[n+4].children[0].height = 40;
+				// 		this.children[n+4].children[0] = new this.onTexture(game.textures.get("button"));
+				// 		this.children[n+4].children[0].width = 120;
+				// 		this.children[n+4].children[0].height = 40;
 						
-						this.children[n+4].children[1].color = "#000";
-					}
-				};
-				BuildMenu.onTexture = Texture;
+				// 		this.children[n+4].children[1].color = "#000";
+				// 	}
+				// };
+				// BuildMenu.onTexture = Texture;
 				
-				_this.add(BuildMenu, "BuildMenu");
+				// _this.add(BuildMenu, "BuildMenu");
 			},
-			updateUnitControl: function(t, actions){
-				game.gui.links.layout.links.unitControl.children = [];
+			updateActions: function(actions){
+				game.gui.links.layout.links.actions.children = [];
 
 				for(var i in actions){
-					var button = new Button(i * 130 - 60, -2, {
-						width: 120,
-						height: 40,
+					var spacing = 49;
+					var button = new Button(i*spacing, 1, {
+						width: 47,
+						height: 47,
 						visible: false,
+						color: "rgba(255,255,255,0.6)",
 						onMouseUp: actions[i].exec,
 						onMouseIn: function(){
-							// console.log(this.description);
-							game.gui.links.hoverText.change(this.description);
+							this.visible = true;
+							game.gui.links.layout.links.hoverText.change(this.description);
+						},
+						onMouseOut: function(){
+							game.gui.links.layout.links.hoverText.hide();
+							this.visible = false;
 						},
 					});
 					button.description = actions[i].description;
 					// obrázek
-					var texture = new Texture(game.textures.get("button"));
-					texture.width = 120;
-					texture.height = 40;
+					var texture = new Texture( game.textures.get(actions[i].icon) );
+					texture.x = 47/2 - texture.width/2;
+					texture.y = 47/2 - texture.height/2;
 
 					button.add( texture );
-					// text
-					var text = new Text({
-						y: 4,
-						color: "#000",
-						font: "PlainBlackNormal",
-						size: actions[i].name > 10 ? 26 : 16,
-						value: actions[i].name,
-						align: "center",
-					});
-					text.width = 120;
-					text.height = 40;
 
-					button.add( text );
-
-					_this.links.layout.links.unitControl.add( button );
+					game.gui.links.layout.links.actions.add( button );
 				}
 			},
 			controls: function(){
@@ -1116,7 +892,7 @@ function GUI(){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
 							if(!game.children[i].ghost)
-								_this.guis.in_game.updateUnitControl(game.children[i], game.children[i].actions)
+								_this.guis.in_game.updateActions(game.children[i].actions)
 
 							game.children[i].onSelect()
 						};

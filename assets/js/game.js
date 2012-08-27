@@ -246,7 +246,7 @@ Game.prototype.setPlayer = function (id){
 };
 
 Game.prototype.updateResources = function (){
-	if(game.gui.links.resources){
+	if(game.gui.links.layout){
 		//Inicializace
 		var playerResources = game.players.player.resources;
 		var enemyResources = game.players.enemy.resources;
@@ -263,15 +263,16 @@ Game.prototype.updateResources = function (){
 			enemyResources.spec += Math.round(zlomekE);
 			zlomekE = 0;
 		}
+		game.gui.links.layout.links.gold.links.text.text[0] = playerResources.gold;
+		game.gui.links.layout.links.spec.links.text.text[0] = playerResources.spec;
 		//Aktualizace
-		game.gui.links.resources.links.gold.links.goldtext.text[0] = playerResources.gold;
-		game.gui.links.resources.links.spec.links.spectext.text[0] = playerResources.spec;
+		// game.gui.links.resources.links.gold.links.goldtext.text[0] = playerResources.gold;
+		// game.gui.links.resources.links.spec.links.spectext.text[0] = playerResources.spec;
 	}
 };
 
 Game.prototype.unselectAll = function() {
 	if(game.eventhandler.mouse.projected.y < game.links.terrain.middleHeight+game.links.terrain.elevation){
-		game.gui.links.layout.links.unitControl.children = [];
 		for(var j in game.selected){
 			game.selected[j].selected = false;
 		};

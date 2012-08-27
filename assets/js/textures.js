@@ -76,7 +76,7 @@ Texture.prototype.draw = function(ctx, x, y, width, height) {
 		}
 	}
 	else {
-		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, 0, 0, width, height);
+		ctx.drawImage(this.image, this.clip.x, this.clip.y, this.clip.width, this.clip.height, x, y, width, height);
 	}
 	ctx.restore();
 };
