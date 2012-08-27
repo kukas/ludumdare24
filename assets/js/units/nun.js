@@ -32,6 +32,18 @@ function Nun( options ){
 			}
 		}
 	});
+	
+	this.projectile = game.textures.get("crossParticle",{
+		totalFrames:2,
+		currentAnimation:"being",
+		animations : {
+			being : {
+				start : 0,
+				end : 1,
+				speed : 10,
+			},
+		},
+	});
 
 	if(options.owner == "enemy"){
 		this.texture.flip = "x";

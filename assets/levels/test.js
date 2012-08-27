@@ -170,10 +170,6 @@ Level.prototype.afterLoad = function (){
 
 	var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
 	this.add(miss);
-	var gr = new Missionary({position:new Vector2(1150,terrain.getHeight(1150)),owner:"enemy"});
-	this.add(gr);
-	var gr2 = new Nun({position:new Vector2(1300,terrain.getHeight(1300)),owner:"enemy"});
-	this.add(gr2);
 	
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem");

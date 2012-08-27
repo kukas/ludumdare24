@@ -2,6 +2,7 @@ function FieldObject( options ){
 	Object2D.call(this, options);
 	this.lastdeal = 0;
 	this.boomRange = -1;
+	this.elAngle = Math.PI/4;
 };
 FieldObject.prototype = new Object2D();
 
@@ -51,6 +52,30 @@ FieldObject.prototype.attack = function( obj ) {
 				this.texture.switchAnimation("attack");
 				obj.dealDamage(this.damage, this);
 				this.lastdeal = 0;
+				//Projektil
+				if(this.range > this.width/2){console.log("firing");
+					var _this = this;
+					var difr = this.position.x-obj.position.x;
+					var vlevo = difr < 0 ? 1:-1;
+					game.links.particlesystem.emit(Particle, 1,{
+						position:_this.position,
+						velocity:new Vector2(
+							vlevo*Math.sqrt(2*0.1*Math.abs(difr)/Math.tan(_this.elAngle)),
+							-Math.sqrt(2*0.1*Math.abs(difr)*Math.tan(_this.elAngle))
+						),
+						gravity:new Vector2(0,0.4),
+						life:Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)*15,
+						width:32,height:32,
+						textured : true,
+						texture : _this.projectile === undefined ? game.textures.get("basicParticle") : _this.projectile,
+					},
+					{
+						spin : {
+							min : -0.1,
+							max : 0.1,
+						},
+					});
+				}
 			}
 		}
 	}
