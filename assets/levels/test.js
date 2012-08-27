@@ -42,6 +42,8 @@ function Level(){
 		zpovednice: this.texturepath + "zpovednice.png",
 		golgota: this.texturepath + "golgota.png",
 		altar: this.texturepath + "altar.png",
+		machinegun: this.texturepath + "machinegun.png",
+
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
