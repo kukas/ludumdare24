@@ -799,7 +799,7 @@ function GUI(){
 					width:190,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Bookmine)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(book);
 					
@@ -862,81 +862,81 @@ function GUI(){
 					MakeTextures();
 					
 					book.add(new Text({
-					x:30,
+					x:17,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Explosive book!",
 					align: "center",
 					}));
 					
 					machinegun.add(new Text({
-					x:0,
+					x:7,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
-					value: "Build build primitive machine gun!",
+					size: 18,
+					value: "Build build machine gun!",
 					align: "center",
 					}));
 					
 					bookpile.add(new Text({
-					x:37,
+					x:25,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Pile of books!",
 					align: "center",
 					}));
 					
 					laboratory.add(new Text({
-					x:22,
+					x:0,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build laboratory!",
 					align: "center",
 					}));
 					
 					gaybar.add(new Text({
-					x:22,
+					x:3,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Gay Bay!",
 					align: "center",
 					}));
 					
 					portal.add(new Text({
-					x:0,
+					x:12,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
-					value: "Build demonic portal!",
+					size: 18,
+					value: "Build portal!",
 					align: "center",
 					}));
 					
 					museum.add(new Text({
-					x:22,
+					x:5,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build museum!",
 					align: "center",
 					}));
 					
 					galapags.add(new Text({
-					x:22,
+					x:3,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Galapags!",
 					align: "center",
 					}));

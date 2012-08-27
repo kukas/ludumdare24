@@ -48,15 +48,15 @@ function Game(){
 		
 	this.players = {
 		player : {
-			side:"creationist",
-			color:"#93C6CC",
-			resources:{gold:1000,spec:100},
-			controledGround:100,
-			},
-		enemy : {
 			side:"atheist",
 			color:"#F0271D",
 			resources:{gold:100,spec:100},
+			controledGround:100,
+			},
+		enemy : {
+			side:"creationist",
+			color:"#93C6CC",
+			resources:{gold:1000,spec:100},
 			controledGround:100,
 			},
 		};
