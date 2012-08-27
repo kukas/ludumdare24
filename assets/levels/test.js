@@ -187,13 +187,13 @@ Level.prototype.afterLoad = function (){
 			owner: "enemy",
 		});
 		this.add(building);
-		game.ai.property.push(building);
 	
 		var building2 = new School({
 			position: new Vector2(150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
 			owner: "player",
 		});
 		this.add(building2, "base");
+		game.ai.property.push(building);
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});

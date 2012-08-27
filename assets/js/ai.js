@@ -13,7 +13,6 @@ function AI(){
 			return;
 		},
 		produce: function(){
-			console.log(_this.property)
 			if(_this.property[0])
 				_this.property[0].actions[ Math.floor(_this.property[0].actions.length*Math.random()) ].exec();
 		},
@@ -26,7 +25,6 @@ AI.prototype.tick = function() {
 	this.ticks++;
 	if(this.ticks % this.aiLimit){
 		var action = this.chooseAction();
-		console.log(action)
 	}
 	else {
 		var action = "nothing";
