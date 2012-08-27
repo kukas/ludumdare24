@@ -187,7 +187,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Cross Scorpion",
-				spec: 10,
+				spec: 15,
 				description: "It throws huge crosses. Yep. All unbelievers will know the pain if you will build this turret.",
 				quote: " "
 			},
@@ -202,7 +202,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Bonfire",
-				spec: 10,
+				spec: 20,
 				description: "With this “building” you can slow enemies movement.",
 				quote: " "
 			},
@@ -217,7 +217,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Baroque paint",
-				spec: 10,
+				spec: 50,
 				description: "This magical paint is guarded by two golden cherubs. With the power of faith they can come to life and explode in enemies lines.",
 				quote: " "
 			},
@@ -232,7 +232,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Confessory",
-				spec: 10,
+				spec: 100,
 				description: "This is where bishops and prophets are trained. Their training is hard, but at the end you have powerful units.",
 				quote: " "
 			},
@@ -247,7 +247,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Altar",
-				spec: 10,
+				spec: 100,
 				description: "On the holy altar the angels are summoned. From the very haven they came to defend all faithful.",
 				quote: " "
 			},
@@ -262,7 +262,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Slum",
-				spec: 10,
+				spec: 120,
 				description: "Mother Teresa works here. Here she makes hers bullets, prepare to battles and stuff.",
 				quote: " "
 			},
@@ -277,7 +277,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Golgota",
-				spec: 10,
+				spec: 200,
 				description: "This is place where Jesus died and also place where his cross stayed. Now he came back. With cross. And it is super effective against all sinners.",
 				quote: " "
 			},
@@ -311,7 +311,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Machinegun",
-				spec: 10,
+				spec: 15,
 				description: "Classic defensive turret.",
 				quote: " "
 			},
@@ -326,7 +326,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Dino bones",
-				spec: 10,
+				spec: 20,
 				description: "Use it to block your enemies. Than you can shoot at them, while they are trying to prove this is actually dragon, not the dino.",
 				quote: " "
 			},
@@ -341,7 +341,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: true,
 			description: {
 				name: "Laboratory",
-				spec: 10,
+				spec: 50,
 				description: "If you are going to need some explosive and poisoned stuff, use this building.",
 				quote: " "
 			},
@@ -356,7 +356,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Gay bar",
-				spec: 10,
+				spec: 100,
 				description: "Wohoo! Here you can have lot of fun. And of course, this is the place where you can find almost best warriors in your realm, gays and heretics.",
 				quote: " "
 			},
@@ -371,7 +371,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Portal",
-				spec: 10,
+				spec: 100,
 				description: "Muhuhuha! Unholy powers have come to your help! From this wound in reality marches legions of daemons!",
 				quote: " "
 			},
@@ -386,7 +386,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Museum",
-				spec: 10,
+				spec: 200,
 				description: "This mighty building can show the world the most fearsome creature that ever was! T-REX! All should be terrified by his wrath!",
 				quote: " "
 			},
@@ -401,7 +401,7 @@ Level.prototype.afterLoad = function (){
 			canBuild: false,
 			description: {
 				name: "Galapagos islands",
-				spec: 10,
+				spec: 120,
 				description: "Good place to find some real scientist. Like Wallace. A man with flying frogs.",
 				quote: " "
 			},
