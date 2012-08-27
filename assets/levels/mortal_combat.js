@@ -21,6 +21,8 @@ Level.prototype = new Levels();
 Level.prototype.afterLoad = function (){
 	var _this = this;
 
+	game.camera.set(0,0);
+
 	var script = {
 		0: {exec:function(){
 			game.jukebox.play("lets_end_it");

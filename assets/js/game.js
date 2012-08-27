@@ -116,6 +116,10 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
+	if(this.ticks % 33 == 1){
+		this.players.player.resources.gold += 10;
+		this.players.enemy.resources.gold += 10;
+	}
 	this.tickChildren();
 	this.updateResources();
 	this.ai.tick();
