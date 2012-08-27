@@ -2,7 +2,7 @@ function School( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 100;
+	this.maxHealth = 500;
 	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
@@ -27,40 +27,40 @@ function School( options ){
 				description: "Stupid animal which can run very fast, but will be killed in first bigger fight.",
 				quote: "Oook? Oook?! Oooooooooook!"
 			},
-			exec:function(){_this.tryProduce(Gorilla,10);},
+			exec:function(){_this.tryProduce(Gorilla,this.description.gold);},
 		},
 		{
 			name : "Teacher",
 			icon:"b_ucitel",
 			description: {
 				name:  "Teacher",
-				gold: 10,
+				gold: 30,
 				description: "This one is good against cherubs. He has very good rate of fire.",
 				quote: "Free knowledge to everyone!"
 			},
-			exec : function (){_this.tryProduce(Teacher,30)}
+			exec : function (){_this.tryProduce(Teacher,this.description.gold)}
 		},
 		{
 			name : "Librarian",
 			icon:"b_knihovnice",
 			description: {
 				name:  "Librarian",
-				gold: 10,
+				gold: 50,
 				description: "Not very fast, but when she hits she hits hard. Good against crusader.",
 				quote: "Burning books? Die bitch!"
 			},
-			exec : function (){_this.tryProduce(Librarian,50);}
+			exec : function (){_this.tryProduce(Librarian,this.description.gold);}
 		},
 		{
 			name : "Professor",
 			icon:"b_profesor",
 			description: {
 				name:  "Professor",
-				gold: 10,
+				gold: 100,
 				description: "Bringer of knowledge. It takes a while to bring it, but then everyone will die. Effective against priests.",
 				quote: "Die morons!"
 			},
-			exec : function (){_this.tryProduce(Professor,100);}
+			exec : function (){_this.tryProduce(Professor,this.description.gold);}
 		},
 		{
 			name : "Upgrade",
@@ -93,7 +93,7 @@ function School( options ){
 			this.nextTierPrice = 10;
 		}
 		if(this.owner == "player")
-			game.gui.links.BuildMenu.enableTier(this.tier);
+			game.gui.links.layout.links.actions.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){

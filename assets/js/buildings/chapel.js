@@ -2,14 +2,14 @@ function Chapel( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 100;
+	this.maxHealth = 500;
 	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrice = 10;
+	this.nextTierPrice = 100;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -34,7 +34,7 @@ function Chapel( options ){
 			icon: "b_knez",
 			description:{
 				name: "Priest",
-				gold: 10,
+				gold: 30,
 				description: "Your first real soldier. He can shoot pretty fast, good against biologist.",
 				quote: "And now... punishment!"
 			},
@@ -45,7 +45,7 @@ function Chapel( options ){
 			icon: "b_jeptiska",
 			description: {
 				name: "Nun",
-				gold: 10,
+				gold: 50,
 				description: "Slow, but strong archer. Effective against professor.",
 				quote: "I like Jesus. He is so muscular."
 			},
@@ -56,7 +56,7 @@ function Chapel( options ){
 			icon: "b_krizak",
 			description: {
 				name: "Crusader",
-				gold: 10,
+				gold: 100,
 				description: "Holy warrior of Jesus. Slow and strong, like Jesus itself. Good against teachers.",
 				quote: "To the holy land!"
 			},
@@ -95,7 +95,7 @@ function Chapel( options ){
 			this.nextTierPrice = 300;
 		}
 		if(this.owner == "player")
-			game.gui.links.BuildMenu.enableTier(this.tier);
+			game.gui.links.layout.links.actions.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){

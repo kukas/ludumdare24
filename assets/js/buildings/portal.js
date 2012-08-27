@@ -11,7 +11,7 @@ function Portal( options ){
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 10;
+	this.price = 100;
 	
 	this.texture = game.textures.get("portal");
 	var _this = this;
@@ -21,11 +21,11 @@ function Portal( options ){
 			icon: "b_dabel",
 			description: {
 				name: "Devil",
-				gold: 10,
+				gold: 666,
 				description: "Devil can destroy almost everyone, with his evil smile and fire balls. Balanced and effective unit.",
 				quote: "I came here to kill and fuck bitches. I am almost done with killing."
 			},
-			exec:function(){_this.tryProduce(Devil,100);},
+			exec:function(){_this.tryProduce(Devil,this.description.gold);},
 		},
 	];
 };

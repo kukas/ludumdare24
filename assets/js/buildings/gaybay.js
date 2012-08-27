@@ -31,22 +31,22 @@ function GayBay( options ){
 			icon: "b_gay",
 			description: {
 				name:  "GAY",
-				gold: 10,
+				gold: 300,
 				description: "Fast unit that can destroy the toughes defense. Good against nuns and buildings.",
 				quote: "Yeah, I have been very nasty."
 			},
-			exec:function(){_this.tryProduce(Gay,100);},
+			exec:function(){_this.tryProduce(Gay,this.description.gold);},
 		},
 		{
 			name:"Heretic",
 			icon: "b_heretic",
 			description: {
 				name:  "Heretic",
-				gold: 10,
+				gold: 400,
 				description: "This one is quite slow, but can take lot of damage and deal it too. Effective against prophets.",
 				quote: "Pssst. Wanna some weed?"
 			},
-			exec:function(){_this.tryProduce(Heretic,100);},
+			exec:function(){_this.tryProduce(Heretic,this.description.gold);},
 		},
 	];
 	
