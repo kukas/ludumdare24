@@ -39,6 +39,9 @@ function Level(){
 		gaybay: this.texturepath + "gaybay.png",
 		painting: this.texturepath + "painting.png",
 		lab: this.texturepath + "lab.png",
+		zpovednice: this.texturepath + "zpovednice.png",
+		golgota: this.texturepath + "golgota.png",
+		altar: this.texturepath + "altar.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -54,6 +57,9 @@ function Level(){
 		teacher: this.texturepath + "teacher.png",
 		cherub: this.texturepath + "cherub.png",
 		bishop: this.texturepath + "bishop.png",
+		heretic: this.texturepath + "heretic.png",
+		angel: this.texturepath + "angel.png",
+		devil: this.texturepath + "devil.png",
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
@@ -150,7 +156,7 @@ Level.prototype.afterLoad = function (){
 		{ // UPDATE
 			icon: "b_holyfire",
 			description: {
-				fullName: "Holy flamev",
+				fullName: "Holy flame",
 				spec: 10,
 				description: "When someone unclean would step on mark of holy fire, he will be destroyed by a holy nuke. Simple.",
 				quote: " "
@@ -446,13 +452,13 @@ Level.prototype.afterLoad = function (){
 			owner: "enemy",
 		});
 		this.add(building);
-		game.ai.property.push(building);
 	
 		var building2 = new School({
 			position: new Vector2(150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
 			owner: "player",
 		});
 		this.add(building2, "base");
+		game.ai.property.push(building);
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});

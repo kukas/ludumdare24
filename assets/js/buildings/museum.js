@@ -34,7 +34,13 @@ function Museum( options ){
 	this.actions = [
 		{
 			name:"T-REX",
-			description:"Recrutes Tyranosaurus Rex",
+			icon: "b_dino",
+			description: {
+				name:  "T-REX",
+				gold: 10,
+				description: "Slow dinosaur. He smashes the buildings, he eats the people. Truly, almost nothing can kill this ultimate killer.",
+				quote: "Raaaaaaar!"
+			},
 			exec:function(){_this.tryProduce(Gorilla,10);},
 		},
 	];

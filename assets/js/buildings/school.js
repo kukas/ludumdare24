@@ -20,22 +20,46 @@ function School( options ){
 	this.actions = [
 		{
 			name:"Gorilla",
-			description:"Recrutes gorilla",
+			icon:"b_gorila",
+			description: {
+				name:  "Gorilla",
+				gold: 10,
+				description: "Stupid animal which can run very fast, but will be killed in first bigger fight.",
+				quote: "Oook? Oook?! Oooooooooook!"
+			},
 			exec:function(){_this.tryProduce(Gorilla,10);},
 		},
 		{
 			name : "Teacher",
-			description : "Recrutes Teacher",
+			icon:"b_ucitel",
+			description: {
+				name:  "Teacher",
+				gold: 10,
+				description: "This one is good against cherubs. He has very good rate of fire.",
+				quote: "Free knowledge to everyone!"
+			},
 			exec : function (){_this.tryProduce(Teacher,30)}
 		},
 		{
 			name : "Librarian",
-			description : "Recrutes Librarian",
+			icon:"b_knihovnice",
+			description: {
+				name:  "Librarian",
+				gold: 10,
+				description: "Not very fast, but when she hits she hits hard. Good against crusader.",
+				quote: "Burning books? Die bitch!"
+			},
 			exec : function (){_this.tryProduce(Librarian,50);}
 		},
 		{
 			name : "Professor",
-			description : "Recrutes professor",
+			icon:"b_profesor",
+			description: {
+				name:  "Professor",
+				gold: 10,
+				description: "Bringer of knowledge. It takes a while to bring it, but then everyone will die. Effective against priests.",
+				quote: "Die morons!"
+			},
 			exec : function (){_this.tryProduce(Professor,100);}
 		},
 		{
@@ -60,12 +84,17 @@ function School( options ){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			this.nextTierPrice = 300;
+			this.nextTierPrice = 10;
 		}
-		game.gui.links.BuildMenu.enableTier(this.tier);
+		if(this.owner == "player")
+			game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){
+		if(this.owner == "enemy"){
+			game.loadLevel("mortal_combat");
+			game.ai.active = false
+		}
 		game.jukebox.play("gorilla");
 	};
 };

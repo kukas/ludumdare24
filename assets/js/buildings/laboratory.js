@@ -18,7 +18,13 @@ function Laboratory( options ){
 	this.actions = [
 		{
 			name:"Biologist",
-			description:"Recrutes Biologist",
+			icon: "b_biolog",
+			description: {
+				name:  "Biologist",
+				gold: 10,
+				description: "He is bringing poisoned explosion pack. On his own body. Navigate him into enemy lines and he will kill lot of them.",
+				quote: "And now worms! More worms!"
+			},
 			exec:function(){_this.tryProduce(Biologist,120);},
 		},
 	];

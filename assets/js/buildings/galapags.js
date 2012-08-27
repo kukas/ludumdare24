@@ -18,7 +18,13 @@ function Galapags( options ){
 	this.actions = [
 		{
 			name:"A. R. Wallace",
-			description:"Recrutes Alfred Russel Wallace",
+			icon: "b_wallace",
+			description: {
+				name:  "A. R. Wallace",
+				gold: 10,
+				description: "This hero runs pretty fast and his flying frogs are dangerous too. He has even chance to stop walking doom - Jesus.",
+				quote: "I have since wandered among men of many races and many religions. And killed them all."
+			},
 			exec:function(){_this.tryProduce(Gorilla,10);},
 		},
 	];

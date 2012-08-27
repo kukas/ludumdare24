@@ -8,7 +8,7 @@ function Painting( options ){
 	this.height = 96;
 	this.range = 48;
 	
-	this.maxQueue = 1;
+	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	this.price = 60;
@@ -18,13 +18,14 @@ function Painting( options ){
 	this.actions = [
 		{
 			name:"Baroco Cherub",
-			description:"Recrutes Cherub",
+			icon: "b_andelicek",
+			description: {
+				name:  "Baroco Cherub",
+				gold: 10,
+				description: "This little annoying creature will explode if it hits enemy. It can hit multlipe enemies at once.",
+				quote: "Hallelujah! Hallelujah!"
+			},
 			exec:function(){_this.tryProduce(Cherub,120);},
-		},
-		{
-			name:"* Bishop",
-			description:"TRIAL",
-			exec:function(){_this.tryProduce(Bishop,120);},
 		},
 	];
 };

@@ -9,7 +9,7 @@ function Chapel( options ){
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrice = 100;
+	this.nextTierPrice = 10;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -24,7 +24,7 @@ function Chapel( options ){
 			description:{
 				fullName: "Missionary",
 				gold: 10,
-				description: "Weak and slow unit.",
+				description: "Fast moving infantry, not very effective in combat, but useful as scout.",
 				quote: "Can we have a little talk about Jesus?"
 			},
 			exec:function(){_this.tryProduce(Missionary,this.description.gold);},
@@ -32,25 +32,40 @@ function Chapel( options ){
 		{
 			name : "Priest",
 			icon: "b_knez",
-			description : "Recrutes priest",
-			exec : function (){_this.tryProduce(Priest,30);}
+			description:{
+				fullName: "Priest",
+				gold: 10,
+				description: "Your first real soldier. He can shoot pretty fast, good against biologist.",
+				quote: "And now... punishment!"
+			},
+			exec : function (){_this.tryProduce(Priest,this.description.gold);}
 		},
 		{
 			name : "Nun",
 			icon: "b_jeptiska",
-			description : "Recrutes Nun",
-			exec : function (){_this.tryProduce(Nun,50);}
+			description: {
+				fullName: "Nun",
+				gold: 10,
+				description: "Slow, but strong archer. Effective against professor.",
+				quote: "I like Jesus. He is so muscular."
+			},
+			exec : function (){_this.tryProduce(Nun,this.description.gold);}
 		},
 		{
 			name : "Crusader",
 			icon: "b_krizak",
-			description : "Recrutes crusader",
-			exec : function (){_this.tryProduce(Crusader,100);}
+			description: {
+				fullName: "Crusader",
+				gold: 10,
+				description: "Holy warrior of Jesus. Slow and strong, like Jesus itself. Good against teachers.",
+				quote: "To the holy land!"
+			},
+			exec : function (){_this.tryProduce(Crusader,this.description.gold);}
 		},
 		{
 			name : "Upgrade",
 			description : "Upgrades your base",
-			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",100);}},
+			exec : function (){if(_this.tier<3){_this.tryProduce("Upgrade",this.description.gold);}},
 		},
 	];
 	
@@ -73,10 +88,15 @@ function Chapel( options ){
 			this.height = 256;
 			this.nextTierPrice = 300;
 		}
-		game.gui.links.BuildMenu.enableTier(1);
+		if(this.owner == "player")
+			game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){
+		if(this.owner == "enemy"){
+			game.loadLevel("mortal_combat");
+			game.ai.active = false;
+		}
 		game.jukebox.play("gorilla");
 	};
 };

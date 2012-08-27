@@ -57,7 +57,7 @@ Bookmine.prototype.boom = function (){
 	game.add(nuke);
 	for(var i in game.children){
 		if((game.children[i].health !== undefined)&&(Math.abs(this.position.x-game.children[i].position.x) <= this.boomRange)&&(game.children[i] != this)){
-			console.log(game.children[i]);game.children[i].dealDamage(this.damage,this);
+			game.children[i].dealDamage(this.damage,this);
 		};
 	};
 	game.remove(this);

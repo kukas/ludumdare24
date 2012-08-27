@@ -7,7 +7,10 @@ function Spawn(con,x,side){
 			obj.texture.flip = "x";
 			game.ai.property.push(obj)
 		}
+		else{
+			obj.spawnSound.play();
+		}
 		game.add(obj);
-		obj.spawnSound.play();
+		
 	}
 };

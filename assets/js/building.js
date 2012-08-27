@@ -99,7 +99,8 @@ Building.prototype.tryProduce = function (Constructor,price){
 			if(!this.initProduction(function (){
 				Spawn(Constructor,_this.spawnPoint,_this.owner);
 				},price)){ //<-- zde se balancuje čas výroby
-					console.log("The queue is full.");
+					if(this.owner == "player")
+						console.log("The queue is full.");
 			}
 			else{
 				game.players[_this.owner].resources.gold -= price;
@@ -114,7 +115,8 @@ Building.prototype.tryProduce = function (Constructor,price){
 			if(!this.initProduction(function (){
 				_this.upgrade();
 				},this.nextTierPrice)){
-				console.log("The queue is full.");
+				if(this.owner == "player")
+					console.log("The queue is full.");
 			}
 			else{
 				game.players[_this.owner].resources.spec -= this.nextTierPrice;
