@@ -94,8 +94,8 @@ function Chapel( options ){
 			this.height = 256;
 			this.nextTierPrice = 300;
 		}
-		if(this.owner == "player")
-			game.gui.links.BuildMenu.enableTier(this.tier);
+		// if(this.owner == "player")
+		// 	game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){

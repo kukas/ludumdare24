@@ -25,7 +25,7 @@ function Painting( options ){
 				description: "This little annoying creature will explode if it hits enemy. It can hit multlipe enemies at once.",
 				quote: "Hallelujah! Hallelujah!"
 			},
-			exec:function(){_this.tryProduce(Cherub,120);},
+			exec:function(){_this.tryProduce(Cherub,this.description.gold);},
 		},
 	];
 };

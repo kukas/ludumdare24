@@ -25,7 +25,7 @@ function Portal( options ){
 				description: "Devil can destroy almost everyone, with his evil smile and fire balls. Balanced and effective unit.",
 				quote: "I came here to kill and fuck bitches. I am almost done with killing."
 			},
-			exec:function(){_this.tryProduce(Devil,100);},
+			exec:function(){_this.tryProduce(Devil,this.description.gold);},
 		},
 	];
 };

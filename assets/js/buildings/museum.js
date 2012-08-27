@@ -41,7 +41,7 @@ function Museum( options ){
 				description: "Slow dinosaur. He smashes the buildings, he eats the people. Truly, almost nothing can kill this ultimate killer.",
 				quote: "Raaaaaaar!"
 			},
-			exec:function(){_this.tryProduce(Trex,10);},
+			exec:function(){_this.tryProduce(Trex,this.description.gold);},
 		},
 	];
 };

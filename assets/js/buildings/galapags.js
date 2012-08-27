@@ -25,7 +25,7 @@ function Galapags( options ){
 				description: "This hero runs pretty fast and his flying frogs are dangerous too. He has even chance to stop walking doom - Jesus.",
 				quote: "I have since wandered among men of many races and many religions. And killed them all."
 			},
-			exec:function(){_this.tryProduce(Wallace,10);},
+			exec:function(){_this.tryProduce(Wallace,this.description.gold);},
 		},
 	];
 	

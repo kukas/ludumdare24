@@ -25,7 +25,7 @@ function Altar( options ){
 				description: "Very balanced and effective unit. Good for everything. He can shoot fire balls. Holy fire balls.",
 				quote: "Glorious doom to the unbelivers."
 			},
-			exec:function(){_this.tryProduce(Angel,100);},
+			exec:function(){_this.tryProduce(Angel,this.description.gold);},
 		},
 	];
 };

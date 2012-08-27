@@ -24,7 +24,7 @@ function Golgota( options ){
 				description: "Ultimate unit. His cross is heavy, so he will be slow. But then... Nothing can stop him from his revenge.",
 				quote: "Fuck it. Revenge time."
 			},
-			exec:function(){_this.tryProduce(Bishop,100);},
+			exec:function(){_this.tryProduce(Bishop,this.description.gold);},
 		},
 	];
 };

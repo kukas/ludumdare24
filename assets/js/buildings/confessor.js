@@ -25,7 +25,7 @@ function Confessor( options ){
 				description: "Strong and tough unit. He is best againts homosexuals.",
 				quote: "God bless you."
 			},
-			exec:function(){_this.tryProduce(Bishop,100);},
+			exec:function(){_this.tryProduce(Bishop,this.description.gold);},
 		},
 		{
 			name:"Prophet",
@@ -36,7 +36,7 @@ function Confessor( options ){
 				description: "Fast moving infantry with solid attack speed. He can break through defensive buildings very fast. Effective against librarian.",
 				quote: "The end is near! Here, take this pamphlet."
 			},
-			exec:function(){_this.tryProduce(Prophet,100);},
+			exec:function(){_this.tryProduce(Prophet,this.description.gold);},
 		},
 	];
 };

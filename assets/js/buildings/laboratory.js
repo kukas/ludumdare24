@@ -25,7 +25,7 @@ function Laboratory( options ){
 				description: "He is bringing poisoned explosion pack. On his own body. Navigate him into enemy lines and he will kill lot of them.",
 				quote: "And now worms! More worms!"
 			},
-			exec:function(){_this.tryProduce(Biologist,120);},
+			exec:function(){_this.tryProduce(Biologist,this.description.gold);},
 		},
 	];
 };
