@@ -1,42 +1,31 @@
-function GayBay( options ){
+function Confessor( options ){
 	
 	Building.call(this, options);
 	
 	this.maxHealth = 50;
 	this.health = this.maxHealth;
-	this.width = 97;
+	this.width = 96;
 	this.height = 96;
 	this.range = 48;
 	
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 120;
+	this.price = 10;
 	
-	this.texture = game.textures.get("gaybay",{
-		totalFrames:2,
-		currentAnimation:"being",
-		animations:{
-			being:{
-				start:0,
-				end:2,
-				speed:15,
-			},
-		},
-	});
+	this.texture = game.textures.get("zpovednice");
 	var _this = this;
 	this.actions = [
 		{
-			name:"GAY",
+			name:"Bishop",
 			description:"Recrutes Gay",
-			exec:function(){_this.tryProduce(Gay,100);},
+			exec:function(){_this.tryProduce(Bishop,100);},
 		},
 		{
-			name:"Heretic",
+			name:"Prophet",
 			description:"Recrutes heretic",
-			exec:function(){_this.tryProduce(Heretic,100);},
+			exec:function(){_this.tryProduce(Prophet,100);},
 		},
 	];
-	
 };
-GayBay.prototype = new Building();
+Confessor.prototype = new Building();

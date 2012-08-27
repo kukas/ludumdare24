@@ -60,12 +60,17 @@ function School( options ){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			this.nextTierPrice = 300;
+			this.nextTierPrice = 10;
 		}
-		game.gui.links.BuildMenu.enableTier(this.tier);
+		if(this.owner == "player")
+			game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){
+		if(this.owner == "enemy"){
+			game.loadLevel("mortal_combat");
+			game.ai.active = false
+		}
 		game.jukebox.play("gorilla");
 	};
 };

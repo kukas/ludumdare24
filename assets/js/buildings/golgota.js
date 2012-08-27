@@ -1,8 +1,7 @@
-function Painting( options ){
-	
+function Golgota( options ){
 	Building.call(this, options);
 	
-	this.maxHealth = 30;
+	this.maxHealth = 50;
 	this.health = this.maxHealth;
 	this.width = 96;
 	this.height = 96;
@@ -11,16 +10,16 @@ function Painting( options ){
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 60;
+	this.price = 10;
 	
-	this.texture = game.textures.get("painting");
+	this.texture = game.textures.get("golgota");
 	var _this = this;
 	this.actions = [
 		{
-			name:"Baroco Cherub",
-			description:"Recrutes Cherub",
-			exec:function(){_this.tryProduce(Cherub,120);},
+			name:"Jesus",
+			description:"Recrutes Jesus",
+			exec:function(){_this.tryProduce(Bishop,100);},
 		},
 	];
 };
-Painting.prototype = new Building();
+Golgota.prototype = new Building();

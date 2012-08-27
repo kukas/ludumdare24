@@ -1,8 +1,8 @@
-function Painting( options ){
+function Altar( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 30;
+	this.maxHealth = 50;
 	this.health = this.maxHealth;
 	this.width = 96;
 	this.height = 96;
@@ -11,16 +11,16 @@ function Painting( options ){
 	this.maxQueue = 2;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 60;
+	this.price = 10;
 	
-	this.texture = game.textures.get("painting");
+	this.texture = game.textures.get("altar");
 	var _this = this;
 	this.actions = [
 		{
-			name:"Baroco Cherub",
-			description:"Recrutes Cherub",
-			exec:function(){_this.tryProduce(Cherub,120);},
+			name:"Angel",
+			description:"Recrutes angel",
+			exec:function(){_this.tryProduce(Angel,100);},
 		},
 	];
 };
-Painting.prototype = new Building();
+Altar.prototype = new Building();

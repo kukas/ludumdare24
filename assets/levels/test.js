@@ -39,6 +39,9 @@ function Level(){
 		gaybay: this.texturepath + "gaybay.png",
 		painting: this.texturepath + "painting.png",
 		lab: this.texturepath + "lab.png",
+		zpovednice: this.texturepath + "zpovednice.png",
+		golgota: this.texturepath + "golgota.png",
+		altar: this.texturepath + "altar.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -54,6 +57,9 @@ function Level(){
 		teacher: this.texturepath + "teacher.png",
 		cherub: this.texturepath + "cherub.png",
 		bishop: this.texturepath + "bishop.png",
+		heretic: this.texturepath + "heretic.png",
+		angel: this.texturepath + "angel.png",
+		devil: this.texturepath + "devil.png",
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",

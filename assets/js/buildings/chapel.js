@@ -9,7 +9,7 @@ function Chapel( options ){
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrice = 100;
+	this.nextTierPrice = 10;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -69,10 +69,15 @@ function Chapel( options ){
 			this.height = 256;
 			this.nextTierPrice = 300;
 		}
-		game.gui.links.BuildMenu.enableTier(1);
+		if(this.owner == "player")
+			game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){
+		if(this.owner == "enemy"){
+			game.loadLevel("mortal_combat");
+			game.ai.active = false;
+		}
 		game.jukebox.play("gorilla");
 	};
 };

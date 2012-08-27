@@ -778,19 +778,19 @@ function GUI(){
 					});
 					BuildMenu.add(painting);
 					
-					var confessory = new Button(10,45,{
+					var confessor = new Button(10,45,{
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Confessor)){console.log("not enough resources");};}},
 					});
-					BuildMenu.add(confessory);
+					BuildMenu.add(confessor);
 					
 					var altar = new Button(10,90,{
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Altar)){console.log("not enough resources");};}},
 					});
 					BuildMenu.add(altar);
 					
@@ -806,7 +806,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Golgota)){console.log("not enough resources");};}},
 					});
 					BuildMenu.add(golgota);
 					
@@ -852,13 +852,13 @@ function GUI(){
 					align: "center",
 					}));
 					
-					confessory.add(new Text({
+					confessor.add(new Text({
 					x:-3.5,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
 					size: 18,
-					value: "Build confessory!",
+					value: "Build confessor!",
 					align: "center",
 					}));
 					
