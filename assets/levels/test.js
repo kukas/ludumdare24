@@ -24,8 +24,15 @@ function Level(){
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
 		chapel3: this.texturepath + "cathedral.png",
-
-		dino: this.texturepath + "dino.png",
+		school0: this.texturepath + "school.png",
+		school1: this.texturepath + "grammar school.png",
+		school2: this.texturepath + "library.png",
+		school3: this.texturepath + "academy.png",
+		bonfire: this.texturepath + "hranice.png",
+		crossscorpio: this.texturepath + "scorpio.png",
+		galapags: this.texturepath + "galapágy.png",
+		museum: this.texturepath + "muzeum.png",
+		bookmine: this.texturepath + "bookmine.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -41,6 +48,11 @@ function Level(){
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
+		button_off: this.texturepath + "button_off.jpg",
+		//Particles
+		basicParticle : this.texturepath + "basicparticle.png",
+		crossParticle : this.texturepath + "cross.png",
+		bookParticle : this.texturepath + "book.png",
 		//Zdroje
 		gold : this.texturepath + "gold.png",
 		faith : this.texturepath + "faith.png",
@@ -141,19 +153,36 @@ Level.prototype.afterLoad = function (){
 	});
 
 	this.add( terrain, "terrain" );
+	if(game.players.player.side == "creationist"){
+		var building = new Chapel({
+			position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
+			owner: "player",
+		});
+		this.add(building, "base");
 	
-	var building = new Chapel({
-		position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2+30),
-		owner: "player",
-	});
-	this.add(building);
+		var building2 = new School({
+			position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
+			owner: "enemy",
+		});
+		this.add(building2);
+	}
+	else{
+		var building = new Chapel({
+			position: new Vector2(game.playground.width-150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
+			owner: "enemy",
+		});
+		this.add(building);
 	
-	var building2 = new School({
-		position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
-		owner: "enemy",
-	});
-	this.add(building2);
+		var building2 = new School({
+			position: new Vector2(150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
+			owner: "player",
+		});
+		this.add(building2, "base");
+	}
 
+	var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
+	this.add(miss);
+	
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem");
 	

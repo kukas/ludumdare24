@@ -626,7 +626,346 @@ function GUI(){
 				Res.add(Gold, "gold");
 				_this.add(Res, "resources")
 				
+				var BuildMenu = new Button(40,360,{
+					width:130,
+					height:50,
+					visible:false,
+				});
 				
+				function MakeTextures(){
+					for(var i = 0; i < 4;i++){
+						var buttonTexture = new Texture(game.textures.get("button"));
+						buttonTexture.width = BuildMenu.children[i].width;
+						buttonTexture.height = BuildMenu.children[i].height;
+						BuildMenu.children[i].add(buttonTexture);
+					};
+					for(var j = 4; j < BuildMenu.children.length;j++){
+						var buttonTexture = new Texture(game.textures.get("button_off"));
+						buttonTexture.width = 120;
+						buttonTexture.height = 40;
+						BuildMenu.children[j].add(buttonTexture);
+					};
+				};
+				if(game.players.player.side == "creationist"){
+					var holyfire = new Button(270,0,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Bookmine)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(holyfire);
+					
+					var Samostril = new Button(270,45,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(CrossScorpio)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(Samostril);
+					
+					var Hranice = new Button(270,90,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(Hranice);
+					
+					var painting = new Button(10,0,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(painting);
+					
+					var confessory = new Button(10,45,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(confessory);
+					
+					var altar = new Button(10,90,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(altar);
+					
+					var slum = new Button(140,0,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(slum);
+					
+					var golgota = new Button(140,45,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(golgota);
+					
+					MakeTextures();
+					
+					holyfire.add(new Text({
+					x:35,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Holy fire mine!",
+					align: "center",
+					}));
+					
+					Samostril.add(new Text({
+					x:35,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Cross Scorpio!",
+					align: "center",
+					}));
+					
+					Hranice.add(new Text({
+					x:55,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build bonfire!",
+					align: "center",
+					}));
+					
+					painting.add(new Text({
+					x:22,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Painting!",
+					align: "center",
+					}));
+					
+					confessory.add(new Text({
+					x:13,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build confessory!",
+					align: "center",
+					}));
+					
+					altar.add(new Text({
+					x:25,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Altar!",
+					align: "center",
+					}));
+					
+					slum.add(new Text({
+					x:27,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build slum!",
+					align: "center",
+					}));
+					
+					golgota.add(new Text({
+					x:20,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Golgota!",
+					align: "center",
+					}));
+					
+				}
+				else{
+					var book = new Button(270,0,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(book);
+					
+					var machinegun = new Button(270,45,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(machinegun);
+					
+					var bookpile = new Button(270,90,{
+					width:190,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(bookpile);
+					
+					var laboratory = new Button(10,0,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					});
+					BuildMenu.add(laboratory);
+					
+					var gaybar = new Button(10,45,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(gaybar);
+					
+					var portal = new Button(10,90,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 2){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(portal);
+					
+					var museum = new Button(140,0,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Museum)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(museum);
+					
+					var galapags = new Button(140,45,{
+					width:120,
+					height:40,
+					visible:false,
+					onMouseUp:function (){if(game.links.base.tier >= 3){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
+					});
+					BuildMenu.add(galapags);
+					
+					MakeTextures();
+					
+					book.add(new Text({
+					x:30,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Explosive book!",
+					align: "center",
+					}));
+					
+					machinegun.add(new Text({
+					x:0,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build build primitive machine gun!",
+					align: "center",
+					}));
+					
+					bookpile.add(new Text({
+					x:37,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Pile of books!",
+					align: "center",
+					}));
+					
+					laboratory.add(new Text({
+					x:22,
+					y:10,
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build laboratory!",
+					align: "center",
+					}));
+					
+					gaybar.add(new Text({
+					x:22,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Gay Bay!",
+					align: "center",
+					}));
+					
+					portal.add(new Text({
+					x:0,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build demonic portal!",
+					align: "center",
+					}));
+					
+					museum.add(new Text({
+					x:22,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build museum!",
+					align: "center",
+					}));
+					
+					galapags.add(new Text({
+					x:22,
+					y:10,
+					color: "#FFF",
+					font: "PlainBlackNormal",
+					size: 14,
+					value: "Build Galapags!",
+					align: "center",
+					}));
+				}
+				BuildMenu.enableTier = function (n){
+					if(n < 3){
+						this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
+						this.children[n+3].children[0].width = 120;
+						this.children[n+3].children[0].height = 40;
+						
+						this.children[n+3].children[1].color = "#000";
+					}
+					if(n == 3){
+						this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
+						this.children[n+3].children[0].width = 120;
+						this.children[n+3].children[0].height = 40;
+						
+						this.children[n+3].children[1].color = "#000";
+						
+						this.children[n+4].children[0] = new this.onTexture(game.textures.get("button"));
+						this.children[n+4].children[0].width = 120;
+						this.children[n+4].children[0].height = 40;
+						
+						this.children[n+4].children[1].color = "#000";
+					}
+				};
+				BuildMenu.onTexture = Texture;
+				
+				_this.add(BuildMenu, "BuildMenu");
 			},
 			updateUnitControl: function(t, actions){
 				game.gui.links.layout.links.unitControl.children = [];
@@ -649,7 +988,7 @@ function GUI(){
 						y: 4,
 						color: "#000",
 						font: "PlainBlackNormal",
-						size: 26,
+						size: actions[i].name > 10 ? 26 : 16,
 						value: actions[i].name,
 						align: "center",
 					});

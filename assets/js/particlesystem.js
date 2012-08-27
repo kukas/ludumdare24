@@ -8,6 +8,8 @@ function Particle(options){
 	this.origin = new Vector2().copy(this.position);
 
 	this.color = options.color === undefined ? new Color(0x000000) : options.color;
+	this.texture = options.texture === undefined ? game.textures.get("basicParticle") : options.texture;
+	this.textured = options.textured === undefined ? false : options.textured;
 
 	// velikost
 	this.width = options.width === undefined ? 1 : options.width;
@@ -26,8 +28,6 @@ function Particle(options){
 	// rotace
 	this.spin = options.spin === undefined ? 0 : options.spin;
 	this.rotation = options.rotation === undefined ? 0 : options.rotation;
-
-	this.texture = options.texture === undefined ? false : options.texture;
 }
 Particle.prototype.render = function(ctx) {
 	if(this.alpha <= 0 || this.size <= 0.5) return;
@@ -37,9 +37,10 @@ Particle.prototype.render = function(ctx) {
 	ctx.scale(this.size,this.size);
 	ctx.rotate(this.rotation);
 	ctx.translate(-this.width/2, -this.height/2);
-	ctx.globalAlpha = this.alpha; 
-	if(this.texture)
-		ctx.drawImage(img,0,0);
+	ctx.globalAlpha = this.alpha;
+	if(this.textured){
+		this.texture.draw(ctx,0,0,this.width,this.height);
+	}
 	else{
 		ctx.fillStyle = this.color.getRGB();
 		ctx.fillRect(0,0, this.width, this.height);

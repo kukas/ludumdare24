@@ -33,6 +33,18 @@ function Librarian( options ){
 			}
 		}
 	});
+	
+	this.projectile = this.projectile = game.textures.get("bookParticle",{
+		totalFrames:3,
+		currentAnimation:"being",
+		animations : {
+			being : {
+				start : 0,
+				end : 3,
+				speed : 20,
+			},
+		},
+	});
 
 	if(options.owner == "enemy"){
 		this.texture.flip = "x";

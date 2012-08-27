@@ -1,5 +1,5 @@
 function Building(options){
-	Object2D.call(this, options);
+	FieldObject.call(this, options);
 
 	this.zIndex = -1;
 
@@ -10,9 +10,13 @@ function Building(options){
 	
 	this.procesQueue = [];
 }
-Building.prototype = new Object2D();
+Building.prototype = new FieldObject();
 
 Building.prototype.dealDamage = function (dmg, murderer){
+	if(this.boomRange > 0 && !this.ghost){
+		this.boom();
+		return true;
+	}
 	murderer = murderer === undefined ? this : murderer;
 	this.health -= dmg;
 	// třísky
@@ -32,7 +36,7 @@ Building.prototype.dealDamage = function (dmg, murderer){
 		},
 		rotation: { min: 0, max: Math.PI }
 	});
-
+	
 	this.die(murderer);
 };
 
@@ -73,7 +77,13 @@ Building.prototype.initProduction = function (callback,_cena){
 };
 
 Building.prototype.tick = function (){
-		this.produce();
+	this.produce();
+	if(this.range > this.width/2)
+		this.tryAim();
+	if(this.lastdeal <= this.cadency)
+		this.lastdeal++;
+	if(this.lastdeal > this.cadency/2)
+		this.texture.switchAnimation("being");
 };
 Building.prototype.onSelect = function (){
 };
@@ -96,22 +106,33 @@ Building.prototype.tryProduce = function (Constructor,price){
 		}
 	}
 	else if(Constructor == "Upgrade"){
-		if(!this.initProduction(function (){
-			_this.upgrade();
-			},this.nextTierPrize)){
-			console.log("IMPASSIBRU!!");
+		if(game.players[_this.owner].resources.spec - this.nextTierPrice < 0){
+			console.log("Not enough resources");
+		}
+		else{
+			if(!this.initProduction(function (){
+				_this.upgrade();
+				},this.nextTierPrice)){
+				console.log("The queue is full.");
+			}
+			else{
+				game.players[_this.owner].resources.spec -= this.nextTierPrice;
+			}
 		}
 	}
-	else {
+	else { // <-- Self building 
 		this.initProduction(function (){
 			_this.ghost = false;
 			}, price)
 	}
 };
 
-Building.prototype.build = function(Constructor, price){
+Building.prototype.build = function(Constructor){
 	var _this = this;
 	var building = new Constructor({});
+	if(game.players[building.owner].resources.spec - building.price < 0){
+		return false;
+	}
 	building.ghost = true;
 	building.selected = true;
 	building.owner = this.owner;
@@ -146,8 +167,9 @@ Building.prototype.build = function(Constructor, price){
 			building.spawnPoint = building.owner == "player" ? building.position.x+building.width+32 : building.position.x-building.width-32;
 			
 			building.afterPlacement();
+			game.players[building.owner].resources.spec -= building.price;
 
-			building.tryProduce("Self", price);
+			building.tryProduce("Self", building.price);
 
 		}
 		else {
@@ -159,7 +181,8 @@ Building.prototype.build = function(Constructor, price){
 			game.remove(building)
 		}
 	});
-	game.add( building, "ghost" )
+	game.add( building, "ghost" );
+	return true;
 }
 
 Building.prototype.afterPlacement = function() {

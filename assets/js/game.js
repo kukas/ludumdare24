@@ -56,7 +56,7 @@ function Game(){
 		enemy : {
 			side:"atheist",
 			color:"#F0271D",
-			resources:{gold:100,spec:100},
+			resources:{gold:100,spec:1000},
 			controledGround:100,
 			},
 		};
@@ -240,8 +240,8 @@ Game.prototype.updateResources = function (){
 		var playerGround =  game.players.player.controledGround;
 		var enemyGround =  game.players.enemy.controledGround;
 		//Zvětšování
-		zlomekP += Math.sqrt(playerGround)/300;
-		zlomekE += Math.sqrt(playerGround)/300;
+		zlomekP += Math.sqrt(playerGround)/800;
+		zlomekE += Math.sqrt(playerGround)/800;
 		if(Math.round(zlomekP) >= 1){
 			playerResources.spec += Math.round(zlomekP);
 			zlomekP = 0;
