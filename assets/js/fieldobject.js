@@ -3,6 +3,8 @@ function FieldObject( options ){
 	this.lastdeal = 0;
 	this.boomRange = -1;
 	this.elAngle = Math.PI/4;
+	this.projectileWidth = 32;
+	this.projectileHeight = 32;
 };
 FieldObject.prototype = new Object2D();
 
@@ -41,7 +43,7 @@ FieldObject.prototype.getDistance = function (){
 
 FieldObject.prototype.attack = function( obj ) {
 	if(!obj.ghost){
-		if(this.boomRange > 0){
+		if(this.boomRange > 0 && obj.owner != this.owner){
 			this.boom();
 			return false;
 		}
@@ -49,15 +51,14 @@ FieldObject.prototype.attack = function( obj ) {
 			if(obj.owner == this.owner)
 				return
 			if(this.lastdeal >= this.cadency){
-				this.texture.switchAnimation("attack");
-				obj.dealDamage(this.damage, this);
-				this.lastdeal = 0;
-				//Projektil
-				if(this.range > this.width/2){console.log("firing");
+				if(this.range > this.width/2){
+					//Projektil
+					this.texture.switchAnimation("attack");
 					var _this = this;
 					var difr = this.position.x-obj.position.x;
 					var vlevo = difr < 0 ? 1:-1;
-					game.links.particlesystem.emit(Particle, 1,{
+					var SUM = this.particleSum === undefined ? 1 : this.particelSum;
+					game.links.particlesystem.emit(Particle, SUM,{
 						position:_this.position,
 						velocity:new Vector2(
 							vlevo*Math.sqrt(2*0.1*Math.abs(difr)/Math.tan(_this.elAngle)),
@@ -65,9 +66,10 @@ FieldObject.prototype.attack = function( obj ) {
 						),
 						gravity:new Vector2(0,0.4),
 						life:Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)*15,
-						width:32,height:32,
-						textured : true,
+						width:_this.projectileWidth,height:_this.projectileHeight,
+						textured : _this.projectile === undefined ? false : true,
 						texture : _this.projectile === undefined ? game.textures.get("basicParticle") : _this.projectile,
+						color : _this.particleColor === undefined ? new Color(0x000000) : _this.particleColor,
 					},
 					{
 						spin : {
@@ -75,6 +77,13 @@ FieldObject.prototype.attack = function( obj ) {
 							max : 0.1,
 						},
 					});
+					game.setTimeout(function (){obj.dealDamage(_this.damage, _this);},Math.floor(Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)));
+					this.lastdeal = 0;
+				}
+				else{
+					this.texture.switchAnimation("attack");
+					obj.dealDamage(this.damage, this);
+					this.lastdeal = 0;
 				}
 			}
 		}

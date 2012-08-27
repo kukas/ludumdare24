@@ -1,8 +1,8 @@
-function Galapags( options ){
+function Painting( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 300;
+	this.maxHealth = 30;
 	this.health = this.maxHealth;
 	this.width = 96;
 	this.height = 96;
@@ -11,17 +11,21 @@ function Galapags( options ){
 	this.maxQueue = 1;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
-	this.price = 300;
+	this.price = 60;
 	
-	this.texture = game.textures.get("galapags");
+	this.texture = game.textures.get("painting");
 	var _this = this;
 	this.actions = [
 		{
-			name:"A. R. Wallace",
-			description:"Recrutes Alfred Russel Wallace",
-			exec:function(){_this.tryProduce(Gorilla,10);},
+			name:"Baroco Cherub",
+			description:"Recrutes Cherub",
+			exec:function(){_this.tryProduce(Cherub,120);},
+		},
+		{
+			name:"* Bishop",
+			description:"TRIAL",
+			exec:function(){_this.tryProduce(Bishop,120);},
 		},
 	];
-	
 };
-Galapags.prototype = new Building();
+Painting.prototype = new Building();

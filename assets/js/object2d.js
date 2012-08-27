@@ -145,6 +145,8 @@ Object2D.prototype.getSortedChildrenHash = function(){
 }
 
 Object2D.prototype.sortChildren = function() {
+	if(this.children.length)
+		return this.children;
 	if( this.sortedChildrenHash !== this.getSortedChildrenHash() ){
 		this.children.sort(function(a,b){
 			return a.zIndex - b.zIndex;

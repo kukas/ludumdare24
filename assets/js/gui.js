@@ -333,6 +333,53 @@ function GUI(){
 		},
 		main_menu: {
 			objects: function(){
+				var play1 = new Button(500,300,{
+					width:400,
+					height:70,
+					visible:false,
+					onMouseUp:function (){game.setPlayer("creationist");game.loadLevel("test");},
+					});
+					
+					var texture = new Texture(game.textures.get("button"));
+					texture.width = play1.width;
+					texture.height = play1.height;
+					
+					play1.add(texture);
+					
+					play1.add(new Text({
+					x: 0, 
+					y: 0,
+					value: "Play for creationists",
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 50,
+					}));
+					
+					_this.add(play1);
+					
+					var play2 = new Button(500,400,{
+					width:400,
+					height:70,
+					visible:false,
+					onMouseUp:function (){game.setPlayer("atheist");game.loadLevel("test");},
+					});
+					
+					var texture2 = new Texture(game.textures.get("button"));
+					texture2.width = play1.width;
+					texture2.height = play1.height;
+					
+					play2.add(texture2);
+					
+					play2.add(new Text({
+					x: 0, 
+					y: 0,
+					value: "Play for atheists",
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 50,
+					}));
+					
+					_this.add(play2);
 			},
 			controls: function(){
 				_this.addControls();
@@ -727,7 +774,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Painting)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(painting);
 					
@@ -766,81 +813,81 @@ function GUI(){
 					MakeTextures();
 					
 					holyfire.add(new Text({
-					x:35,
+					x:15,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Holy fire mine!",
 					align: "center",
 					}));
 					
 					Samostril.add(new Text({
-					x:35,
+					x:15,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Cross Scorpio!",
 					align: "center",
 					}));
 					
 					Hranice.add(new Text({
-					x:55,
+					x:40,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build bonfire!",
 					align: "center",
 					}));
 					
 					painting.add(new Text({
-					x:22,
+					x:7,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Painting!",
 					align: "center",
 					}));
 					
 					confessory.add(new Text({
-					x:13,
+					x:-3.5,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build confessory!",
 					align: "center",
 					}));
 					
 					altar.add(new Text({
-					x:25,
+					x:15,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Altar!",
 					align: "center",
 					}));
 					
 					slum.add(new Text({
-					x:27,
+					x:20,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build slum!",
 					align: "center",
 					}));
 					
 					golgota.add(new Text({
-					x:20,
+					x:10,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Golgota!",
 					align: "center",
 					}));
@@ -851,7 +898,7 @@ function GUI(){
 					width:190,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Bookmine)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(book);
 					
@@ -875,7 +922,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Laboratory)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(laboratory);
 					
@@ -883,7 +930,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
+					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(GayBay)){console.log("not enough resources");};}},
 					});
 					BuildMenu.add(gaybar);
 					
@@ -914,81 +961,81 @@ function GUI(){
 					MakeTextures();
 					
 					book.add(new Text({
-					x:30,
+					x:17,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Explosive book!",
 					align: "center",
 					}));
 					
 					machinegun.add(new Text({
-					x:0,
+					x:7,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
-					value: "Build build primitive machine gun!",
+					size: 18,
+					value: "Build build machine gun!",
 					align: "center",
 					}));
 					
 					bookpile.add(new Text({
-					x:37,
+					x:25,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Pile of books!",
 					align: "center",
 					}));
 					
 					laboratory.add(new Text({
-					x:22,
+					x:0,
 					y:10,
 					color: "#000",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build laboratory!",
 					align: "center",
 					}));
 					
 					gaybar.add(new Text({
-					x:22,
+					x:3,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Gay Bay!",
 					align: "center",
 					}));
 					
 					portal.add(new Text({
-					x:0,
+					x:12,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
-					value: "Build demonic portal!",
+					size: 18,
+					value: "Build portal!",
 					align: "center",
 					}));
 					
 					museum.add(new Text({
-					x:22,
+					x:5,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build museum!",
 					align: "center",
 					}));
 					
 					galapags.add(new Text({
-					x:22,
+					x:3,
 					y:10,
 					color: "#FFF",
 					font: "PlainBlackNormal",
-					size: 14,
+					size: 18,
 					value: "Build Galapags!",
 					align: "center",
 					}));

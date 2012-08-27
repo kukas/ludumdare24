@@ -31,6 +31,10 @@ function CrossScorpio( options ){
 			},
 		}
 	});
+	
+	this.projectile = game.textures.get("crossScorpioParticle");
+	this.projectileWidth = 93;
+	this.projectileHeight = 35;
 
 };
 CrossScorpio.prototype = new Building();

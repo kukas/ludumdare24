@@ -49,18 +49,20 @@ function Game(){
 		
 	this.players = {
 		player : {
-			side:"creationist",
-			color:"#93C6CC",
-			resources:{gold:1000,spec:100},
+			side:"atheist",
+			color:"#F0271D",
+			resources:{gold:1000,spec:1000},
 			controledGround:100,
 			},
 		enemy : {
-			side:"atheist",
-			color:"#F0271D",
-			resources:{gold:100,spec:1000},
+			side:"creationist",
+			color:"#93C6CC",
+			resources:{gold:1000,spec:1000},
 			controledGround:100,
 			},
 		};
+		
+		this.timedEvents = [];
 };
 
 Game.prototype = new Object2D();
@@ -126,6 +128,15 @@ Game.prototype.tick = function() {
 				this.totalWin3();
 		}
 	}
+	if(this.timedEvents.length > 0){
+		for(var i in this.timedEvents){
+			this.timedEvents[i].toInit--;
+			if(this.timedEvents[i].toInit <= 0){
+				this.timedEvents[i].init();
+				this.timedEvents.splice(i-1,1);
+			}
+		};
+	}
 };
 
 Game.prototype.runScript = function(now) {
@@ -166,7 +177,7 @@ Game.prototype.init = function() {
 	  _this.centerCanvas();
 	});
 
-	this.loadLevel("test")
+	this.loadLevel("menu");
 
 	this.render();
 };
@@ -225,12 +236,12 @@ Game.prototype.add = function(obj, name) {
 
 Game.prototype.setPlayer = function (id){
 	if(id == "creationist"){
-		this.player = {side:"creationist",color:"#93C6CC"};
-		this.enemy = {side:"atheist",color:"#F0271D"};
+		this.players.player = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100};
+		this.players.enemy = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100};
 	}
 	else{
-		this.player = {side:"atheist",color:"#F0271D"};
-		this.enemy = {side:"creationist",color:"#93C6CC"};
+		this.players.player = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100};
+		this.players.enemy = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100};
 	}
 };
 
@@ -286,4 +297,11 @@ Game.prototype.totalWin3 = function() {
 Game.prototype.playScript = function(script) {
 	this.script = script;
 	this.creationTime = new Date().getTime();
+};
+
+Game.prototype.setTimeout = function (fce,mills){
+	this.timedEvents.push({
+		init : fce,
+		toInit : mills,
+	});
 };
