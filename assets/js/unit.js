@@ -56,7 +56,7 @@ Unit.prototype.onCollision = function(obj) {
 		}
 	}
 	if(obj instanceof Unit || obj instanceof Building){
-		if( dist < (this.width + obj.width)/2-obj.speed && dist > 0 ){
+		if( dist < (this.width + obj.width)/3-obj.speed && dist > 0 ){
 			this.shouldBeSpeed = -this.speed;
 			obj.shouldBeSpeed = -this.speed;
 			if(this.ujdi < 1)
