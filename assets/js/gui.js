@@ -132,13 +132,14 @@ function GUI(){
 		this.size = options.size === undefined ? 16 : options.size;
 		this.lineSpacing = options.lineSpacing === undefined ? 1 : options.lineSpacing;
 		this.font = options.font === undefined ? "Verdana" : options.font;
+		this.style = options.style === undefined ? "normal" : options.style;
 		this.weight = options.weight === undefined ? 400 : options.weight;
 		this.shadow = options.shadow === undefined ? false : options.shadow;
 
 		this.visible = options.visible === undefined ? true : options.visible;
 
 		var ctx = document.createElement("canvas").getContext("2d");
-		ctx.font = this.weight + " " + this.size + "px " + this.font;
+		ctx.font = this.style + " " + this.weight + " " + this.size + "px " + this.font;
 
 		// zalamování textu
 		if(this.text.length < 1){
@@ -202,7 +203,7 @@ function GUI(){
 	Text.prototype.render = function(ctx) {
 		if(!this.visible)
 			return
-		ctx.font = this.weight + " " + this.size + "px " + this.font;
+		ctx.font = this.style + " " + this.weight + " " + this.size + "px " + this.font;
 
 		if(this.blink){
 			if(game.ticks % 10 > 0 && game.ticks % 10 < 5) 
@@ -463,7 +464,6 @@ function GUI(){
 
 				var tut = new Text( {
 					y: 20,
-					// x: game.width - 150,
 					width: game.width,
 					text: ["Use A to cover yourself and S, D to fight!","Move using your arrow keys!"],
 					color: "#F00",
@@ -553,7 +553,6 @@ function GUI(){
 				}) );
 				_this.add(enterMortality);
 
-
 				var layout = new Button(game.width/2 - 250, game.height - 200, {
 					width: 500,
 					height: 200,
@@ -561,6 +560,59 @@ function GUI(){
 				});
 				// layout.add( new Text({value:"ASDF"}) );
 				_this.add(layout, "layout");
+
+				var hoverText = new Button(game.width - 400, game.height - 141, {
+					width: 380,
+					height: 131,
+					visible: true
+				});
+				var name = new Text({
+					y: 0,
+					width: 380,
+					value: " ",
+					font: "Arial",
+					size: 18,
+				});
+				hoverText.add(name, "name");
+
+				var price = new Text({
+					y: 20,
+					width: 380,
+					value: " ",
+					font: "Arial",
+					size: 18,
+				});
+				hoverText.add(price, "price");
+
+				var description = new Text({
+					y: 40,
+					width: 380,
+					value: " ",
+					font: "Arial",
+					size: 18,
+				});
+				hoverText.add(description, "description");
+
+				var quote = new Text({
+					y: 80,
+					width: 380,
+					value: " ",
+					font: "Arial",
+					style: "italic",
+					size: 18,
+				});
+				hoverText.add(quote, "quote");
+
+				hoverText.change = function(desc){
+					this.links.name.changeText(desc.fullName);
+					if(desc.gold)
+						this.links.price.changeText(desc.gold);
+					else if(desc.spec)
+						this.links.price.changeText(desc.spec);
+					this.links.description.changeText(desc.description);
+					this.links.quote.changeText(desc.quote);
+				}
+				_this.add(hoverText, "hoverText");
 
 				var unitControl = new Button(10, 10, {
 					width: 1,
@@ -971,12 +1023,17 @@ function GUI(){
 				game.gui.links.layout.links.unitControl.children = [];
 
 				for(var i in actions){
-					var button = new Button(i * 130, 0, {
+					var button = new Button(i * 130 - 60, -2, {
 						width: 120,
 						height: 40,
 						visible: false,
-						onMouseUp: actions[i].exec
+						onMouseUp: actions[i].exec,
+						onMouseIn: function(){
+							// console.log(this.description);
+							game.gui.links.hoverText.change(this.description);
+						},
 					});
+					button.description = actions[i].description;
 					// obrázek
 					var texture = new Texture(game.textures.get("button"));
 					texture.width = 120;

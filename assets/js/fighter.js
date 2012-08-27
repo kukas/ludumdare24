@@ -102,16 +102,7 @@ Fighter.prototype.tick = function() {
 	if(this.charge > 0){
 		this.charge--;
 	}
-	if(this.name == "darwin" && this.health < 25 && !this.finish_him_played){
-		this.finish_him_played = true;
-		game.gui.links.finish_him.visible = true;
-		game.jukebox.play("finish_him");
-		game.playScript({
-			2000: {exec:function(){
-				game.gui.links.finish_him.visible = false;
-			}}
-		});
-	}
+	
 	this.velocity.addSelf( this.gravity )
 	this.tryLand();
 	this.position.addSelf( this.velocity );
@@ -147,7 +138,6 @@ Fighter.prototype.dealDamage = function(dmg, murderer) {
 };
 
 Fighter.prototype.refreshHealth = function() {
-	console.log(game.gui.links.hp_player)
 	if(this.name == "darwin")
 		game.gui.links.hp_player.set( this.health/this.maxHealth );
 	else
@@ -155,6 +145,6 @@ Fighter.prototype.refreshHealth = function() {
 };
 
 Fighter.prototype.die = function(murderer) {
-	if(this.health <= 0)
+	if(this.health <= 0 && !game.winner)
 		game.totalWin(murderer.name);
 };

@@ -22,8 +22,13 @@ function Chapel( options ){
 	this.actions = [
 		{
 			name:"Missionary",
-			description:"Recrutes missionary",
-			exec:function(){_this.tryProduce(Missionary,10);},
+			description:{
+				fullName: "Missionary",
+				gold: 10,
+				description: "Weak and slow unit.",
+				quote: "Can we have a little talk about Jesus?"
+			},
+			exec:function(){_this.tryProduce(Missionary,this.description.gold);},
 		},
 		{
 			name : "Priest",

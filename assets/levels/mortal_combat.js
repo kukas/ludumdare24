@@ -69,7 +69,7 @@ Level.prototype.afterLoad = function (){
 			game.gui.links.subtitles.font = "Arial";
 			game.gui.links.subtitles.text = [
 			"Credits"," ","Programming: Jirka Balhar, Štěpán Marek"," ",
-			"Graphics: Martin Mach"," ", "Game design: Hynek Bečka, Štěpán Marek"," ",
+			"Graphics: Martin Mach, Hynek Bečka"," ", "Game design: Hynek Bečka, Štěpán Marek, Jirka Balhar, Martin Mach"," ",
 			"Dubbing: Hynek Bečka, Martin Mach, Jiří Zbytovský"," ",
 			"SFX: Jiří Zbytovský"," "," ", "Qaterknan (c) 2012"
 			]
@@ -216,6 +216,18 @@ Level.prototype.afterLoad = function (){
 		}
 		if(this.AI == "cover"){
 			this.cover();
+		}
+
+		if(this.health < 25 && !this.finish_him_played){
+			this.finish_him_played = true;
+			console.log("finish_him", game.gui.links.finish_him)
+			game.gui.links.finish_him.visible = true;
+			game.jukebox.play("finish_him");
+			game.playScript({
+				2000: {exec:function(){
+					game.gui.links.finish_him.visible = false;
+				}}
+			});
 		}
 
 		this.position.addSelf( this.velocity );
