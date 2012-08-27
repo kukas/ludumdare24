@@ -348,7 +348,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Gaybar)){
+				if(!game.links.base.build(GayBay)){
 					console.log("not enough resources");
 				}
 			}
@@ -459,6 +459,8 @@ Level.prototype.afterLoad = function (){
 		});
 		this.add(building2);
 		game.ai.property.push(building2);
+		
+		game.ai.buildings = [Bookmine,Bookmine,Dino,Laboratory,GayBay,Portal,Museum,Galapags];
 	}
 	else{
 		var building = new Chapel({
@@ -473,6 +475,7 @@ Level.prototype.afterLoad = function (){
 		});
 		this.add(building2, "base");
 		game.ai.property.push(building);
+		game.ai.buildings = [Holyfire,CrossScorpio,Bonfire,Painting,Confessor,Altar,Slum,Golgota];
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
