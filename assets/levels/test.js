@@ -169,6 +169,7 @@ Level.prototype.afterLoad = function (){
 	game.buildingCreationist = [
 		{
 			icon: "b_holyfire",
+			canBuild: true,
 			description: {
 				name: "Holy flame",
 				spec: 10,
@@ -183,6 +184,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_crossscorpion",
+			canBuild: true,
 			description: {
 				name: "Cross Scorpion",
 				spec: 10,
@@ -197,6 +199,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_bonfire",
+			canBuild: true,
 			description: {
 				name: "Bonfire",
 				spec: 10,
@@ -211,6 +214,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_picture",
+			canBuild: true,
 			description: {
 				name: "Baroque paint",
 				spec: 10,
@@ -225,6 +229,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_confessor",
+			canBuild: false,
 			description: {
 				name: "Confessory",
 				spec: 10,
@@ -239,6 +244,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_altar",
+			canBuild: false,
 			description: {
 				name: "Altar",
 				spec: 10,
@@ -253,6 +259,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_slum",
+			canBuild: false,
 			description: {
 				name: "Slum",
 				spec: 10,
@@ -267,6 +274,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_golgota",
+			canBuild: false,
 			description: {
 				name: "Golgota",
 				spec: 10,
@@ -285,6 +293,7 @@ Level.prototype.afterLoad = function (){
 	game.buildingAtheists = [
 		{ 
 			icon: "b_book",
+			canBuild: true,
 			description: {
 				name: "Explosive book",
 				spec: 10,
@@ -299,6 +308,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_machinegun",
+			canBuild: true,
 			description: {
 				name: "Machinegun",
 				spec: 10,
@@ -313,6 +323,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_dino",
+			canBuild: true,
 			description: {
 				name: "Dino bones",
 				spec: 10,
@@ -327,6 +338,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_laboratory",
+			canBuild: true,
 			description: {
 				name: "Laboratory",
 				spec: 10,
@@ -341,6 +353,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_gaybar",
+			canBuild: false,
 			description: {
 				name: "Gay bar",
 				spec: 10,
@@ -348,13 +361,14 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Gaybar)){
+				if(!game.links.base.build(GayBay)){
 					console.log("not enough resources");
 				}
 			}
 		},
 		{ 
 			icon: "b_portal",
+			canBuild: false,
 			description: {
 				name: "Portal",
 				spec: 10,
@@ -369,6 +383,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_museum",
+			canBuild: false,
 			description: {
 				name: "Museum",
 				spec: 10,
@@ -383,6 +398,7 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_galapags",
+			canBuild: false,
 			description: {
 				name: "Galapagos islands",
 				spec: 10,

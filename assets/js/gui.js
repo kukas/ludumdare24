@@ -599,23 +599,23 @@ function GUI(){
 				})
 				_this.add(mapRight);
 
-				var enterMortality = new Button(game.width/2 - 130, 10, {
-					width: 260,
-					height: 30,
-					onMouseUp: function(){
-						game.loadLevel("mortal_combat");
-					}
-				});
-				enterMortality.add( new Text({
-					width: 260,
-					y: 3,
-					color: "#F00",
-					font: "Arial",
-					size: 20,
-					value: "ENTER THE BRUTALITY",
-					align: "center",
-				}) );
-				_this.add(enterMortality);
+				// var enterMortality = new Button(game.width/2 - 130, 10, {
+				// 	width: 260,
+				// 	height: 30,
+				// 	onMouseUp: function(){
+				// 		game.loadLevel("mortal_combat");
+				// 	}
+				// });
+				// enterMortality.add( new Text({
+				// 	width: 260,
+				// 	y: 3,
+				// 	color: "#F00",
+				// 	font: "Arial",
+				// 	size: 20,
+				// 	value: "ENTER THE BRUTALITY",
+				// 	align: "center",
+				// }) );
+				// _this.add(enterMortality);
 
 				// LAYOUT --------------------------
 				var layout = new Button( game.width/2 - 673/2, game.height - 100, {
@@ -739,12 +739,6 @@ function GUI(){
 					height: 50,
 					visible: false,
 					color: "rgba(255,255,255,0.2)",
-					onMouseIn: function(){
-						this.visible = true;
-					},
-					onMouseOut: function(){
-						this.visible = false;
-					}
 				} )
 				layout.add(actions, "actions");
 
@@ -823,33 +817,29 @@ function GUI(){
 				else{
 					_this.guis.in_game.updateActions(game.buildingAtheists);
 				}
-				// BuildMenu.enableTier = function (n){
-				// 	if(n < 3){
-				// 		this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
-				// 		this.children[n+3].children[0].width = 120;
-				// 		this.children[n+3].children[0].height = 40;
-						
-				// 		this.children[n+3].children[1].color = "#000";
-				// 	}
-				// 	if(n == 3){
-				// 		this.children[n+3].children[0] = new this.onTexture(game.textures.get("button"));
-				// 		this.children[n+3].children[0].width = 120;
-				// 		this.children[n+3].children[0].height = 40;
-						
-				// 		this.children[n+3].children[1].color = "#000";
-						
-				// 		this.children[n+4].children[0] = new this.onTexture(game.textures.get("button"));
-				// 		this.children[n+4].children[0].width = 120;
-				// 		this.children[n+4].children[0].height = 40;
-						
-				// 		this.children[n+4].children[1].color = "#000";
-				// 	}
-				// };
-				// BuildMenu.onTexture = Texture;
+
+				actions.enableTier = function (n){
+					if(game.players.player.side == "creationist")
+						var buildings = game.buildingCreationist;
+					else
+						var buildings = game.buildingAtheists;
+
+					if(n < 3){
+						buildings[n+3].canBuild = true;
+					}
+					if(n == 3){
+						buildings[n+3].canBuild = true;
+						buildings[n+4].canBuild = true;
+					}
+				};
+				actions.onTexture = Texture;
 				
 				// _this.add(BuildMenu, "BuildMenu");
 			},
 			updateActions: function(actions){
+				if(actions == game.buildingCreationist || actions == game.buildingAtheists)
+					game.gui.links.layout.links.actions.buildBuildings = true;
+					
 				game.gui.links.layout.links.actions.children = [];
 
 				for(var i in actions){
@@ -869,6 +859,10 @@ function GUI(){
 							this.visible = false;
 						},
 					});
+					if(actions[i].canBuild === false){
+						button.onMouseUp = undefined;
+						button.onMouseIn = undefined;
+					}
 					button.description = actions[i].description;
 					// obrázek
 					var texture = new Texture( game.textures.get(actions[i].icon) );
