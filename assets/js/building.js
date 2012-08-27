@@ -97,7 +97,7 @@ Building.prototype.tryProduce = function (Constructor,price){
 		}
 		else{
 			if(!this.initProduction(function (){
-				Spawn(Constructor,_this.spawnPoint,_this.owner);
+				Spawn(Constructor,_this.spawnPoint,_this.owner, price);
 				},price)){ //<-- zde se balancuje čas výroby
 					if(this.owner == "player")
 						console.log("The queue is full.");
