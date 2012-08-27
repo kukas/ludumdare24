@@ -87,7 +87,7 @@ Eventhandler.prototype.addMouseControl = function(which, down, up, continuous) {
 Eventhandler.prototype.keyboardhandler = function(e) {
 	var keycode = e.keyCode,
 		type = e.type;
-	if( this.keyboardControls[ keycode ] ){
+	if( this.keyboardControls[ keycode ]){
 		this.keyboardControls[ keycode ].down = (type == "keydown");
 		this.keyboardControls[ keycode ].exec(type);
 	}

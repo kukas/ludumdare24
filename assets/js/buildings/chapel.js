@@ -4,7 +4,7 @@ function Chapel( options ){
 	
 	this.maxHealth = 100;
 	this.health = this.maxHealth;
-	this.width = 128;
+	this.width = 256;
 	this.height = 128;
 	this.range = 64;
 	
@@ -15,7 +15,9 @@ function Chapel( options ){
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	this.price = 0;
 	
-	this.texture = game.textures.get("chapel0");
+	this.texture = game.textures.get("dino", {
+		totalFrames: 2
+	});
 	var _this = this;
 	this.actions = [
 		{

@@ -23,6 +23,7 @@ function Game(){
 	this.rightShadow.addColorStop(1, "rgba(0,0,0,1)");
 
 	this.ticks = 0;
+	this.creationTime = new Date().getTime();
 
 	// this.clearColor = "#BDFFFF";
 	this.clearColor = new Color(0xBDFFFF);
@@ -112,6 +113,26 @@ Game.prototype.tickChildren = function() {
 Game.prototype.tick = function() {
 	this.tickChildren();
 	this.updateResources();
+	if(this.script)
+		this.runScript( new Date().getTime() - this.creationTime );
+	if(this.fade){
+		this.night.alpha += 0.01;
+		if(this.night.alpha >= 1){
+			this.totalWin2();
+			this.gui.links.xicht.links.xicht.image.alpha += 0.01;
+			if(this.gui.links.xicht.links.xicht.image.alpha >= 1)
+				this.totalWin3();
+		}
+	}
+};
+
+Game.prototype.runScript = function(now) {
+	for(var i in this.script){
+		if(i < now && !this.script[i].done){
+			this.script[i].exec();
+			this.script[i].done = true;
+		}
+	}
 };
 
 Game.prototype.centerCanvas = function() {
@@ -242,4 +263,25 @@ Game.prototype.unselectAll = function() {
 			game.selected[j].selected = false;
 		};
 	}
+};
+
+Game.prototype.totalWin = function(winner) {
+	this.gui.remove(this.gui.links.hp_enemy);
+	this.gui.remove(this.gui.links.hp_player);
+	this.fade = true;
+	this.winner = winner;
+};
+Game.prototype.totalWin2 = function() {
+	this.gui.links.subtitles.visible = true;
+};
+
+Game.prototype.totalWin3 = function() {
+	if(this.script == this.totalWinScript)
+		return
+	this.playScript(this.totalWinScript)
+};
+
+Game.prototype.playScript = function(script) {
+	this.script = script;
+	this.creationTime = new Date().getTime();
 };
