@@ -19,18 +19,20 @@ function Level(){
 
 		bionuke: this.texturepath + "bionuke.png",
 
+		dino: this.texturepath + "dino.png",
+
 		//Budovy
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
 		chapel2: this.texturepath + "monastery.png",
 		chapel3: this.texturepath + "cathedral.png",
 		school0: this.texturepath + "school.png",
-		school1: this.texturepath + "grammar school.png",
+		school1: this.texturepath + "grammar_school.png",
 		school2: this.texturepath + "library.png",
 		school3: this.texturepath + "academy.png",
 		bonfire: this.texturepath + "hranice.png",
 		crossscorpio: this.texturepath + "scorpio.png",
-		galapags: this.texturepath + "galapágy.png",
+		galapags: this.texturepath + "galapagy.png",
 		museum: this.texturepath + "muzeum.png",
 		bookmine: this.texturepath + "bookmine.png",
 		//Jednotky
