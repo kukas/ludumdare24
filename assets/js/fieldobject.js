@@ -1,6 +1,7 @@
 function FieldObject( options ){
 	Object2D.call(this, options);
 	this.lastdeal = 0;
+	this.boomRange = -1;
 };
 FieldObject.prototype = new Object2D();
 
@@ -38,17 +39,19 @@ FieldObject.prototype.getDistance = function (){
 };
 
 FieldObject.prototype.attack = function( obj ) {
-	if(this.boomRange > 0){
-		this.boom();
-		return false;
-	}
-	else{
-		if(obj.owner == this.owner)
-			return
-		if(this.lastdeal >= this.cadency){
-			this.texture.switchAnimation("attack");
-			obj.dealDamage(this.damage, this);
-			this.lastdeal = 0;
+	if(!obj.ghost){
+		if(this.boomRange > 0){
+			this.boom();
+			return false;
+		}
+		else{
+			if(obj.owner == this.owner)
+				return
+			if(this.lastdeal >= this.cadency){
+				this.texture.switchAnimation("attack");
+				obj.dealDamage(this.damage, this);
+				this.lastdeal = 0;
+			}
 		}
 	}
 };

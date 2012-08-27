@@ -25,6 +25,9 @@ function Level(){
 		school3: this.texturepath + "academy.png",
 		bonfire: this.texturepath + "hranice.png",
 		crossscorpio: this.texturepath + "scorpio.png",
+		galapags: this.texturepath + "galapágy.png",
+		museum: this.texturepath + "muzeum.png",
+		bookmine: this.texturepath + "bookmine.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -40,7 +43,9 @@ function Level(){
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
+		button_off: this.texturepath + "button_off.jpg",
 		//Particles
+		basicParticle : this.texturepath + "basicparticle.png",
 		crossParticle : this.texturepath + "cross.png",
 		bookParticle : this.texturepath + "book.png",
 		//Zdroje
@@ -163,6 +168,13 @@ Level.prototype.afterLoad = function (){
 		this.add(building2, "base");
 	}
 
+	var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
+	this.add(miss);
+	var gr = new Missionary({position:new Vector2(1150,terrain.getHeight(1150)),owner:"enemy"});
+	this.add(gr);
+	var gr2 = new Nun({position:new Vector2(1300,terrain.getHeight(1300)),owner:"enemy"});
+	this.add(gr2);
+	
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem");
 	

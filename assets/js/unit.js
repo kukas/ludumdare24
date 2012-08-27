@@ -36,8 +36,6 @@ function Unit(options){
 			}
 		},
 	];
-		
-	this.boomRange = -1;
 }
 Unit.prototype = new FieldObject();
 

@@ -9,7 +9,7 @@ function School( options ){
 	this.range = 64;
 	
 	this.tier = 0;
-	this.nextTierPrice = 100;
+	this.nextTierPrice = 10;
 	this.maxQueue = 5;
 	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
 	this.owner = options.owner !== undefined ? options.owner : "player";
@@ -60,8 +60,9 @@ function School( options ){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			this.nextTierPrice = 300;
+			this.nextTierPrice = 10;
 		}
+		game.gui.links.BuildMenu.enableTier(this.tier);
 	};
 	
 	this.onDie = function (){

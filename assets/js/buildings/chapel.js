@@ -64,6 +64,7 @@ function Chapel( options ){
 			this.height = 256;
 			this.nextTierPrice = 300;
 		}
+		game.gui.links.BuildMenu.enableTier("1");
 	};
 	
 	this.onDie = function (){

@@ -55,7 +55,7 @@ function Game(){
 		enemy : {
 			side:"atheist",
 			color:"#F0271D",
-			resources:{gold:100,spec:100},
+			resources:{gold:100,spec:1000},
 			controledGround:100,
 			},
 		};

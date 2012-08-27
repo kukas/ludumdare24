@@ -8,6 +8,7 @@ function Particle(options){
 	this.origin = new Vector2().copy(this.position);
 
 	this.color = options.color === undefined ? new Color(0x000000) : options.color;
+	this.texture = options.texture === undefined ? game.textures.get("basicParticle") : options.texture;
 
 	// velikost
 	this.width = options.width === undefined ? 1 : options.width;

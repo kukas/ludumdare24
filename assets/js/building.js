@@ -13,6 +13,10 @@ function Building(options){
 Building.prototype = new FieldObject();
 
 Building.prototype.dealDamage = function (dmg, murderer){
+	if(this.boomRange > 0 && !this.ghost){
+		this.boom();
+		return true;
+	}
 	murderer = murderer === undefined ? this : murderer;
 	this.health -= dmg;
 	// třísky
