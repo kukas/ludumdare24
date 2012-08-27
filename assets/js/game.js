@@ -50,13 +50,13 @@ function Game(){
 		player : {
 			side:"atheist",
 			color:"#F0271D",
-			resources:{gold:100,spec:100},
+			resources:{gold:1000,spec:1000},
 			controledGround:100,
 			},
 		enemy : {
 			side:"creationist",
 			color:"#93C6CC",
-			resources:{gold:1000,spec:100},
+			resources:{gold:1000,spec:1000},
 			controledGround:100,
 			},
 		};
@@ -175,7 +175,7 @@ Game.prototype.init = function() {
 	  _this.centerCanvas();
 	});
 
-	this.loadLevel("test")
+	this.loadLevel("menu");
 
 	this.render();
 };
@@ -234,12 +234,12 @@ Game.prototype.add = function(obj, name) {
 
 Game.prototype.setPlayer = function (id){
 	if(id == "creationist"){
-		this.player = {side:"creationist",color:"#93C6CC"};
-		this.enemy = {side:"atheist",color:"#F0271D"};
+		this.players.player = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100};
+		this.players.enemy = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100};
 	}
 	else{
-		this.player = {side:"atheist",color:"#F0271D"};
-		this.enemy = {side:"creationist",color:"#93C6CC"};
+		this.players.player = {side:"atheist",color:"#F0271D",resources:{gold:1000,spec:1000},controledGround:100};
+		this.players.enemy = {side:"creationist",color:"#93C6CC",resources:{gold:1000,spec:1000},controledGround:100};
 	}
 };
 

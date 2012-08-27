@@ -332,6 +332,53 @@ function GUI(){
 		},
 		main_menu: {
 			objects: function(){
+				var play1 = new Button(500,300,{
+					width:400,
+					height:70,
+					visible:false,
+					onMouseUp:function (){game.setPlayer("creationist");game.loadLevel("test");},
+					});
+					
+					var texture = new Texture(game.textures.get("button"));
+					texture.width = play1.width;
+					texture.height = play1.height;
+					
+					play1.add(texture);
+					
+					play1.add(new Text({
+					x: 0, 
+					y: 0,
+					value: "Play for creationists",
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 50,
+					}));
+					
+					_this.add(play1);
+					
+					var play2 = new Button(500,400,{
+					width:400,
+					height:70,
+					visible:false,
+					onMouseUp:function (){game.setPlayer("atheist");game.loadLevel("test");},
+					});
+					
+					var texture2 = new Texture(game.textures.get("button"));
+					texture2.width = play1.width;
+					texture2.height = play1.height;
+					
+					play2.add(texture2);
+					
+					play2.add(new Text({
+					x: 0, 
+					y: 0,
+					value: "Play for atheists",
+					color: "#000",
+					font: "PlainBlackNormal",
+					size: 50,
+					}));
+					
+					_this.add(play2);
 			},
 			controls: function(){
 				_this.addControls();
@@ -675,7 +722,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Bonfire)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Painting)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(painting);
 					
@@ -823,7 +870,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(!game.links.base.build(Galapags)){console.log("not enough resources");};},
+					onMouseUp:function (){if(!game.links.base.build(Laboratory)){console.log("not enough resources");};},
 					});
 					BuildMenu.add(laboratory);
 					
@@ -831,7 +878,7 @@ function GUI(){
 					width:120,
 					height:40,
 					visible:false,
-					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(Galapags)){console.log("not enough resources");};}},
+					onMouseUp:function (){if(game.links.base.tier >= 1){if(!game.links.base.build(GayBay)){console.log("not enough resources");};}},
 					});
 					BuildMenu.add(gaybar);
 					

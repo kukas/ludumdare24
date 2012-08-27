@@ -18,6 +18,7 @@ function Level(){
 		cloud5: this.texturepath + "clouds/mrak5.png",
 
 		bionuke: this.texturepath + "bionuke.png",
+		holynuke: this.texturepath + "holynuke.png",
 
 		dino: this.texturepath + "dino.png",
 
@@ -35,6 +36,9 @@ function Level(){
 		galapags: this.texturepath + "galapagy.png",
 		museum: this.texturepath + "muzeum.png",
 		bookmine: this.texturepath + "bookmine.png",
+		gaybay: this.texturepath + "gaybay.png",
+		painting: this.texturepath + "painting.png",
+		lab: this.texturepath + "lab.png",
 		//Jednotky
 		crusader: this.texturepath + "crusader.png",
 		troll: this.texturepath + "troll.png",
@@ -47,6 +51,9 @@ function Level(){
 		priest: this.texturepath + "priest.png",
 		librarian: this.texturepath + "librarian.png",
 		biologist: this.texturepath + "biologist.png",
+		teacher: this.texturepath + "teacher.png",
+		cherub: this.texturepath + "cherub.png",
+		bishop: this.texturepath + "bishop.png",
 		//GUI
 		button: this.texturepath + "button.jpg",
 		button2: this.texturepath + "button2.jpg",
@@ -55,6 +62,11 @@ function Level(){
 		basicParticle : this.texturepath + "basicparticle.png",
 		crossParticle : this.texturepath + "cross.png",
 		bookParticle : this.texturepath + "book.png",
+		ruzenecParticle : this.texturepath + "ruzenec.png",
+		kridaParticle : this.texturepath + "krida.png",
+		crossScorpioParticle : this.texturepath + "kriz.png",
+		fireball : this.texturepath + "koule.png",
+		sancWater : this.texturepath + "sancwater.png",
 		//Zdroje
 		gold : this.texturepath + "gold.png",
 		faith : this.texturepath + "faith.png",
@@ -71,7 +83,7 @@ function Level(){
 		priest : this.soundpath + "zvuky/knez.wav",
 		librarian : this.soundpath + "zvuky/knihovnice.wav",
 		angel : this.soundpath + "zvuky/andel.wav",
-		barocoangel : this.soundpath + "zvuky/andelicek.wav",
+		cherub : this.soundpath + "zvuky/andelicek.wav",
 		biologist : this.soundpath + "zvuky/biolog.wav",
 		bishop : this.soundpath + "zvuky/biskup.wav",
 		devil : this.soundpath + "zvuky/dabel.wav",
@@ -163,7 +175,7 @@ Level.prototype.afterLoad = function (){
 		this.add(building, "base");
 	
 		var building2 = new School({
-			position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
+			position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("school0").height/2),
 			owner: "enemy",
 		});
 		this.add(building2);
@@ -182,8 +194,8 @@ Level.prototype.afterLoad = function (){
 		this.add(building2, "base");
 	}
 
-	var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
-	this.add(miss);
+	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
+	//this.add(miss);
 	
 	var ps = new ParticleSystem();
 	this.add(ps, "particlesystem");

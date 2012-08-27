@@ -33,8 +33,8 @@ function Nun( options ){
 		}
 	});
 	
-	this.projectile = game.textures.get("crossParticle",{
-		totalFrames:2,
+	this.projectile = game.textures.get("ruzenecParticle",{
+		totalFrames:1,
 		currentAnimation:"being",
 		animations : {
 			being : {
@@ -44,6 +44,9 @@ function Nun( options ){
 			},
 		},
 	});
+	
+	this.projectileWidth = 14;
+	this.projectileHeight = 47;
 
 	if(options.owner == "enemy"){
 		this.texture.flip = "x";

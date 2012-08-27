@@ -1,4 +1,4 @@
-function Biologist( options ){
+function Cherub( options ){
 	
 	this.speed = options.speed !== undefined ? options.speed : 1;
 	
@@ -16,20 +16,20 @@ function Biologist( options ){
 	this.health = this.maxHealth;
 	this.price = 120;
 	
-	this.spawnSound = game.jukebox.sounds["biologist"];
+	this.spawnSound = game.jukebox.sounds["cherub"];
 	
-	this.texture = game.textures.get("biologist", {
-		totalFrames: 6,
+	this.texture = game.textures.get("cherub", {
+		totalFrames: 2,
 		currentAnimation: "walking",
 		animations:{
 			walking: {
 				start: 0,
-				end: 6,
+				end: 2,
 				speed: 7
 			},
 			attack: {
-				start: 5,
-				end: 6,
+				start: 1,
+				end: 2,
 				speed: 10,
 				cycle: false
 			}
@@ -43,9 +43,9 @@ function Biologist( options ){
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 };
-Biologist.prototype = new Unit();
+Cherub.prototype = new Unit();
 
-Biologist.prototype.boom = function (){
+Cherub.prototype.boom = function (){
 	this.owner = "no one";
 	var _this = this;
 	var nuke = new Background({
@@ -53,7 +53,7 @@ Biologist.prototype.boom = function (){
 		width: 53*6,
 		height: 64*6,
 		zIndex: -3,
-		texture: game.textures.get("bionuke", {
+		texture: game.textures.get("holynuke", {
 			totalFrames: 12,
 			currentAnimation: "explosion",
 			animations:{
