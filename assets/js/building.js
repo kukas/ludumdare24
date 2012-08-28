@@ -41,7 +41,6 @@ Building.prototype.dealDamage = function (dmg, murderer){
 };
 
 Building.prototype.die = function( murderer ) {
-	// console.log(murderer)
 	if(murderer instanceof Unit)
 		murderer.unfreeze();
 	if(this.health <= 0){
@@ -93,14 +92,15 @@ Building.prototype.tryProduce = function (Constructor,price){
 	var _this = this;
 	if(typeof(Constructor) != "string"){
 		if(game.players[_this.owner].resources.gold - price < 0){
-			console.log("Not enough resources.");
+			if(this.owner == "player")
+				game.gui.links.alert.alert("Not enough resources.");
 		}
 		else{
 			if(!this.initProduction(function (){
 				Spawn(Constructor,_this.spawnPoint,_this.owner, price);
 				},price)){ //<-- zde se balancuje čas výroby
 					if(this.owner == "player")
-						console.log("The queue is full.");
+						game.gui.links.alert.alert("The queue is full.");
 			}
 			else{
 				game.players[_this.owner].resources.gold -= price;
@@ -109,14 +109,15 @@ Building.prototype.tryProduce = function (Constructor,price){
 	}
 	else if(Constructor == "Upgrade"){
 		if(game.players[_this.owner].resources.spec - this.nextTierPrice < 0){
-			console.log("Not enough resources");
+			if(this.owner == "player")
+				game.gui.links.alert.alert("Not enough resources");
 		}
 		else{
 			if(!this.initProduction(function (){
 				_this.upgrade();
 				},this.nextTierPrice)){
 				if(this.owner == "player")
-					console.log("The queue is full.");
+					game.gui.links.alert.alert("The queue is full.");
 			}
 			else{
 				game.players[_this.owner].resources.spec -= this.nextTierPrice;

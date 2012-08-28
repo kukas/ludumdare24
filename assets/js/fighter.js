@@ -1,8 +1,8 @@
 function Fighter(options){
 	Object2D.call(this, options);
 
-	this.width = 240;
-	this.height = 300;
+	this.width = 175;
+	this.height = 243;
 	this.jumping = false;
 
 	this.think = false;

@@ -102,8 +102,7 @@ function Chapel( options ){
 	};
 	
 	this.onDie = function (){
-		game.loadLevel("mortal_combat");
-		game.ai.active = false;
+		game.switchToMortalCombat();
 	};
 };
 Chapel.prototype = new Building();

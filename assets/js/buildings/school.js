@@ -97,8 +97,7 @@ function School( options ){
 	};
 	
 	this.onDie = function (){
-		game.loadLevel("mortal_combat");
-		game.ai.active = false;
+		game.switchToMortalCombat();
 	};
 };
 School.prototype = new Building();

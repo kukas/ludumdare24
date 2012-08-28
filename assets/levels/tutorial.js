@@ -3,11 +3,13 @@ function Level(){
 	this.links = {};
 
 	this.textures_src = {
+		"0": this.texturepath + "tutorial/0.png",
+		"1": this.texturepath + "tutorial/1.png",
 		"2": this.texturepath + "tutorial/2.jpg",
 		"3": this.texturepath + "tutorial/3.png",
-		"4": this.texturepath + "tutorial/4.jpg",
-		"5": this.texturepath + "tutorial/5.jpg",
-		"6": this.texturepath + "tutorial/6.jpg",
+		"4": this.texturepath + "tutorial/4.png",
+		"5": this.texturepath + "tutorial/5.png",
+		"6": this.texturepath + "tutorial/6.png",
 		"7": this.texturepath + "tutorial/7.jpg",
 	};
 	this.sounds_src = {
@@ -23,24 +25,30 @@ Level.prototype.afterLoad = function (){
 
 	var script = {
 		0: {exec:function(){
+			game.gui.links.slide.image = game.textures.get("0");
+		}},
+		25000: {exec:function(){
+			game.gui.links.slide.image = game.textures.get("1");
+		}},
+		31000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("2");
 		}},
-		3000: {exec:function(){
+		36000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("3");
 		}},
-		16000: {exec:function(){
+		58000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("4");
 		}},
-		24000: {exec:function(){
+		78000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("5");
 		}},
-		30000: {exec:function(){
+		95000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("6");
 		}},
-		34000: {exec:function(){
+		104000: {exec:function(){
 			game.gui.links.slide.image = game.textures.get("7");
 		}},
-		38000: {exec:function(){
+		107000: {exec:function(){
 			game.loadLevel("menu");
 		}},
 	}

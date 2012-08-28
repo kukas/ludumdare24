@@ -7,7 +7,7 @@ function Level(){
 		troll: this.texturepath + "troll.png",
 		// stickman: this.texturepath + "stickman.png",
 		god: this.texturepath + "god.png",
-		stickman: this.texturepath + "godfight.png"
+		stickman: this.texturepath + "godfight-small.png"
 	};
 	this.sounds_src = {
 		lets_end_it : this.soundpath+"mortal_combat/lets_end_it.wav",
@@ -46,7 +46,6 @@ Level.prototype.afterLoad = function (){
 
 	// total win
 	game.totalWinScript = {
-		// After this terrible battle was fought the peace has come. Your enemies are forgotten now, but you still wake every morning with fear of possible return of that big old man… Was he defeated truly forever? Well, maybe once you will know.
 		0: {exec:function(){
 			game.gui.links.subtitles.changeText("After this terrible battle was fought the peace has come.")
 		}},
@@ -62,19 +61,20 @@ Level.prototype.afterLoad = function (){
 		18000: {exec:function(){
 			game.gui.links.subtitles.changeText("Well, maybe once you will know.")
 		}},
-		21000: {exec:function(){
-			game.gui.links.subtitles.changeText("The end.")
-		}},
-		24000: {exec:function(){
+		22000: {exec:function(){
 			game.fade = false;
 			game.gui.links.xicht.links.xicht.image.alpha = 0.1;
 			game.gui.links.subtitles.y = 50;
 			game.gui.links.subtitles.font = "Arial";
 			game.gui.links.subtitles.text = [
-			"Credits"," ","Programming: Jirka Balhar, Štěpán Marek, Martin Mach"," ",
-			"Graphics: Martin Mach, Hynek Bečka"," ", "Game design: Hynek Bečka, Štěpán Marek, Jirka Balhar, Martin Mach"," ",
+			"Credits"," ",
+			"Programming: Jirka Balhar, Štěpán Marek, Martin Mach"," ",
+			"Graphics: Martin Mach, Hynek Bečka, Jan Mesany"," ", 
+			"Game design: Hynek Bečka, Štěpán Marek, Jirka Balhar, Martin Mach"," ",
 			"Dubbing: Hynek Bečka, Martin Mach, Jiří Zbytovský"," ",
-			"SFX: Jiří Zbytovský"," ","Music: Jan Mesany"," ","Barista: Jan Mesany", " "," ", "Qaterknan (c) 2012"
+			// "SFX: Hynek Bečka"," ",
+			"Music: Jan Mesany"," ",
+			"Barista: Jan Mesany", " "," ", "Qaterknan (c) 2012"
 			]
 		}},
 	}
@@ -133,14 +133,14 @@ Level.prototype.afterLoad = function (){
 					speed: 100
 				},
 				punch: {
-					start: 2,
-					end: 4,
+					start: 3,
+					end: 5,
 					speed: 10,
 					cycle: false
 				},
 				kick: {
-					start: 0,
-					end: 2,
+					start: 1,
+					end: 3,
 					speed: 10,
 					cycle: false
 				},
@@ -223,7 +223,6 @@ Level.prototype.afterLoad = function (){
 
 		if(this.health < 25 && !this.finish_him_played){
 			this.finish_him_played = true;
-			console.log("finish_him", game.gui.links.finish_him)
 			game.gui.links.finish_him.visible = true;
 			game.jukebox.play("finish_him");
 			game.playScript({

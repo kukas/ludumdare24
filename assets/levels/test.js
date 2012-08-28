@@ -173,7 +173,7 @@ Level.prototype = new Levels();
 Level.prototype.afterLoad = function (){
 	var _this = this;
 	if(!jQuery.browser.mozilla){
-		game.jukebox.play("song");
+		game.jukebox.loop("song");
 	}
 	game.buildingCreationist = [
 		{
@@ -187,7 +187,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Holyfire)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -202,7 +202,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(CrossScorpio)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -217,7 +217,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Bonfire)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -232,7 +232,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Painting)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -247,7 +247,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Confessor)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -262,7 +262,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Altar)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -277,7 +277,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Slum)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -292,7 +292,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Golgota)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -311,7 +311,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Bookmine)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -326,7 +326,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Machinegun)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -341,7 +341,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Dino)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -356,7 +356,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Laboratory)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -371,7 +371,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(GayBay)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -386,7 +386,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Portal)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -401,7 +401,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Museum)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -416,7 +416,7 @@ Level.prototype.afterLoad = function (){
 			},
 			exec: function(){
 				if(!game.links.base.build(Galapags)){
-					console.log("not enough resources");
+					game.gui.links.alert.alert("not enough resources");
 				}
 			}
 		},
@@ -443,7 +443,6 @@ Level.prototype.afterLoad = function (){
 	}
 	slunce.relative = true;
 	this.add( slunce, "slunce" );
-	console.log(this.links);
 
 	for(var i=0;i<10;i++){
 		var mrak = new Background({
@@ -517,7 +516,6 @@ Level.prototype.afterLoad = function (){
 	zlomekE = 0;
 	
 	game.ai.active = true;
-	console.log(game.ai)
 };
 
 var level = new Level();

@@ -488,7 +488,6 @@ function GUI(){
 				xichtTex.width = 75*4;
 				xichtTex.height = 95*4;
 				xichtTex.image.alpha = 0;
-				console.log(xichtTex)
 
 				xicht.add(xichtTex, "xicht");
 
@@ -564,7 +563,7 @@ function GUI(){
 					height: game.height,
 					onMouseIn: function(){
 						if(game.camera.x > 0)
-							game.camera.x -= 2;
+							game.camera.x -= 3;
 					}
 				})
 				_this.add(mapLeft);
@@ -573,28 +572,35 @@ function GUI(){
 					height: game.height,
 					onMouseIn: function(){
 						if(game.camera.x < game.playground.width-game.width)
-							game.camera.x += 2;
+							game.camera.x += 3;
 					}
 				})
 				_this.add(mapRight);
 
-				// var enterMortality = new Button(game.width/2 - 130, 10, {
-				// 	width: 260,
-				// 	height: 30,
-				// 	onMouseUp: function(){
-				// 		game.loadLevel("mortal_combat");
-				// 	}
-				// });
-				// enterMortality.add( new Text({
-				// 	width: 260,
-				// 	y: 3,
-				// 	color: "#F00",
-				// 	font: "Arial",
-				// 	size: 20,
-				// 	value: "ENTER THE BRUTALITY",
-				// 	align: "center",
-				// }) );
-				// _this.add(enterMortality);
+				var tut = new Text( {
+					y: 30,
+					width: game.width,
+					text: [" "],
+					color: "#F00",
+					font: "akashiregular",
+					visible: false,
+					align: "center",
+					size: 30,
+				} );
+				tut.alert = function(msg){
+					this.visible = true;
+					this.changeText(msg);
+					this.timeout = 60;
+				}
+				tut.tick = function(){
+					this.visible = false;
+					if(this.timeout > 0){
+						this.timeout--;
+						this.visible = true;
+					}
+				}
+
+				_this.add(tut, "alert");
 
 				// LAYOUT --------------------------
 				var layout = new Button( game.width/2 - 673/2, game.height - 100, {

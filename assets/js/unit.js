@@ -85,10 +85,6 @@ Unit.prototype.onCollision = function(obj) {
 	};
 };
 
-Unit.prototype.onSelect = function() {
-	console.log(this.waiting, this.shouldBeSpeed, this.currentSpeed)
-};
-
 Unit.prototype.move = function() {
 	if(this.waiting)
 		var sp = this.shouldBeSpeed;

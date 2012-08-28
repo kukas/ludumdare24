@@ -46,7 +46,9 @@ function Game(){
 	this.camera.tY = function(y){
 			return y + this.y;
 		};
-		
+	this.camera.velocity = new Vector2(0,0);
+	this.camera.gravity = new Vector2(0,0);
+
 	this.players = {
 		player : {
 			side:"atheist",
@@ -68,6 +70,19 @@ function Game(){
 };
 
 Game.prototype = new Object2D();
+Game.prototype.switchToMortalCombat = function() {
+	game.playScript({
+		0: {exec:function(){
+			game.camera.gravity.set(0,-0.1)
+		}},
+		2000: {exec:function(){
+			game.camera.gravity.set(0,0);
+			game.camera.velocity.set(0,0);
+			game.loadLevel("mortal_combat");
+			game.ai.active = false;
+		}}
+	});
+}
 
 Game.prototype.render = function() {
 	var _this = this;
@@ -108,6 +123,7 @@ Game.prototype.tickChildren = function() {
 	this.eventhandler.loop();
 	this.gui.tick();
 
+
 	for (var i = 0, len = this.children.length; i < len; i++){
 		this.children[i].tick();
 		if(this.children[i].tickChildren)
@@ -120,6 +136,10 @@ Game.prototype.tick = function() {
 		this.players.player.resources.gold += 1;
 		this.players.enemy.resources.gold += 1;
 	}
+
+	this.camera.velocity.addSelf(this.camera.gravity)
+	this.camera.addSelf(this.camera.velocity)
+	
 	this.tickChildren();
 	this.updateResources();
 	this.ai.tick();
