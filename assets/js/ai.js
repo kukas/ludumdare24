@@ -25,7 +25,8 @@ function AI(){
 			}
 		},
 		build : function (){
-			var id = Math.round(Math.random()*(3+_this.property[0].tier));
+			//var ex = _this.property[0].tier == 3 ? 1 : 0;
+			var id = Math.round(Math.random()*(3+_this.property[0].tier+ex));
 				var building = new _this.buildings[id]({});
 				building.owner = "enemy";
 				building.position.x = Math.random()*game.players.enemy.controledGround;
