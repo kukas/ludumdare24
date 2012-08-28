@@ -135,19 +135,19 @@ Level.prototype.afterLoad = function (){
 				punch: {
 					start: 3,
 					end: 5,
-					speed: 10,
+					speed: 5,
 					cycle: false
 				},
 				kick: {
 					start: 1,
 					end: 3,
-					speed: 10,
+					speed: 5,
 					cycle: false
 				},
 				cover: {
 					start: 1,
 					end: 2,
-					speed: 10,
+					speed: 5,
 					cycle: false
 				},
 			}
@@ -172,7 +172,7 @@ Level.prototype.afterLoad = function (){
 		if(!this.playing)
 			return
 		this.ticks++;
-		var AIlimit = 16;
+		var AIlimit = 26;
 		if(this.ticks % AIlimit == 0){
 
 			var AIcommands = ["standing", "move", "back", "attack", "cover"];
@@ -183,13 +183,17 @@ Level.prototype.afterLoad = function (){
 			this.uncover();
 			if(dist < 200 && Math.random() > 0.1){
 				if(this.health > 65){
+					if(Math.random() > 0.6)
+						this.AI = "attack";
+					else
+						this.AI = "standing";
+				}
+				else if(this.health > 35){
+					// this.AI = "attack";
 					if(Math.random() > 0.4)
 						this.AI = "attack";
 					else
-						this.AI = "cover";
-				}
-				else if(this.health > 35){
-					this.AI = "attack";
+						this.AI = "standing";
 				}
 				else {
 					if(Math.random() > 0.8)
@@ -198,7 +202,7 @@ Level.prototype.afterLoad = function (){
 						this.AI = "back";
 				}
 			}
-			if(dist > 200 && Math.random() > 0.2){
+			if(dist > 200 && Math.random() > (this.health > 35 ? 0.2 : 0.6)){
 				this.AI = "move";
 			}
 		}

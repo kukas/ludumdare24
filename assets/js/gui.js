@@ -548,11 +548,6 @@ function GUI(){
 				game.eventhandler.addKeyboardControl("D", function(){
 					game.links.god.attack("punch");
 				});
-				// game.eventhandler.addKeyboardControl("A", undefined, undefined, left)
-
-				// game.eventhandler.addKeyboardControl(39, undefined, undefined, right)
-				// game.eventhandler.addKeyboardControl("D", undefined, undefined, right)
-
 			}
 		},
 		in_game: {

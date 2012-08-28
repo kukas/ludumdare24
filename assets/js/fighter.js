@@ -9,11 +9,11 @@ function Fighter(options){
 
 	this.attacks = {
 		kick: {
-			range: 250,
+			range: 210,
 			damage: 10
 		},
 		punch: {
-			range: 220,
+			range: 210,
 			damage: 5
 		}
 	};
@@ -46,12 +46,14 @@ Fighter.prototype.jump = function(force) {
 	}
 };
 Fighter.prototype.go = function(vec) {
-	this.uncover();
-	this.texture.switchAnimation("walking");
+	// this.uncover();
+	if(this.shield == 0)
+		this.texture.switchAnimation("walking");
 	this.velocity.x = vec.x;
 };
 Fighter.prototype.stop = function() {
-	this.texture.switchAnimation("standing");
+	if(this.shield == 0)
+		this.texture.switchAnimation("standing");
 	if(!this.jumping)
 		this.velocity.set(0,0);
 };
@@ -68,8 +70,18 @@ Fighter.prototype.attack = function(type) {
 	if(this.name == "god" && this.charge > 0)
 		return;
 
-	this.charge = 36;
+	var _this = this;
+
+	this.uncover();
+
+	this.charge = 26;
 	this.texture.switchAnimation(type);
+	this.attacking = true;
+	setTimeout(function(){
+		_this.texture.switchAnimation("standing");
+		_this.attacking = false;
+		_this.uncover();
+	}, 300)
 	for(var i in game.children){
 		var obj = game.children[i];
 		if(obj instanceof Fighter && obj != this){
@@ -86,6 +98,8 @@ Fighter.prototype.attack = function(type) {
 };
 
 Fighter.prototype.cover = function() {
+	if(this.attacking)
+		return
 	if(this.shield != this.coverShield){
 		this.shield = this.coverShield;
 		this.texture.switchAnimation("cover")
@@ -113,9 +127,9 @@ Fighter.prototype.tick = function() {
 Fighter.prototype.dealDamage = function(dmg, murderer) {
 	var _this = this;
 	if(this.shield > 0){
-		dmg = 0;
+		return;
 	}
-	this.health -= dmg - this.shield;
+	this.health -= dmg;
 
 	// krev
 	var vlevo = (this.position.x < murderer.position.x) ? 1 : 0;
