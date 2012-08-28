@@ -479,6 +479,7 @@ Level.prototype.afterLoad = function (){
 			position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("school0").height/2),
 			owner: "enemy",
 		});
+		building2.selectable = false;
 		this.add(building2);
 		game.ai.property.push(building2);
 		
@@ -490,6 +491,7 @@ Level.prototype.afterLoad = function (){
 			position: new Vector2(game.playground.width-150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
 			owner: "enemy",
 		});
+		building.selectable = false;
 		this.add(building);
 	
 		var building2 = new School({

@@ -31,6 +31,9 @@ function Holyfire( options ){
 Holyfire.prototype = new Building();
 
 Holyfire.prototype.boom = function (){
+	if(this.boomed)
+		return;
+	this.boomed = true;
 	this.owner = "no one";
 	var _this = this;
 	var nuke = new Background({

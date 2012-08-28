@@ -21,6 +21,7 @@ function Object2D( options ){
 
 	this.ghostAlpha = 0.5;
 
+	this.selectable = true;
 	this.selected = false;
 	this.selectColor = new Color("#0000FF");
 

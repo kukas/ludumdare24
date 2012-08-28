@@ -46,13 +46,16 @@ function Biologist( options ){
 Biologist.prototype = new Unit();
 
 Biologist.prototype.boom = function (){
+	if(this.boomed)
+		return;
+	this.boomed = true;
 	this.owner = "no one";
 	var _this = this;
 	var nuke = new Background({
 		position: _this.position,
 		width: 53*6,
 		height: 64*6,
-		zIndex: -3,
+		zIndex: -5,
 		texture: game.textures.get("bionuke", {
 			totalFrames: 12,
 			currentAnimation: "explosion",

@@ -10,6 +10,7 @@ function Spawn(con,x,side, price){
 		obj.price = price;
 		if(side == "enemy"){
 			obj.texture.flip = "x";
+			obj.selectable = false;
 			game.ai.property.push(obj)
 		}
 		else{

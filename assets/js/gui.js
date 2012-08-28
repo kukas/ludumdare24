@@ -895,7 +895,7 @@ function GUI(){
 						_this.guis.in_game.updateActions(game.buildingAtheists);
 					}
 					for(var i in game.children){
-						if( game.children[i].inObject(game.eventhandler.mouse.projected) && game.children[i].collidable ){
+						if( game.children[i].inObject(game.eventhandler.mouse.projected) && game.children[i].collidable && game.children[i].selectable ){
 							game.children[i].selected = true;
 							game.selected = [ game.children[i] ];
 							if(!game.children[i].ghost)

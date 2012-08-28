@@ -31,13 +31,16 @@ function Bookmine( options ){
 Bookmine.prototype = new Building();
 
 Bookmine.prototype.boom = function (){
+	if(this.boomed)
+		return;
+	this.boomed = true;
 	this.owner = "no one";
 	var _this = this;
 	var nuke = new Background({
 		position: _this.position,
-		width: 53*3,
-		height: 64*3,
-		zIndex: -3,
+		width: 26*3,
+		height: 32*3,
+		zIndex: -5,
 		texture: game.textures.get("bionuke", {
 			totalFrames: 12,
 			currentAnimation: "explosion",
