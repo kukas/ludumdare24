@@ -137,6 +137,7 @@ function Level(){
 		fireball : this.texturepath + "koule.png",
 		sancWater : this.texturepath + "sancwater.png",
 		litajici_zaba : this.texturepath + "litajici_zaba.png",
+		bullet : this.texturepath + "bullet.png",
 	};
 	this.sounds_src = {
 		gorilla : this.soundpath+"zvuky/opice.wav",
@@ -163,7 +164,7 @@ function Level(){
 		// song : this.musicpath + "song.mp3",
 	};
 
-	if(jQuery.browser != "mozilla"){
+	if(jQuery.browser.mozilla){
 		this.sounds_src.song = this.musicpath + "song.mp3";
 	}
 }
