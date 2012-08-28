@@ -70,6 +70,33 @@ function Game(){
 };
 
 Game.prototype = new Object2D();
+
+
+Game.prototype.remove = function(obj) {
+	this.toRemove.push(obj);
+};
+
+Game.prototype.removeToRemove = function(){
+	for(var i in this.toRemove){
+		var obj = this.toRemove[i];
+		var search = this.children.indexOf(obj);
+		if(search > -1){
+			this.children.splice(search, 1);
+		}
+
+		for (var i = 0; i < this.links.length; i++) {
+			if(this.links[i] == obj)
+				delete this.links[i];
+		};
+
+		for (var i = 0; i < game.ai.property.length; i++) {
+			if(this.links[i] == obj)
+				delete game.ai.property[i];
+		};
+	}
+	this.toRemove = [];
+};
+
 Game.prototype.switchToMortalCombat = function() {
 	game.playScript({
 		0: {exec:function(){
@@ -163,6 +190,8 @@ Game.prototype.tick = function() {
 			}
 		};
 	}
+
+	this.removeToRemove();
 };
 
 Game.prototype.runScript = function(now) {

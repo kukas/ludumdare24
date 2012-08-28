@@ -77,7 +77,11 @@ FieldObject.prototype.attack = function( obj ) {
 							max : 0.1,
 						},
 					});
-					game.setTimeout(function (){obj.dealDamage(_this.damage, _this);},Math.floor(Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)));
+					setTimeout(
+						function (){
+							obj.dealDamage(_this.damage, _this);
+						},Math.sqrt(Math.abs(difr)*Math.tan(_this.elAngle)*0.5/0.1)*15
+						);
 					this.lastdeal = 0;
 				}
 				else{

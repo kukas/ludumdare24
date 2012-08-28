@@ -25,6 +25,8 @@ function Object2D( options ){
 	this.selected = false;
 	this.selectColor = new Color("#0000FF");
 
+	this.toRemove = [];
+
 	this.texture = options.texture === undefined ? false : options.texture;
 	this.rendering = true;
 

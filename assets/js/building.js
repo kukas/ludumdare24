@@ -133,13 +133,12 @@ Building.prototype.tryProduce = function (Constructor,price){
 
 Building.prototype.build = function(Constructor){
 	var _this = this;
-	var building = new Constructor({});
+	var building = new Constructor({owner: _this.owner});
 	if(game.players[building.owner].resources.spec - building.price < 0){
 		return false;
 	}
 	building.ghost = true;
 	building.selected = true;
-	building.owner = this.owner;
 	game.eventhandler.addMouseControl(0,function(){
 		if(building.ghost && !building.building){
 			var x = game.eventhandler.mouse.x;

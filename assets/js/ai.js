@@ -34,14 +34,14 @@ function AI(){
 		build : function (){
 			var ex = _this.property[0].tier == 3 ? 1 : 0;
 			var id = Math.round(Math.random()*(3+_this.property[0].tier+ex));
-				var building = new _this.buildings[id]({});
-				building.owner = "enemy";
+				var building = new _this.buildings[id]({owner:"enemy"});
 				building.position.x = Math.random()*game.players.enemy.controledGround;
 				building.position.y = game.links.terrain.getHeight(building.position.x)-building.height/2;
 				if(game.links.terrain.getOwner(building.position.x) == building.owner && game.findCollisions(building).length < 1){
 					// samotné postavení
 					building.ghost = true;
 					building.building = true;
+					building.selectable = false;
 
 					building.spawnPoint = building.owner == "player" ? building.position.x+building.width+32 : building.position.x-building.width-32;
 			

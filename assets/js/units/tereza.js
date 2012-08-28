@@ -34,17 +34,9 @@ function Terese( options ){
 		}
 	});
 	
-	this.projectile = this.projectile = game.textures.get("fireball",{
-		totalFrames:4,
-		currentAnimation:"being",
-		animations : {
-			being : {
-				start : 0,
-				end : 4,
-				speed : 10,
-			},
-		},
-	});
+	this.projectile = game.textures.get("bulletParticle");
+	this.projectileWidth = 6;
+	this.projectileHeight = 4;
 
 	if(options.owner == "enemy"){
 		this.texture.flip = "x";

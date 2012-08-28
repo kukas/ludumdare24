@@ -67,15 +67,6 @@ Particle.prototype.update = function(){
 	this.rotation += this.spin;
 }
 Particle.prototype.tick = function() {}
-// NA OHEŇ
-// Particle.prototype.tick = function() {
-// 	if(this.origin.x < this.position.x){
-// 		this.gravity.x = -0.02;
-// 	}
-// 	else {
-// 		this.gravity.x = 0.02;
-// 	}
-// };
 
 function ParticleSystem(options){
 	Object2D.call(this, options);

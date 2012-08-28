@@ -32,13 +32,13 @@ function Machinegun( options ){
 		}
 	});
 
-	if(options.owner == "player"){
+	if(this.owner == "player"){
 		this.texture.flip = "x";
 	}
 	
 	this.projectile = game.textures.get("bulletParticle");
-	this.projectileWidth = 93;
-	this.projectileHeight = 35;
+	this.projectileWidth = 6;
+	this.projectileHeight = 4;
 
 };
 Machinegun.prototype = new Building();
