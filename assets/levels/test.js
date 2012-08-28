@@ -169,7 +169,6 @@ Level.prototype.afterLoad = function (){
 	game.buildingCreationist = [
 		{
 			icon: "b_holyfire",
-			canBuild: true,
 			description: {
 				name: "Holy flame",
 				spec: 10,
@@ -184,10 +183,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_crossscorpion",
-			canBuild: true,
 			description: {
 				name: "Cross Scorpion",
-				spec: 15,
+				spec: 10,
 				description: "It throws huge crosses. Yep. All unbelievers will know the pain if you will build this turret.",
 				quote: " "
 			},
@@ -199,10 +197,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_bonfire",
-			canBuild: true,
 			description: {
 				name: "Bonfire",
-				spec: 20,
+				spec: 10,
 				description: "With this “building” you can slow enemies movement.",
 				quote: " "
 			},
@@ -214,10 +211,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_picture",
-			canBuild: true,
 			description: {
 				name: "Baroque paint",
-				spec: 50,
+				spec: 10,
 				description: "This magical paint is guarded by two golden cherubs. With the power of faith they can come to life and explode in enemies lines.",
 				quote: " "
 			},
@@ -229,10 +225,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_confessor",
-			canBuild: false,
 			description: {
 				name: "Confessory",
-				spec: 100,
+				spec: 10,
 				description: "This is where bishops and prophets are trained. Their training is hard, but at the end you have powerful units.",
 				quote: " "
 			},
@@ -244,10 +239,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_altar",
-			canBuild: false,
 			description: {
 				name: "Altar",
-				spec: 100,
+				spec: 10,
 				description: "On the holy altar the angels are summoned. From the very haven they came to defend all faithful.",
 				quote: " "
 			},
@@ -259,10 +253,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_slum",
-			canBuild: false,
 			description: {
 				name: "Slum",
-				spec: 120,
+				spec: 10,
 				description: "Mother Teresa works here. Here she makes hers bullets, prepare to battles and stuff.",
 				quote: " "
 			},
@@ -274,10 +267,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{
 			icon: "b_golgota",
-			canBuild: false,
 			description: {
 				name: "Golgota",
-				spec: 200,
+				spec: 10,
 				description: "This is place where Jesus died and also place where his cross stayed. Now he came back. With cross. And it is super effective against all sinners.",
 				quote: " "
 			},
@@ -293,7 +285,6 @@ Level.prototype.afterLoad = function (){
 	game.buildingAtheists = [
 		{ 
 			icon: "b_book",
-			canBuild: true,
 			description: {
 				name: "Explosive book",
 				spec: 10,
@@ -308,10 +299,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_machinegun",
-			canBuild: true,
 			description: {
 				name: "Machinegun",
-				spec: 15,
+				spec: 10,
 				description: "Classic defensive turret.",
 				quote: " "
 			},
@@ -323,10 +313,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_dino",
-			canBuild: true,
 			description: {
 				name: "Dino bones",
-				spec: 20,
+				spec: 10,
 				description: "Use it to block your enemies. Than you can shoot at them, while they are trying to prove this is actually dragon, not the dino.",
 				quote: " "
 			},
@@ -338,10 +327,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_laboratory",
-			canBuild: true,
 			description: {
 				name: "Laboratory",
-				spec: 50,
+				spec: 10,
 				description: "If you are going to need some explosive and poisoned stuff, use this building.",
 				quote: " "
 			},
@@ -353,10 +341,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_gaybar",
-			canBuild: false,
 			description: {
 				name: "Gay bar",
-				spec: 100,
+				spec: 10,
 				description: "Wohoo! Here you can have lot of fun. And of course, this is the place where you can find almost best warriors in your realm, gays and heretics.",
 				quote: " "
 			},
@@ -368,10 +355,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_portal",
-			canBuild: false,
 			description: {
 				name: "Portal",
-				spec: 100,
+				spec: 10,
 				description: "Muhuhuha! Unholy powers have come to your help! From this wound in reality marches legions of daemons!",
 				quote: " "
 			},
@@ -383,10 +369,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_museum",
-			canBuild: false,
 			description: {
 				name: "Museum",
-				spec: 200,
+				spec: 10,
 				description: "This mighty building can show the world the most fearsome creature that ever was! T-REX! All should be terrified by his wrath!",
 				quote: " "
 			},
@@ -398,10 +383,9 @@ Level.prototype.afterLoad = function (){
 		},
 		{ 
 			icon: "b_galapags",
-			canBuild: false,
 			description: {
 				name: "Galapagos islands",
-				spec: 120,
+				spec: 10,
 				description: "Good place to find some real scientist. Like Wallace. A man with flying frogs.",
 				quote: " "
 			},
@@ -424,7 +408,7 @@ Level.prototype.afterLoad = function (){
 	});
 	slunce.tick = function(){
 		this.rotation += 0.0005;
-		// this.rotation += 0.01;
+		this.rotation += 0.01;
 		var sinus = Math.sin(this.rotation/2);
 		var sinus3 = sinus*sinus*sinus;
 		game.clearColor.r = 100 + (1-Math.abs( sinus3 ))*89;
@@ -477,6 +461,7 @@ Level.prototype.afterLoad = function (){
 		game.ai.property.push(building2);
 		
 		game.ai.buildings = [Bookmine,Bookmine,Dino,Laboratory,GayBay,Portal,Museum,Galapags];
+		game.ai.availableUnits = [Gorilla,Teacher,Librarian,Professor],
 	}
 	else{
 		var building = new Chapel({
@@ -492,6 +477,7 @@ Level.prototype.afterLoad = function (){
 		this.add(building2, "base");
 		game.ai.property.push(building);
 		game.ai.buildings = [Holyfire,CrossScorpio,Bonfire,Painting,Confessor,Altar,Slum,Golgota];
+		game.ai.availableUnits = [Missionary,Priest,Nun,Professor],
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
