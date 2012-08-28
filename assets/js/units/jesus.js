@@ -4,8 +4,8 @@ function Jesus( options ){
 	
 	Unit.call(this, options);
 	
-	this.width = 46;
-	this.height = 79;
+	this.width = 95;
+	this.height = 100;
 	this.range = 23;
 	
 	this.damage = 15;

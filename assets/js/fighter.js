@@ -112,6 +112,9 @@ Fighter.prototype.tick = function() {
 
 Fighter.prototype.dealDamage = function(dmg, murderer) {
 	var _this = this;
+	if(this.shield > 0){
+		dmg = 0;
+	}
 	this.health -= dmg - this.shield;
 
 	// krev

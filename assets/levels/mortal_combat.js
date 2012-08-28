@@ -83,7 +83,7 @@ Level.prototype.afterLoad = function (){
 
 	game.gui.switchGUI("mortal_combat");
 
-	var max = 17;
+	var max = 30;
 	for(var i=0;i<max;i++){
 		var mrak = new Background({
 			position: new Vector2(i*((game.width+96)/max), game.zem),
