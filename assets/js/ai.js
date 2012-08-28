@@ -5,13 +5,17 @@ function AI(){
 	this.availableUnits = [];
 	this.buildings = [];
 
-	this.active = true;
+	this.active = false;
 	this.ticks = 0;
 	this.difficultyRatio = 0;
 	this.aiLimit = 10;
 	this.actions = {
 		nothing: function(){
 			return;
+		},
+		upgrade : function (){
+			if(_this.property[0])
+				_this.property[0].tryProduce("Upgrade");
 		},
 		produce: function(){
 			if(_this.property[0]){

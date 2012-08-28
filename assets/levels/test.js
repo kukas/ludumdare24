@@ -509,6 +509,7 @@ Level.prototype.afterLoad = function (){
 	zlomekP = 0;
 	zlomekE = 0;
 	
+	game.ai.active = true;
 };
 
 var level = new Level();
