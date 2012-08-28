@@ -116,6 +116,10 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
+	if(this.ticks % 83 == 0){
+		this.players.player.resources.gold += 10;
+		this.players.enemy.resources.gold += 10;
+	}
 	this.tickChildren();
 	this.updateResources();
 	this.ai.tick();
@@ -256,7 +260,7 @@ Game.prototype.updateResources = function (){
 		var enemyGround =  game.players.enemy.controledGround;
 		//Zvětšování
 		zlomekP += Math.sqrt(playerGround)/1000;
-		zlomekE += Math.sqrt(playerGround)/1000;
+		zlomekE += Math.sqrt(enemyGround)/1000;
 		if(Math.round(zlomekP) >= 1){
 			playerResources.spec += Math.round(zlomekP);
 			zlomekP = 0;
@@ -265,6 +269,14 @@ Game.prototype.updateResources = function (){
 			enemyResources.spec += Math.round(zlomekE);
 			zlomekE = 0;
 		}
+
+		if(playerResources.spec < 0){
+			playerResources.spec = 0;
+		}
+		if(enemyResources.spec < 0){
+			enemyResources.spec = 0;
+		}
+
 		game.gui.links.layout.links.gold.links.text.text[0] = playerResources.gold;
 		game.gui.links.layout.links.spec.links.text.text[0] = playerResources.spec;
 	}

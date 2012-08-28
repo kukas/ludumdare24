@@ -76,6 +76,10 @@ function Level(){
 		button2: this.texturepath + "button2.jpg",
 		button_off: this.texturepath + "button_off.jpg",
 
+		button_creationists: this.texturepath + "creationists.png",
+		button_evolucionists: this.texturepath + "evolucionists.png",
+		button_tut: this.texturepath + "tut.png",
+
 		upgrade: this.texturepath + "upgrade.png",
 
 		layout: this.texturepath + "menu/background.png",

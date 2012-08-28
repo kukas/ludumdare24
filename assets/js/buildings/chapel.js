@@ -11,7 +11,7 @@ function Chapel( options ){
 	this.tier = 0;
 	this.nextTierPrice = 100;
 	this.maxQueue = 5;
-	this.spawnPoint = options.owner == "player" ? this.position.x+this.width+32 : this.position.x-this.width-32;
+	this.spawnPoint = options.owner == "player" ? this.position.x: this.position.x;
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	this.price = 0;
 	
