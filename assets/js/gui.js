@@ -349,6 +349,12 @@ function GUI(){
 				game.jukebox.play("logo");
 			}
 		},
+		slideshow: {
+			objects: function(){
+				logo = new Texture(game.textures.get("2"));
+				_this.add( logo,"slide"  );
+			},
+		},
 		main_menu: {
 			objects: function(){
 				var play1 = new Button(game.width/2 - 200,150,{
@@ -381,11 +387,11 @@ function GUI(){
 				
 				_this.add(play2);
 
-				var play3 = new Button(game.width/2 - 200,300,{
+				var play3 = new Button(game.width/2 - 200,25,{
 					width:400,
 					height:100,
 					visible:false,
-					onMouseUp:function (){game.setPlayer("atheist");game.loadLevel("test");},
+					onMouseUp:function (){game.loadLevel("tutorial");},
 					});
 				
 				var texture3 = new Texture(game.textures.get("button_tut"));
