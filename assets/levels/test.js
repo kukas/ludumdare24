@@ -172,7 +172,9 @@ Level.prototype = new Levels();
 
 Level.prototype.afterLoad = function (){
 	var _this = this;
-	// game.jukebox.play("song");
+	if(!jQuery.browser.mozilla){
+		game.jukebox.play("song");
+	}
 	game.buildingCreationist = [
 		{
 			icon: "b_holyfire",
