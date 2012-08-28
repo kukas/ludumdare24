@@ -5,6 +5,7 @@ function AI(){
 	this.availableUnits = [];
 	this.buildings = [];
 
+	this.chance = 1;
 	this.active = false;
 	this.ticks = 0;
 	this.difficultyRatio = 0;
@@ -23,6 +24,12 @@ function AI(){
 				var price = new uu({}).price;
 				_this.property[0].tryProduce(uu,price);
 			}
+		},
+		setrit : function (){
+			_this.chance = 0.1;
+		},
+		nesetrit : function (){
+			_this.chance = 1;
 		},
 		build : function (){
 			var ex = _this.property[0].tier == 3 ? 1 : 0;
@@ -95,7 +102,14 @@ AI.prototype.tick = function() {
 AI.prototype.chooseAction = function() {
 	var actionNames = Object.keys(this.actions);
 	var actionLength = actionNames.length;
-	return actionNames[Math.floor(actionLength*Math.random())];
+	if(Math.random() < 0.25) return "setrit";
+	if(Math.random() < 0.75) return "nesetrit";
+	if(Math.random() < this.chance){
+		return actionNames[Math.floor(actionLength*Math.random())];
+	}
+	else{
+		return "nothing";
+	}
 };
 
 AI.prototype.tierPossible = function (id){
