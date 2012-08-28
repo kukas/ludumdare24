@@ -7,8 +7,8 @@ function Gorilla( options ){
 	this.height = 64;
 	this.range = 32;
 	
-	this.damage = 1;
-	this.maxHealth = 3;
+	this.damage = 2;
+	this.maxHealth = 6;
 	this.health = this.maxHealth;
 	this.cadency = 30;
 	this.price = 10;

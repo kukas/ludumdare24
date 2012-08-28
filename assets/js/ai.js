@@ -5,7 +5,7 @@ function AI(){
 	this.availableUnits = [];
 	this.buildings = [];
 
-	this.active = false;
+	this.active = true;
 	this.ticks = 0;
 	this.difficultyRatio = 0;
 	this.aiLimit = 10;

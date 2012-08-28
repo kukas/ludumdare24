@@ -8,7 +8,7 @@ function Professor( options ){
 	this.range = 32;
 	
 	this.damage = 6;
-	this.maxHealth = 15;
+	this.maxHealth = 25;
 	this.health = this.maxHealth;
 	this.cadency = 50;
 	this.price = 100;
@@ -22,7 +22,7 @@ function Professor( options ){
 			walking: {
 				start: 0,
 				end: 2,
-				speed: 7
+				speed: 10
 			},
 			attack: {
 				start: 2,

@@ -2,7 +2,7 @@ function Chapel( options ){
 	
 	Building.call(this, options);
 	
-	this.maxHealth = 500;
+	this.maxHealth = 100;
 	this.health = this.maxHealth;
 	this.width = 128;
 	this.height = 128;
@@ -67,7 +67,7 @@ function Chapel( options ){
 			icon: "upgrade",
 			description : {
 				name: "Upgrade",
-				gold: 10,
+				spec: 100,
 				description: "Upgrade your base to unlock more building options!",
 				quote: " "
 			},
@@ -86,13 +86,13 @@ function Chapel( options ){
 		else if(this.tier == 2){
 			this.tier += 1;
 			this.texture = game.textures.get("chapel"+this.tier);
-			this.maxHealth = this.health+=300;
+			this.maxHealth = this.health+=200;
 		}
 		if(this.tier == 2){
 			this.position.x-=this.width/2;
 			this.width = 256;
 			this.height = 256;
-			this.nextTierPrice = 300;
+			this.nextTierPrice = 100;
 		}
 		if(this.owner == "player")
 			game.gui.links.layout.links.actions.enableTier(this.tier);

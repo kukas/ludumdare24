@@ -8,11 +8,11 @@ function Angel( options ){
 	this.height = 96;
 	this.range = 300;
 	
-	this.damage = 10;
+	this.damage = 8;
 	this.maxHealth = 50;
 	this.health = this.maxHealth;
-	this.cadency = 20;
-	this.price = 666;
+	this.cadency = 30;
+	this.price = 500;
 	
 	this.spawnSound = game.jukebox.sounds["angel"];
 	

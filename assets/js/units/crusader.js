@@ -9,7 +9,7 @@ function Crusader( options ){
 	this.range = 23;
 	
 	this.damage = 6;
-	this.maxHealth = 15;
+	this.maxHealth = 25;
 	this.health = this.maxHealth;
 	this.cadency = 50;
 	this.price = 100;
@@ -23,7 +23,7 @@ function Crusader( options ){
 			walking: {
 				start: 0,
 				end: 6,
-				speed: 7
+				speed: 10
 			},
 			attack: {
 				start: 5,

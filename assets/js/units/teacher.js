@@ -10,7 +10,7 @@ function Teacher( options ){
 	this.damage = 1;
 	this.maxHealth = 5;
 	this.health = this.maxHealth;
-	this.cadency = 20;
+	this.cadency = 30;
 	this.price = 30;
 	
 	this.spawnSound = game.jukebox.sounds["teacher"];
