@@ -28,7 +28,7 @@ function Jesus( options ){
 			attack: {
 				start: 9,
 				end: 10,
-				speed: 10,
+				speed: 5,
 				cycle: false
 			}
 		}

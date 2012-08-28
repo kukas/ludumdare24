@@ -102,11 +102,8 @@ function Chapel( options ){
 	};
 	
 	this.onDie = function (){
-		if(this.owner == "enemy"){
-			game.loadLevel("mortal_combat");
-			game.ai.active = false;
-		}
-		game.jukebox.play("gorilla");
+		game.loadLevel("mortal_combat");
+		game.ai.active = false;
 	};
 };
 Chapel.prototype = new Building();
