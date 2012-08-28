@@ -14,14 +14,17 @@ function AI(){
 			return;
 		},
 		produce: function(){
-			if(_this.property[0])
-				_this.property[0].actions[ Math.floor(_this.property[0].actions.length*Math.random()) ].exec();
+			if(_this.property[0]){
+				var uu = _this.availableUnits[Math.floor(Math.random()*_this.availableUnits.length)];
+				var price = new uu({}).price;
+				_this.property[0].tryProduce(uu,price);
+			}
 		},
 		build : function (){
 			var id = Math.round(Math.random()*(3+_this.property[0].tier));
 				var building = new _this.buildings[id]({});
 				building.owner = "enemy";
-				building.position.x = _this.property[0].position.x-_this.property[0].width/2-building.width/2;
+				building.position.x = Math.random()*game.players.enemy.controledGround;
 				building.position.y = game.links.terrain.getHeight(building.position.x)-building.height/2;
 				if(game.links.terrain.getOwner(building.position.x) == building.owner && game.findCollisions(building).length < 1){
 					// samotné postavení
@@ -35,10 +38,37 @@ function AI(){
 					
 					building.tryProduce("Self", building.price);
 					game.add(building);
+					if(_this.buildings[id] == GayBay){
+						_this.availableUnits.push(Gay,Heretic);
+					}
+					if(_this.buildings[id] == Laboratory){
+						_this.availableUnits.push(Biologist);
+					}
+					if(_this.buildings[id] == Portal){
+						_this.availableUnits.push(Devil);
+					}
+					if(_this.buildings[id] == Galapags){
+						_this.availableUnits.push(Wallace);
+					}
+					if(_this.buildings[id] == Museum){
+						_this.availableUnits.push(Trex);
+					}
+					if(_this.buildings[id] == Painting){
+						_this.availableUnits.push(Cherub);
+					}
+					if(_this.buildings[id] == Confessor){
+						_this.availableUnits.push(Bishop,Prophet);
+					}
+					if(_this.buildings[id] == Altar){
+						_this.availableUnits.push(Angel);
+					}
+					if(_this.buildings[id] == Slum){
+						_this.availableUnits.push(Terese);
+					}
+					if(_this.buildings[id] == Golgota){
+						_this.availableUnits.push(Jesus);
+					}
 				}
-		},
-		makeApe : function (){
-			_this.property[0].actions[0].exec();
 		},
 	};
 }
