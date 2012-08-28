@@ -4,8 +4,8 @@ function Bookmine( options ){
 	
 	this.maxHealth = 1;
 	this.health = this.maxHealth;
-	this.width = 64;
-	this.height = 64;
+	this.width = 32;
+	this.height = 32;
 	this.range = 32;
 	
 	this.boomRange = 120;

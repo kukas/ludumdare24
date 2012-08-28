@@ -207,6 +207,12 @@ Object2D.prototype.render = function(ctx) {
 						this.texture.alpha = 1;
 					this.texture.draw(ctx, 0, 0 , this.width, this.height)
 				}
+
+				if(this.owner && this.health){
+					if(this.owner == "enemy")
+						this.renderLife(ctx);
+				}
+
 				if(this.selected){
 					ctx.beginPath();
 					ctx.fillStyle = this.selectColor.getRGBA(0.3);

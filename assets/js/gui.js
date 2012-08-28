@@ -351,53 +351,50 @@ function GUI(){
 		},
 		main_menu: {
 			objects: function(){
-				var play1 = new Button(500,300,{
+				var play1 = new Button(game.width/2 - 200,150,{
 					width:400,
-					height:70,
+					height:100,
 					visible:false,
 					onMouseUp:function (){game.setPlayer("creationist");game.loadLevel("test");},
 					});
 					
-					var texture = new Texture(game.textures.get("button"));
-					texture.width = play1.width;
-					texture.height = play1.height;
-					
-					play1.add(texture);
-					
-					play1.add(new Text({
-					x: 0, 
-					y: 0,
-					value: "Play for creationists",
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 50,
-					}));
-					
-					_this.add(play1);
-					
-					var play2 = new Button(500,400,{
+				var texture = new Texture(game.textures.get("button_creationists"));
+				texture.width = play1.width;
+				texture.height = play1.height;
+				
+				play1.add(texture);
+				
+				_this.add(play1);
+				
+				var play2 = new Button(game.width/2 - 200,300,{
 					width:400,
-					height:70,
+					height:100,
 					visible:false,
 					onMouseUp:function (){game.setPlayer("atheist");game.loadLevel("test");},
 					});
-					
-					var texture2 = new Texture(game.textures.get("button"));
-					texture2.width = play1.width;
-					texture2.height = play1.height;
-					
-					play2.add(texture2);
-					
-					play2.add(new Text({
-					x: 0, 
-					y: 0,
-					value: "Play for atheists",
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 50,
-					}));
-					
-					_this.add(play2);
+				
+				var texture2 = new Texture(game.textures.get("button_evolucionists"));
+				texture2.width = play1.width;
+				texture2.height = play1.height;
+				
+				play2.add(texture2);
+				
+				_this.add(play2);
+
+				var play3 = new Button(game.width/2 - 200,300,{
+					width:400,
+					height:100,
+					visible:false,
+					onMouseUp:function (){game.setPlayer("atheist");game.loadLevel("test");},
+					});
+				
+				var texture3 = new Texture(game.textures.get("button_tut"));
+				texture3.width = play1.width;
+				texture3.height = play1.height;
+				
+				play3.add(texture3);
+				
+				_this.add(play3);
 			},
 			controls: function(){
 				_this.addControls();
@@ -455,31 +452,6 @@ function GUI(){
 				healthbarEnemy.set(1);
 
 				_this.add(healthbarEnemy, "hp_enemy");
-
-
-				var nameGod = new Text( {
-					x: 10, 
-					y: 30,
-					value: "GOD",
-					color: "#000",
-					font: "PlainBlackNormal",
-					size: 50,
-				} );
-
-				_this.add(nameGod);
-
-				var nameDar = new Text( {
-					x: 0, 
-					y: 30,
-					width: game.width-10,
-					value: "DARWIN",
-					color: "#000",
-					font: "CarbonTypeRegular",
-					align: "right",
-					size: 50,
-				} );
-
-				_this.add(nameDar);
 
 				var finish_him = new Text( {
 					y: game.height/2-50,

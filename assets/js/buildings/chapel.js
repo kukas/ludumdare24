@@ -78,6 +78,9 @@ function Chapel( options ){
 	this.owner = options.owner !== undefined ? options.owner : "player";
 	
 	this.upgrade = function (){
+		if(this.tier == 1)
+			this.position.y += 10;
+		
 		if(this.tier < 2){
 			this.tier += 1;
 			this.texture = game.textures.get("chapel"+this.tier);

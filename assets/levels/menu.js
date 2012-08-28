@@ -4,7 +4,9 @@ function Level(){
 
 	this.textures_src = {
 		logo : this.texturepath + "logo.png",
-		button : this.texturepath + "button.jpg",
+		button_creationists: this.texturepath + "creationists.png",
+		button_evolucionists: this.texturepath + "evolucionists.png",
+		button_tut: this.texturepath + "tut.png",
 	};
 
 	this.sounds_src = {
