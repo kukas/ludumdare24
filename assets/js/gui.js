@@ -317,19 +317,20 @@ function GUI(){
 		},
 		logo: {
 			objects: function(){
-				logo = new Texture(game.textures.get("logo"), {x: (game.width-354)/2, y: (game.height-270)/2, width: 354, height: 270, opacity: 0});
+				logo = new Texture(game.textures.get("logo"), {x: (game.width-354)/2, y: (game.height-270)/2, width: 354, height: 270});
+				logo.image.alpha = 0;
 				logo.tick = function(){
 					var time = new Date().getTime() - this.creationTime;
 
-					if(this.opacity < 1 && time < 2000){
-						this.opacity += 0.02;
+					if(this.image.alpha < 1 && time < 2000){
+						this.image.alpha += 0.02;
 					}
 					else if(time > 2000){
-						this.opacity -= 0.02;
+						this.image.alpha -= 0.02;
 					}
 
-					if(this.opacity < 0){
-						this.opacity = 0;
+					if(this.image.alpha < 0){
+						this.image.alpha = 0;
 						_this.switchGUI("main_menu");
 					}
 				}

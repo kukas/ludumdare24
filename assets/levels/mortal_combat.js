@@ -5,8 +5,9 @@ function Level(){
 	this.textures_src = {
 		skeleton: this.texturepath + "v_hline/skeleton.png",
 		troll: this.texturepath + "troll.png",
-		stickman: this.texturepath + "stickman.png",
+		// stickman: this.texturepath + "stickman.png",
 		god: this.texturepath + "god.png",
+		stickman: this.texturepath + "godfight.png"
 	};
 	this.sounds_src = {
 		lets_end_it : this.soundpath+"mortal_combat/lets_end_it.wav",
@@ -118,7 +119,7 @@ Level.prototype.afterLoad = function (){
 	}
 
 	var options = {
-			totalFrames: 10,
+			totalFrames: 4,
 			currentAnimation: "standing",
 			animations:{
 				standing: {
@@ -128,24 +129,24 @@ Level.prototype.afterLoad = function (){
 				},
 				walking: {
 					start: 0,
-					end: 4,
-					speed: 7
+					end: 1,
+					speed: 100
 				},
 				punch: {
-					start: 4,
-					end: 6,
+					start: 2,
+					end: 4,
 					speed: 10,
 					cycle: false
 				},
 				kick: {
-					start: 6,
-					end: 8,
+					start: 0,
+					end: 2,
 					speed: 10,
 					cycle: false
 				},
 				cover: {
-					start: 8,
-					end: 10,
+					start: 1,
+					end: 2,
 					speed: 10,
 					cycle: false
 				},

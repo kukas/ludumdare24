@@ -163,13 +163,15 @@ function Level(){
 		teacher : this.soundpath + "zvuky/ucitel.wav",
 		matherTerese : this.soundpath + "zvuky/matka_tereza.wav",
 		wallace : this.soundpath + "zvuky/wallace.wav",
+
+		song : this.musicpath + "song.mp3",
 	};
 }
 Level.prototype = new Levels();
 
 Level.prototype.afterLoad = function (){
 	var _this = this;
-
+	game.jukebox.play("song");
 	game.buildingCreationist = [
 		{
 			icon: "b_holyfire",
@@ -320,7 +322,7 @@ Level.prototype.afterLoad = function (){
 				quote: " "
 			},
 			exec: function(){
-				if(!game.links.base.build(Bookmine)){
+				if(!game.links.base.build(Machinegun)){
 					console.log("not enough resources");
 				}
 			}
