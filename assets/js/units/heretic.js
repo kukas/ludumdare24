@@ -8,10 +8,10 @@ function Heretic( options ){
 	this.height = 64;
 	this.range = 26;
 	
-	this.damage = 10;
+	this.damage = 8;
 	this.maxHealth = 50;
 	this.health = this.maxHealth;
-	this.cadency = 30;
+	this.cadency = 40;
 	this.price = 400;
 	
 	this.spawnSound = game.jukebox.sounds["heretic"];

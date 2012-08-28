@@ -10,7 +10,7 @@ function Prophet( options ){
 	this.damage = 5;
 	this.maxHealth = 30;
 	this.health = this.maxHealth;
-	this.cadency = 20;
+	this.cadency = 30;
 	this.price = 300;
 	
 	this.spawnSound = game.jukebox.sounds["prophet"];

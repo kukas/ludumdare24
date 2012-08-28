@@ -8,7 +8,7 @@ function Wallace( options ){
 	this.height = 64;
 	this.range = 500;
 	
-	this.damage = 4;
+	this.damage = 6;
 	this.maxHealth = 150;
 	this.health = this.maxHealth;
 	this.cadency = 10;

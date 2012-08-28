@@ -11,7 +11,7 @@ function Terese( options ){
 	this.damage = 6;
 	this.maxHealth = 150;
 	this.health = this.maxHealth;
-	this.cadency = 5;
+	this.cadency = 10;
 	this.price = 1000;
 	
 	this.spawnSound = game.jukebox.sounds["matherTerese"];

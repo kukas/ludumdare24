@@ -116,9 +116,9 @@ Game.prototype.tickChildren = function() {
 };
 
 Game.prototype.tick = function() {
-	if(this.ticks % 83 == 0){
-		this.players.player.resources.gold += 10;
-		this.players.enemy.resources.gold += 10;
+	if(this.ticks % 83 == 1){
+		this.players.player.resources.gold += 1;
+		this.players.enemy.resources.gold += 1;
 	}
 	this.tickChildren();
 	this.updateResources();

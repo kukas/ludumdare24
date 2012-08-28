@@ -8,11 +8,11 @@ function Trex( options ){
 	this.height = 79;
 	this.range = 23;
 	
-	this.damage = 20;
-	this.maxHealth = 300;
+	this.damage = 15;
+	this.maxHealth = 200;
 	this.health = this.maxHealth;
 	this.cadency = 50;
-	this.price = 2000;
+	this.price = 1500;
 	
 	this.spawnSound = game.jukebox.sounds["trex"];
 	
