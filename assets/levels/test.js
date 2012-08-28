@@ -501,7 +501,7 @@ Level.prototype.afterLoad = function (){
 		this.add(building2, "base");
 		game.ai.property.push(building);
 		game.ai.buildings = [Holyfire,CrossScorpio,Bonfire,Painting,Confessor,Altar,Slum,Golgota];
-		game.ai.buildings = [Missionary,Priest,Nun,Crusader];
+		game.ai.availableUnits = [Missionary,Priest,Nun,Crusader];
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
@@ -513,6 +513,7 @@ Level.prototype.afterLoad = function (){
 	zlomekP = 0;
 	zlomekE = 0;
 	
+	game.ai.active = true;
 };
 
 var level = new Level();

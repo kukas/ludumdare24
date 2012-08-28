@@ -5,6 +5,7 @@ function AI(){
 	this.availableUnits = [];
 	this.buildings = [];
 
+	this.chance = 1;
 	this.active = false;
 	this.ticks = 0;
 	this.difficultyRatio = 0;
@@ -13,6 +14,10 @@ function AI(){
 		nothing: function(){
 			return;
 		},
+		upgrade : function (){
+			if(_this.property[0])
+				_this.property[0].tryProduce("Upgrade");
+		},
 		produce: function(){
 			if(_this.property[0]){
 				var uu = _this.availableUnits[Math.floor(Math.random()*_this.availableUnits.length)];
@@ -20,8 +25,15 @@ function AI(){
 				_this.property[0].tryProduce(uu,price);
 			}
 		},
+		setrit : function (){
+			_this.chance = 0.1;
+		},
+		nesetrit : function (){
+			_this.chance = 1;
+		},
 		build : function (){
-			var id = Math.round(Math.random()*(3+_this.property[0].tier));
+			var ex = _this.property[0].tier == 3 ? 1 : 0;
+			var id = Math.round(Math.random()*(3+_this.property[0].tier+ex));
 				var building = new _this.buildings[id]({});
 				building.owner = "enemy";
 				building.position.x = Math.random()*game.players.enemy.controledGround;
@@ -90,8 +102,14 @@ AI.prototype.tick = function() {
 AI.prototype.chooseAction = function() {
 	var actionNames = Object.keys(this.actions);
 	var actionLength = actionNames.length;
-	this.actions.build();
-	return actionNames[Math.floor(actionLength*Math.random())];
+	if(Math.random() < 0.25) return "setrit";
+	if(Math.random() < 0.75) return "nesetrit";
+	if(Math.random() < this.chance){
+		return actionNames[Math.floor(actionLength*Math.random())];
+	}
+	else{
+		return "nothing";
+	}
 };
 
 AI.prototype.tierPossible = function (id){
