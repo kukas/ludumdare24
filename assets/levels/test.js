@@ -160,7 +160,7 @@ function Level(){
 		matherTerese : this.soundpath + "zvuky/matka_tereza.wav",
 		wallace : this.soundpath + "zvuky/wallace.wav",
 
-		song : this.musicpath + "song.mp3",
+		// song : this.musicpath + "song.mp3",
 	};
 }
 Level.prototype = new Levels();
