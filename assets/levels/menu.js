@@ -3,6 +3,7 @@ function Level(){
 	this.objects = [];
 
 	this.textures_src = {
+		logo : this.texturepath + "logo.png",
 		button : this.texturepath + "button.jpg",
 	};
 
@@ -13,7 +14,7 @@ function Level(){
 Level.prototype = new Levels();
 
 Level.prototype.afterLoad = function (){
-	game.gui.switchGUI("main_menu");
+	game.gui.switchGUI("logo");
 };
 
 var level = new Level();

@@ -856,10 +856,13 @@ function GUI(){
 						},
 						onMouseOut: function(){
 							game.gui.links.layout.links.hoverText.hide();
-							this.visible = false;
+							if(this.color != "rgba(0,0,0,0.3)")
+								this.visible = false;
 						},
 					});
 					if(actions[i].canBuild === false){
+						button.visible = true;
+						button.color = "rgba(0,0,0,0.3)";
 						button.onMouseUp = undefined;
 						button.onMouseIn = undefined;
 					}
