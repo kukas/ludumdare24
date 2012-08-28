@@ -41,26 +41,26 @@ function School( options ){
 			exec : function (){_this.tryProduce(Teacher,this.description.gold)}
 		},
 		{
-			name : "Librarian",
-			icon:"b_knihovnice",
-			description: {
-				name:  "Librarian",
-				gold: 50,
-				description: "Not very fast, but when she hits she hits hard. Good against crusader.",
-				quote: "Burning books? Die bitch!"
-			},
-			exec : function (){_this.tryProduce(Librarian,this.description.gold);}
-		},
-		{
 			name : "Professor",
 			icon:"b_profesor",
 			description: {
 				name:  "Professor",
-				gold: 100,
+				gold: 50,
 				description: "Bringer of knowledge. It takes a while to bring it, but then everyone will die. Effective against priests.",
 				quote: "Die morons!"
 			},
 			exec : function (){_this.tryProduce(Professor,this.description.gold);}
+		},
+		{
+			name : "Librarian",
+			icon:"b_knihovnice",
+			description: {
+				name:  "Librarian",
+				gold: 100,
+				description: "Not very fast, but when she hits she hits hard. Good against crusader.",
+				quote: "Burning books? Die bitch!"
+			},
+			exec : function (){_this.tryProduce(Librarian,this.description.gold);}
 		},
 		{
 			name : "Upgrade",

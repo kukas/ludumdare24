@@ -11,7 +11,7 @@ function Nun( options ){
 	this.maxHealth = 6;
 	this.health = this.maxHealth;
 	this.cadency = 50;
-	this.price = 50;
+	this.price = 100;
 	
 	this.spawnSound = game.jukebox.sounds["nun"];
 	

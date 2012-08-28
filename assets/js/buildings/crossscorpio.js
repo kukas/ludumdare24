@@ -31,6 +31,10 @@ function CrossScorpio( options ){
 			},
 		}
 	});
+
+	if(options.owner == "enemy"){
+		this.texture.flip = "x";
+	}
 	
 	this.projectile = game.textures.get("crossScorpioParticle");
 	this.projectileWidth = 93;

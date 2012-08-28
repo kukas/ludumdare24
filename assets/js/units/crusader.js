@@ -12,7 +12,7 @@ function Crusader( options ){
 	this.maxHealth = 25;
 	this.health = this.maxHealth;
 	this.cadency = 50;
-	this.price = 100;
+	this.price = 50;
 	
 	this.spawnSound = game.jukebox.sounds["crusader"];
 	

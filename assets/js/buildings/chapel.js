@@ -41,26 +41,26 @@ function Chapel( options ){
 			exec : function (){_this.tryProduce(Priest,this.description.gold);}
 		},
 		{
-			name : "Nun",
-			icon: "b_jeptiska",
-			description: {
-				name: "Nun",
-				gold: 50,
-				description: "Slow, but strong archer. Effective against professor.",
-				quote: "I like Jesus. He is so muscular."
-			},
-			exec : function (){_this.tryProduce(Nun,this.description.gold);}
-		},
-		{
 			name : "Crusader",
 			icon: "b_krizak",
 			description: {
 				name: "Crusader",
-				gold: 100,
+				gold: 50,
 				description: "Holy warrior of Jesus. Slow and strong, like Jesus itself. Good against teachers.",
 				quote: "To the holy land!"
 			},
 			exec : function (){_this.tryProduce(Crusader,this.description.gold);}
+		},
+		{
+			name : "Nun",
+			icon: "b_jeptiska",
+			description: {
+				name: "Nun",
+				gold: 100,
+				description: "Slow, but strong archer. Effective against professor.",
+				quote: "I like Jesus. He is so muscular."
+			},
+			exec : function (){_this.tryProduce(Nun,this.description.gold);}
 		},
 		{
 			name : "Upgrade",

@@ -31,8 +31,12 @@ function Machinegun( options ){
 			},
 		}
 	});
+
+	if(options.owner == "player"){
+		this.texture.flip = "x";
+	}
 	
-	this.projectile = game.textures.get("crossScorpioParticle");
+	this.projectile = game.textures.get("bulletParticle");
 	this.projectileWidth = 93;
 	this.projectileHeight = 35;
 

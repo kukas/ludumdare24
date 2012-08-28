@@ -20,7 +20,6 @@ function Level(){
 		bionuke: this.texturepath + "bionuke.png",
 		holynuke: this.texturepath + "holynuke.png",
 
-
 		//Budovy
 		chapel0: this.texturepath + "rotunda.png",
 		chapel1: this.texturepath + "church.png",
@@ -72,10 +71,6 @@ function Level(){
 		jesus: this.texturepath + "jesus.png",
 		
 		//GUI
-		button: this.texturepath + "button.jpg",
-		button2: this.texturepath + "button2.jpg",
-		button_off: this.texturepath + "button_off.jpg",
-
 		upgrade: this.texturepath + "upgrade.png",
 
 		layout: this.texturepath + "menu/background.png",
@@ -137,7 +132,7 @@ function Level(){
 		fireball : this.texturepath + "koule.png",
 		sancWater : this.texturepath + "sancwater.png",
 		litajici_zaba : this.texturepath + "litajici_zaba.png",
-		bullet : this.texturepath + "bullet.png",
+		bulletParticle : this.texturepath + "bullet.png",
 	};
 	this.sounds_src = {
 		gorilla : this.soundpath+"zvuky/opice.wav",
@@ -160,11 +155,12 @@ function Level(){
 		teacher : this.soundpath + "zvuky/ucitel.wav",
 		matherTerese : this.soundpath + "zvuky/matka_tereza.wav",
 		wallace : this.soundpath + "zvuky/wallace.wav",
-
-		// song : this.musicpath + "song.mp3",
 	};
 
-	if(!jQuery.browser.mozilla){
+	if(jQuery.browser.mozilla || jQuery.browser.opera){
+		this.sounds_src.song = this.musicpath + "song.ogg";
+	}
+	else {
 		this.sounds_src.song = this.musicpath + "song.mp3";
 	}
 }
@@ -172,9 +168,7 @@ Level.prototype = new Levels();
 
 Level.prototype.afterLoad = function (){
 	var _this = this;
-	if(!jQuery.browser.mozilla){
-		game.jukebox.loop("song");
-	}
+	game.jukebox.loop("song");
 	game.buildingCreationist = [
 		{
 			icon: "b_holyfire",
