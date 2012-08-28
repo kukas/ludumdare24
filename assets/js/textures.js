@@ -108,7 +108,8 @@ Textures.prototype.loadTextures = function(src_object, callback) {
 					callback();
 			}
 
-			image.src = _this.textures_src[name] + "?_="+Math.random();
+			image.src = _this.textures_src[name];
+			// image.src = _this.textures_src[name] + "?_="+Math.random();
 		}(name, callback))
 	};
 };
