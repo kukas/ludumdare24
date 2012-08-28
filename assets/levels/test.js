@@ -481,6 +481,7 @@ Level.prototype.afterLoad = function (){
 		game.ai.property.push(building2);
 		
 		game.ai.buildings = [Bookmine,Bookmine,Dino,Laboratory,GayBay,Portal,Museum,Galapags];
+		game.ai.availableUnits = [Gorilla,Teacher,Librarian,Professor];
 	}
 	else{
 		var building = new Chapel({
@@ -496,6 +497,7 @@ Level.prototype.afterLoad = function (){
 		this.add(building2, "base");
 		game.ai.property.push(building);
 		game.ai.buildings = [Holyfire,CrossScorpio,Bonfire,Painting,Confessor,Altar,Slum,Golgota];
+		game.ai.buildings = [Missionary,Priest,Nun,Crusader];
 	}
 
 	//var miss = new Missionary({position:new Vector2(1000,terrain.getHeight(1000)),owner:"player"});
