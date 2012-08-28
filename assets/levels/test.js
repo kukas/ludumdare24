@@ -164,7 +164,7 @@ function Level(){
 		// song : this.musicpath + "song.mp3",
 	};
 
-	if(jQuery.browser.mozilla){
+	if(!jQuery.browser.mozilla){
 		this.sounds_src.song = this.musicpath + "song.mp3";
 	}
 }
