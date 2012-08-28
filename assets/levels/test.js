@@ -470,13 +470,13 @@ Level.prototype.afterLoad = function (){
 	this.add( terrain, "terrain" );
 	if(game.players.player.side == "creationist"){
 		var building = new Chapel({
-			position: new Vector2(150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
+			position: new Vector2(200,terrain.getHeight(200)-game.textures.get("chapel0").height/2),
 			owner: "player",
 		});
 		this.add(building, "base");
 	
 		var building2 = new School({
-			position: new Vector2(game.playground.width-150,terrain.getHeight(game.playground.width-150)-game.textures.get("school0").height/2),
+			position: new Vector2(game.playground.width-200,terrain.getHeight(game.playground.width-200)-game.textures.get("school0").height/2),
 			owner: "enemy",
 		});
 		building2.selectable = false;
@@ -488,14 +488,14 @@ Level.prototype.afterLoad = function (){
 	}
 	else{
 		var building = new Chapel({
-			position: new Vector2(game.playground.width-150,terrain.getHeight(150)-game.textures.get("chapel0").height/2),
+			position: new Vector2(game.playground.width-200,terrain.getHeight(200)-game.textures.get("chapel0").height/2),
 			owner: "enemy",
 		});
 		building.selectable = false;
 		this.add(building);
 	
 		var building2 = new School({
-			position: new Vector2(150,terrain.getHeight(game.playground.width-150)-game.textures.get("chapel0").height/2),
+			position: new Vector2(200,terrain.getHeight(game.playground.width-200)-game.textures.get("chapel0").height/2),
 			owner: "player",
 		});
 		this.add(building2, "base");

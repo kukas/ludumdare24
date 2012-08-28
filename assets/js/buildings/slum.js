@@ -1,6 +1,8 @@
 function Slum( options ){
 	
 	Building.call(this, options);
+
+	this.position.y += 10;
 	
 	this.maxHealth = 120;
 	this.health = this.maxHealth;

@@ -119,7 +119,7 @@ Level.prototype.afterLoad = function (){
 	}
 
 	var options = {
-			totalFrames: 4,
+			totalFrames: 5,
 			currentAnimation: "standing",
 			animations:{
 				standing: {
